@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<p>Directory access is forbidden.</p>
+<p>Ici c'est l'accueil</p>
 
 </body>
 </html>
