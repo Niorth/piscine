@@ -1,10 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+$isLogged = isset($_SESSION['login']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -73,18 +76,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<!-- Account -->
 						<li class="header-account dropdown default-dropdown">
 							<div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
-								<div class="header-btns-icon">
-									<i class="fa fa-user-o"></i>
-								</div>
-								<strong class="text-uppercase">Mon compte <i class="fa fa-caret-down"></i></strong>
+                                <div class="header-btns-icon">
+                                    <i class="fa fa-user-o"></i>
+                                </div>
+                                <?php
+                                    if($isLogged) {
+								        echo('<strong class="text-uppercase">Mon compte <i class="fa fa-caret-down"></i></strong>');
+                                    }
+                                ?>
 							</div>
-							<a href="#" class="text-uppercase">S'identifier</a> / <a href="#" class="text-uppercase">S'inscrire</a>
-							<ul class="custom-menu">
-								<li><a href="#"><i class="fa fa-user-o"></i>Mon compte</a></li>
-								<li><a href="#"><i class="fa fa-exchange"></i>Comparer</a></li>
-								<li><a href="#"><i class="fa fa-check"></i> Mes commandes</a></li>
-								<li><a href="#"><i class="fa fa-user-plus"></i> Créer un compte</a></li>
-							</ul>
+                            <?php
+                                if(!$isLogged) {
+                                    echo('<a href="../Account/connexion_page" class="text-uppercase">S\'identifier</a> / <a href="../Account/create_account_page" class="text-uppercase">S\'inscrire</a>');
+                                }
+                                else {
+                                    ?>
+                                    <ul class="custom-menu">
+                                        <li><a href="../Account/myAccount_page"><i class="fa fa-user-o"></i>Mon compte</a></li>
+                                        <li><a href="#"><i class="fa fa-check"></i> Mes commandes</a></li>
+                                        <li><a href="../Account/deconnexion"><i class="fas fa-sign-out-alt"></i>Deconnexion</a></li>
+                                    </ul>
+                                    <?php
+                                }
+                            ?>
 						</li>
 						<!-- /Account -->
 
