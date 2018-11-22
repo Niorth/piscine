@@ -18,6 +18,21 @@ class Product extends CI_Controller
         $this->load->view('layout/footer');
     }
 
+    public function product_page($CodeProduit){
+        $data['product'] =  $this->product_model->getProductById($CodeProduit);
+        $data['boutique'] =  $this->product_model->getBoutiqueProductById($CodeProduit);
+        $this->load->view('layout/header');
+        $this->load->view('product/product_page', $data);
+        $this->load->view('layout/footer');
+    }
+
+    public function all_product_page(){
+      $data['product'] = $this->product_model->getAllProductByCat();
+      $this->load->view('layout/header');
+      $this->load->view('product/all_product', $data);
+      $this->load->view('layout/footer');
+    }
+
     public function update_product_page($id)
     {
         $data['product'] =  $this->product_model->getProductBySelector('CodeProduit', $id);

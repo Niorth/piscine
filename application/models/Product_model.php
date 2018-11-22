@@ -53,6 +53,50 @@ class Product_Model extends CI_Model
         return $result;
     }
 
+    /*
+      requete pour avoir la boutique d'un produit
+
+      SELECT `NomBoutique` FROM `boutique`,produit
+      WHERE boutique.`IdBoutique` = produit.`IdBoutique`
+      and CodeProduit = 1
+     */
+    public function getBoutiqueProductById($CodeProduit){
+      $this->load->database();
+      return $this->db->select('NomBoutique')
+                    ->from('boutique')
+                    ->join($this->table, "boutique.IdBoutique = produit.IdBoutique")
+                    ->where('CodeProduit', $CodeProduit)
+                    ->get()
+                    ->result();
+    }
+
+    /*
+      requete pour avoir toutes les infos sur la page de tous les produits ( par categorie par la suite)
+
+      SELECT `CodeProduit`,`LibelleProduit`,`PrixProd`,`StockDispo`,NomBoutique FROM `boutique`,produit
+      WHERE boutique.`IdBoutique` = produit.`IdBoutique`
+    */
+    public function getAllProductByCat(){
+      $this->load->database();
+      return $this->db->select('CodeProduit,LibelleProduit,PrixProd,StockDispo,NomBoutique')
+                    ->from($this->table)
+                    ->join('boutique', "boutique.IdBoutique = produit.IdBoutique")
+                    ->get()
+                    ->result();
+    }
+
+    public function getProductById($CodeProduit){
+    $this->load->database();
+    return $this->db->select('CodeProduit,LibelleProduit,PrixProd,StockDispo,NomBoutique,DescriptionProd')
+                  ->from($this->table)
+                  ->join('boutique', "boutique.IdBoutique = produit.IdBoutique")
+                  ->where('CodeProduit', $CodeProduit)
+                  ->get()
+                  ->result();
+    }
+
+
+
     public function getProductBySelector($selectorName, $selector){
         $this->load->database();
         $query = $this->db->get_where($this->table, array($selectorName => $selector));

@@ -32,11 +32,11 @@
             </div>
               <div class="form-group">
                   <label class=" form-control-label">Stock Disponible :</label>
-                  <input class="input" type="text" name="stockDispo" placeholder="Stock" required  <?php if (isset($product)) echo "value = \"" . $product[0]['StockDispo'] . "\""?>>
+                  <input class="input" type="number" name="stockDispo"  placeholder="Stock" required  <?php if (isset($product)) echo "value = \"" . $product[0]['StockDispo'] . "\""?> >
               </div>
             <div class="form-group">
                   <label class=" form-control-label">Durée de la reservation :</label>
-                  <input class="input" type="text" name="duree" placeholder="Durée" required  <?php if (isset($product)) echo "value = \"" . $product[0]['DureeReservation'] . "\""?>>
+                  <input class="input" type="number" name="duree" placeholder="Durée" required  <?php if (isset($product)) echo "value = \"" . $product[0]['DureeReservation'] . "\""?>>
               </div>
               <div class="form-group">
                   <label class=" form-control-label">Description :</label>
