@@ -1,13 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-$isLogged = isset($_SESSION['login']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,9 +59,9 @@ $isLogged = isset($_SESSION['login']);
 					<div class="header-search">
 						<form>
 							<input class="input search-input" type="text" placeholder="Enter your keyword">
-							<select class="input search-categories">
-								<option value="0">All Categories</option>
-								<option value="1">Category 01</option>
+							<select class="input search-Catégories">
+								<option value="0">Toutes les catégories</option>
+								<option value="1">Category test01</option>
 							</select>
 							<button class="search-btn"><i class="fa fa-search"></i></button>
 						</form>
@@ -76,29 +73,18 @@ $isLogged = isset($_SESSION['login']);
 						<!-- Account -->
 						<li class="header-account dropdown default-dropdown">
 							<div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
-                                <div class="header-btns-icon">
-                                    <i class="fa fa-user-o"></i>
-                                </div>
-                                <?php
-                                    if($isLogged) {
-								        echo('<strong class="text-uppercase">Mon compte <i class="fa fa-caret-down"></i></strong>');
-                                    }
-                                ?>
+								<div class="header-btns-icon">
+									<i class="fa fa-user-o"></i>
+								</div>
+								<strong class="text-uppercase">Mon compte<i class="fa fa-caret-down"></i></strong>
 							</div>
-                            <?php
-                                if(!$isLogged) {
-                                    echo('<a href="../Account/connexion_page" class="text-uppercase">S\'identifier</a> / <a href="../Account/create_account_page" class="text-uppercase">S\'inscrire</a>');
-                                }
-                                else {
-                                    ?>
-                                    <ul class="custom-menu">
-                                        <li><a href="../Account/myAccount_page"><i class="fa fa-user-o"></i>Mon compte</a></li>
-                                        <li><a href="#"><i class="fa fa-check"></i> Mes commandes</a></li>
-                                        <li><a href="../Account/deconnexion"><i class="fas fa-sign-out-alt"></i>Deconnexion</a></li>
-                                    </ul>
-                                    <?php
-                                }
-                            ?>
+							<a href="#" class="text-uppercase">S'identifier</a> / <a href="#" class="text-uppercase">S'inscrire</a>
+							<ul class="custom-menu">
+								<li><a href="#"><i class="fa fa-user-o"></i>Mon compte</a></li>
+								<li><a href="#"><i class="fa fa-exchange"></i>Comparer</a></li>
+								<li><a href="#"><i class="fa fa-check"></i>Mes commandes</a></li>
+								<li><a href="#"><i class="fa fa-user-plus"></i>Créer un compte</a></li>
+							</ul>
 						</li>
 						<!-- /Account -->
 
@@ -109,9 +95,9 @@ $isLogged = isset($_SESSION['login']);
 									<i class="fa fa-shopping-cart"></i>
 									<span class="qty">3</span>
 								</div>
-								<strong class="text-uppercase">My Cart:</strong>
+								<strong class="text-uppercase">Mon panier:</strong>
 								<br>
-								<span>35.20$</span>
+								<span>35,20€</span>
 							</a>
 							<div class="custom-menu">
 								<div id="shopping-cart">
@@ -121,8 +107,8 @@ $isLogged = isset($_SESSION['login']);
 												<img src="./img/thumb-product01.jpg" alt="">
 											</div>
 											<div class="product-body">
-												<h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
-												<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
+												<h3 class="product-price">35,20€<span class="qty">x3</span></h3>
+												<h2 class="product-name"><a href="#">Le nom de produit va ici</a></h2>
 											</div>
 											<button class="cancel-btn"><i class="fa fa-trash"></i></button>
 										</div>
@@ -131,8 +117,8 @@ $isLogged = isset($_SESSION['login']);
 												<img src="./img/thumb-product01.jpg" alt="">
 											</div>
 											<div class="product-body">
-												<h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
-												<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
+												<h3 class="product-price">35,20€<span class="qty">x3</span></h3>
+												<h2 class="product-name"><a href="#">Le nom de produit va ici</a></h2>
 											</div>
 											<button class="cancel-btn"><i class="fa fa-trash"></i></button>
 										</div>
@@ -167,45 +153,45 @@ $isLogged = isset($_SESSION['login']);
 			<div id="responsive-nav">
 				<!-- category nav -->
 				<div class="category-nav show-on-click">
-					<span class="category-header">Categories <i class="fa fa-list"></i></span>
+					<span class="category-header">Catégories <i class="fa fa-list"></i></span>
 					<ul class="category-list">
 						<li class="dropdown side-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Women’s Clothing <i class="fa fa-angle-right"></i></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Vêtements femmes <i class="fa fa-angle-right"></i></a>
 							<div class="custom-menu">
 								<div class="row">
 									<div class="col-md-4">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
 									<div class="col-md-4">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
 									<div class="col-md-4">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 									</div>
 								</div>
@@ -215,148 +201,148 @@ $isLogged = isset($_SESSION['login']);
 										<a class="banner banner-1" href="#">
 											<img src="<?php echo base_url() ?>assets/img/banner05.jpg" alt="">
 											<div class="banner-caption text-center">
-												<h2 class="white-color">NEW COLLECTION</h2>
-												<h3 class="white-color font-weak">HOT DEAL</h3>
+												<h2 class="white-color">NOUVELLES COLLECTION</h2>
+												<h3 class="white-color font-weak">BONNE AFFAIRE</h3>
 											</div>
 										</a>
 									</div>
 								</div>
 							</div>
 						</li>
-						<li><a href="#">Men’s Clothing</a></li>
-						<li class="dropdown side-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Phones & Accessories <i class="fa fa-angle-right"></i></a>
+						<li><a href="#">Vêtements hommes</a></li>
+						<li class="dropdown side-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Téléphones et Accessoires<i class="fa fa-angle-right"></i></a>
 							<div class="custom-menu">
 								<div class="row">
 									<div class="col-md-4">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 										<hr>
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
 									<div class="col-md-4">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 										<hr>
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 									</div>
 									<div class="col-md-4 hidden-sm hidden-xs">
 										<a class="banner banner-2" href="#">
 											<img src="<?php echo base_url() ?>assets/img/banner04.jpg" alt="">
 											<div class="banner-caption">
-												<h3 class="white-color">NEW<br>COLLECTION</h3>
+												<h3 class="white-color">NOUVELLES<br>COLLECTION</h3>
 											</div>
 										</a>
 									</div>
 								</div>
 							</div>
 						</li>
-						<li><a href="#">Computer & Office</a></li>
-						<li><a href="#">Consumer Electronics</a></li>
+						<li><a href="#">Ordinateurs et bureaux</a></li>
+						<li><a href="#">Composants électroniques</a></li>
 						<li class="dropdown side-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Jewelry & Watches <i class="fa fa-angle-right"></i></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Bijoux et montres <i class="fa fa-angle-right"></i></a>
 							<div class="custom-menu">
 								<div class="row">
 									<div class="col-md-4">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 										<hr>
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
 									<div class="col-md-4">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 										<hr>
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
 									<div class="col-md-4">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 										<hr>
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 									</div>
 								</div>
 							</div>
 						</li>
-						<li><a href="#">Bags & Shoes</a></li>
-						<li><a href="#">View All</a></li>
+						<li><a href="#">Sacs et chaussures</a></li>
+						<li><a href="#">Tout voir</a></li>
 					</ul>
 				</div>
 				<!-- /category nav -->
@@ -367,42 +353,42 @@ $isLogged = isset($_SESSION['login']);
 					<ul class="menu-list">
 						<li><a href="#">Accueil</a></li>
 						<li><a href="#">Boutique</a></li>
-						<li class="dropdown mega-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Women <i class="fa fa-caret-down"></i></a>
+						<li class="dropdown mega-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Femmes <i class="fa fa-caret-down"></i></a>
 							<div class="custom-menu">
 								<div class="row">
 									<div class="col-md-4">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
 									<div class="col-md-4">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
 									<div class="col-md-4">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 									</div>
 								</div>
@@ -412,15 +398,15 @@ $isLogged = isset($_SESSION['login']);
 										<a class="banner banner-1" href="#">
 											<img src="<?php echo base_url() ?>assets/img/banner05.jpg" alt="">
 											<div class="banner-caption text-center">
-												<h2 class="white-color">NEW COLLECTION</h2>
-												<h3 class="white-color font-weak">HOT DEAL</h3>
+												<h2 class="white-color">NOUVELLE COLECTION</h2>
+												<h3 class="white-color font-weak">BONNES AFFAIRES</h3>
 											</div>
 										</a>
 									</div>
 								</div>
 							</div>
 						</li>
-						<li class="dropdown mega-dropdown full-width"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Men <i class="fa fa-caret-down"></i></a>
+						<li class="dropdown mega-dropdown full-width"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Hommes <i class="fa fa-caret-down"></i></a>
 							<div class="custom-menu">
 								<div class="row">
 									<div class="col-md-3">
@@ -428,19 +414,19 @@ $isLogged = isset($_SESSION['login']);
 											<a class="banner banner-1" href="#">
 												<img src="<?php echo base_url() ?>assets/img/banner06.jpg" alt="">
 												<div class="banner-caption text-center">
-													<h3 class="white-color text-uppercase">Women’s</h3>
+													<h3 class="white-color text-uppercase">Femmes</h3>
 												</div>
 											</a>
 											<hr>
 										</div>
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 									</div>
 									<div class="col-md-3">
@@ -448,19 +434,19 @@ $isLogged = isset($_SESSION['login']);
 											<a class="banner banner-1" href="#">
 												<img src="<?php echo base_url() ?>assets/img/banner07.jpg" alt="">
 												<div class="banner-caption text-center">
-													<h3 class="white-color text-uppercase">Men’s</h3>
+													<h3 class="white-color text-uppercase">Hommes</h3>
 												</div>
 											</a>
 										</div>
 										<hr>
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 									</div>
 									<div class="col-md-3">
@@ -468,19 +454,19 @@ $isLogged = isset($_SESSION['login']);
 											<a class="banner banner-1" href="#">
 												<img src="<?php echo base_url() ?>assets/img/banner08.jpg" alt="">
 												<div class="banner-caption text-center">
-													<h3 class="white-color text-uppercase">Accessories</h3>
+													<h3 class="white-color text-uppercase">Accessoires</h3>
 												</div>
 											</a>
 										</div>
 										<hr>
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 									</div>
 									<div class="col-md-3">
@@ -488,30 +474,30 @@ $isLogged = isset($_SESSION['login']);
 											<a class="banner banner-1" href="#">
 												<img src="<?php echo base_url() ?>assets/img/banner09.jpg" alt="">
 												<div class="banner-caption text-center">
-													<h3 class="white-color text-uppercase">Bags</h3>
+													<h3 class="white-color text-uppercase">Sacs</h3>
 												</div>
 											</a>
 										</div>
 										<hr>
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Catégories</h3></li>
+											<li><a href="#">Vêtements femmes</a></li>
+											<li><a href="#">Vêtements hommes</a></li>
+											<li><a href="#">Téléphones & Accessoires</a></li>
+											<li><a href="#">Bijoux et montres</a></li>
+											<li><a href="#">Sacs et chaussures</a></li>
 										</ul>
 									</div>
 								</div>
 							</div>
 						</li>
-						<li><a href="#">Sales</a></li>
+						<li><a href="#">Ventes</a></li>
 						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Pages <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
-								<li><a href="index.html">Home</a></li>
-								<li><a href="products.html">Products</a></li>
-								<li><a href="product-page.html">Product Details</a></li>
+								<li><a href="index.html">Accueil</a></li>
+								<li><a href="products.html">Produits</a></li>
+								<li><a href="product-page.html">Détails Produit</a></li>
 								<li><a href="checkout.html">Checkout</a></li>
 							</ul>
 						</li>
