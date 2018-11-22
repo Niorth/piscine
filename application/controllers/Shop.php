@@ -37,6 +37,7 @@ class Shop extends CI_Controller {
 
 	public function shop_card($id){
 		$data['boutique'] =  $this->shop_model->selectShopById($id);
+        $data['commercant'] =  $this->trader_model->getAllTrader();
 		$this->load->view('layout/header');
 		$this->load->view('shop/shop_card', $data);
 		$this->load->view('layout/footer');
