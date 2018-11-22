@@ -367,6 +367,7 @@ $isLogged = isset($_SESSION['login']);
 					<ul class="menu-list">
 						<li><a href="#">Accueil</a></li>
 						<li><a href="#">Boutique</a></li>
+            <li><a href="<?php echo site_url('Product/all_product_page'); ?>">Produit</a></li>
 						<li class="dropdown mega-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Women <i class="fa fa-caret-down"></i></a>
 							<div class="custom-menu">
 								<div class="row">
