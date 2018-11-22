@@ -25,4 +25,26 @@ class Trader_Model extends CI_Model
             ->set('MailCommercant', $data['mail'])
             ->insert($this->table);
     }
+
+    /*
+     *  SELECT `NumCommercant`,`NomCommercant`,`PrenomCommercant`
+     *  FROM `commercant`
+     *
+     */
+    public function getAllTrader(){
+        $this->load->database();
+        return $this->db->select('NumCommercant,NomCommercant,PrenomCommercant')
+            ->from($this->table)
+            ->get()
+            ->result();
+    }
+
+
+    public function insertGererBoutique($data){
+        $this->load->database();
+        return $this->db->set('IdBoutique', $data['IdBoutique'])
+            ->set('NumCommercant', $data['NumCommercant'])
+            ->insert("gererboutique");
+
+    }
 }
