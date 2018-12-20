@@ -36,7 +36,17 @@
             </div>
           </div>
         </div>
+
+
         <div class="col-md-6">
+
+          <!-- A afficher qu'en mode admin et commercant -->
+
+          <a href="<?php $code = $product[0]->CodeProduit; echo site_url("Product/update_product_page/$code"); ?>" class="btn btn-warning" role="button">Modifier</a>
+          <a href="<?php $code = $product[0]->CodeProduit; echo site_url("Product/delete_product/$code"); ?>" class="btn btn-danger" role="button">Supprimer</a>
+
+          <!-- fin commentaire -->
+
           <div class="product-body">
             <h2 class="product-name"><?php echo $product[0]->LibelleProduit; ?></h2>
             <h3 class="product-price"><?php echo $product[0]->PrixProd . " €"; ?></h3>
@@ -73,11 +83,20 @@
             </div> -->
 
             <div class="product-btns">
-              <div class="qty-input">
+              <div class="qty-input" >
                 <span class="text-uppercase">Quantité: </span>
                 <input class="input" type="number">
               </div>
               <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Ajouter au panier</button>
+
+              <!--
+              <div class="qty-input">
+                <span class="text-uppercase">Quantité: </span>
+                <input class="input" type="number">
+              </div>
+              <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Reserver</button>
+              -->
+
               <div class="pull-right">
                 <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
                 <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
@@ -102,16 +121,14 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="product-reviews">
+
+
                       <div class="single-review">
                         <div class="review-heading">
                           <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
                           <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
                           <div class="review-rating pull-right">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o empty"></i>
+
                           </div>
                         </div>
                         <div class="review-body">
@@ -120,41 +137,8 @@
                         </div>
                       </div>
 
-                      <div class="single-review">
-                        <div class="review-heading">
-                          <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                          <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                          <div class="review-rating pull-right">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o empty"></i>
-                          </div>
-                        </div>
-                        <div class="review-body">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                        </div>
-                      </div>
 
-                      <div class="single-review">
-                        <div class="review-heading">
-                          <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                          <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                          <div class="review-rating pull-right">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o empty"></i>
-                          </div>
-                        </div>
-                        <div class="review-body">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                        </div>
-                      </div>
+
 
                       <ul class="reviews-pages">
                         <li class="active">1</li>

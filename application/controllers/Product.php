@@ -12,10 +12,10 @@ class Product extends CI_Controller
 {
     public function create_product_page()
     {
-        $data['action'] = "create_product";
-        $this->load->view('layout/header');
-        $this->load->view('product/create_product', $data);
-        $this->load->view('layout/footer');
+      $data['categorie'] = $this->categorie_model->getAllCategorie();
+      $this->load->view('layout/header');
+      $this->load->view('product/create_product', $data);
+      $this->load->view('layout/footer');
     }
 
     public function product_page($CodeProduit){
@@ -24,6 +24,18 @@ class Product extends CI_Controller
         $this->load->view('layout/header');
         $this->load->view('product/product_page', $data);
         $this->load->view('layout/footer');
+    }
+
+
+    public function product_list_page(){
+
+      // l'id de la boutique à mettre par la suite
+      $data['p_unavailable'] =  $this->product_model->getProductUnavailable(1);
+      $data['p_available'] =  $this->product_model->getProductAvailable(1);
+      $this->load->view('layout/header');
+      $this->load->view('product/product_list',$data);
+      $this->load->view('layout/footer');
+
     }
 
     public function all_product_page(){
@@ -36,45 +48,79 @@ class Product extends CI_Controller
     public function update_product_page($id)
     {
         $data['product'] =  $this->product_model->getProductBySelector('CodeProduit', $id);
-        $data['action'] = "update_product";
-        $data['key'] = $id;
+        $data['categorie'] = $this->categorie_model->getAllCategorie();
         $this->load->view('layout/header');
-        $this->load->view('product/create_product', $data);
+        $this->load->view('product/modify_product', $data);
         $this->load->view('layout/footer');
     }
 
     public function create_product(){
-        $dataProduct = array(
-            "libelle" => htmlspecialchars($_POST['libelle']),
-            "prix" => htmlspecialchars($_POST['prix']),
-            "stockDispo" => htmlspecialchars($_POST['stockDispo']),
-            "duree" => htmlspecialchars($_POST['duree']),
-            "id" => htmlspecialchars($_POST['id']),
-            "description" => htmlspecialchars($_POST['description']),
 
-        );
+      $productCode = $this->product_model->getLastCodeProduit();
+			$code = ($productCode[0]->CodeProduit) + 1;
 
-        $this->product_model->createProduct($dataProduct);
+      $dataProduct = array(
+          "LibelleProduit" => htmlspecialchars($_POST['libelle']),
+          "DureeReservation" => htmlspecialchars($_POST['duree']),
+          "StockDispo" => htmlspecialchars($_POST['stockDispo']),
+          "PrixProd" => htmlspecialchars($_POST['prix']),
+          "DescriptionProd" => htmlspecialchars($_POST['description']),
+          "NumCategorieP" => htmlspecialchars($_POST['categorie']),
+          // à modifier
+          "IdBoutique" => htmlspecialchars($_POST['id']),
+          // image a mettre
+      );
+
+      $this->product_model->createProduct($dataProduct);
+      header('location:  ' . site_url("Product/product_page/$code"));
+
     }
 
+    /*
+      Modifie un produit
+    */
     public function update_product(){
-        $dataProduct = array(
-            "libelle" => htmlspecialchars($_POST['libelle']),
-            "prix" => htmlspecialchars($_POST['prix']),
-            "stockDispo" => htmlspecialchars($_POST['stockDispo']),
-            "duree" => htmlspecialchars($_POST['duree']),
-            "id" => htmlspecialchars($_POST['id']),
-            "description" => htmlspecialchars($_POST['description']),
-            //TODO : supprimer key
-            "key" => htmlspecialchars($_POST['key']),
 
+        $code = htmlspecialchars($_POST['CodeProduit']);
+
+        $dataProduct = array(
+            "CodeProduit" => $code,
+            "LibelleProduit" => htmlspecialchars($_POST['libelle']),
+            "PrixProd" => htmlspecialchars($_POST['prix']),
+            "stockDispo" => htmlspecialchars($_POST['stockDispo']),
+            "stockReel" => htmlspecialchars($_POST['stockReel']),
+            "DureeReservation" => htmlspecialchars($_POST['duree']),
+            "DescriptionProd" => htmlspecialchars($_POST['description']),
+            "NumCategorieP" => htmlspecialchars($_POST['categorie']),
+            //TODO : à supprimer Idboutique
+            "IdBoutique" => htmlspecialchars($_POST['id'])
         );
 
         $this->product_model->updateProduct($dataProduct);
+        header('location:  ' . site_url("Product/product_page/$code"));
+
     }
 
-    public function delete_product($id){
-        $this->product_model->deleteProductByid($id);
+    /*
+      Met à jour le stock d'un produit
+    */
+    public function update_product_stock($code){
+
+      $dataProduct = array(
+        "stockDispo" => htmlspecialchars($_POST['stock']),
+        "stockReel" => htmlspecialchars($_POST['stock'])
+      );
+
+      $this->product_model->updateProductStock($dataProduct,$code);
+      header('location:  ' . site_url("Product/product_list_page"));
+    }
+
+    public function delete_product($code){
+        $this->product_model->deleteProductByid($code);
+        $this->order_model-> deleteLinkCommandeByCode($code);
+        header('location:  ' . site_url("Product/all_product_page"));
+
+        //  supprimer dans le reservations et commentaires par la suite
     }
 
     public function getAll(){
