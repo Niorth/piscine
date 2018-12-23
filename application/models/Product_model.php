@@ -23,6 +23,7 @@ class Product_Model extends CI_Model
             ->set('StockDispo', $data['StockDispo'])
             ->set('IdBoutique', $data['IdBoutique'])
             ->set('NumCategorieP', $data['NumCategorieP'])
+            ->set('ImgProd', $data['ImgProd'])
             ->insert($this->table);
     }
 
@@ -76,7 +77,7 @@ class Product_Model extends CI_Model
     */
     public function getAllProductByCat(){
       $this->load->database();
-      return $this->db->select('CodeProduit,LibelleProduit,PrixProd,StockDispo,NomBoutique')
+      return $this->db->select('CodeProduit,LibelleProduit,PrixProd,StockDispo,NomBoutique,ImgProd')
                     ->from($this->table)
                     ->join('boutique', "boutique.IdBoutique = produit.IdBoutique")
                     ->get()

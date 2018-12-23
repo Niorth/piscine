@@ -56,6 +56,27 @@ class Product extends CI_Controller
 
     public function create_product(){
 
+      // -------------------- upload image --------------------
+
+      $config['upload_path']          = './assets/img/';
+      $config['allowed_types']        = 'jpeg|jpg|png';
+      $config['max_size']             = 2048000; // 2MB
+      $config['max_width']            = 1024;
+      $config['max_height']           = 768;
+
+      $this->load->library('upload', $config);
+
+      $imgName = "not-available.png";
+
+      // si chargement de l'image reussi
+      if ( $this->upload->do_upload('img') ){
+        $imgName = $this->upload->data('file_name');
+      }else{
+        // code d'erreur a insérer ici
+      }
+
+      // -------------------- fin upload image --------------------
+
       $productCode = $this->product_model->getLastCodeProduit();
 			$code = ($productCode[0]->CodeProduit) + 1;
 
@@ -66,12 +87,13 @@ class Product extends CI_Controller
           "PrixProd" => htmlspecialchars($_POST['prix']),
           "DescriptionProd" => htmlspecialchars($_POST['description']),
           "NumCategorieP" => htmlspecialchars($_POST['categorie']),
+          "ImgProd" => $imgName,
           // à modifier
           "IdBoutique" => htmlspecialchars($_POST['id']),
-          // image a mettre
       );
 
       $this->product_model->createProduct($dataProduct);
+
       header('location:  ' . site_url("Product/product_page/$code"));
 
     }

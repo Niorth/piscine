@@ -7,21 +7,17 @@
       <!--  Product Details -->
       <div class="product product-details clearfix">
         <div class="col-md-6">
+
+
           <div id="product-main-view">
             <div class="product-view">
-              <img src="./img/main-product01.jpg" alt="">
-            </div>
-            <div class="product-view">
-              <img src="./img/main-product02.jpg" alt="">
-            </div>
-            <div class="product-view">
-              <img src="./img/main-product03.jpg" alt="">
-            </div>
-            <div class="product-view">
-              <img src="./img/main-product04.jpg" alt="">
+              <?php $link = $product[0]->ImgProd ?>
+              <img src="<?php echo base_url() . "assets/img/" . $link ?>" alt="" >
             </div>
           </div>
-          <div id="product-view">
+
+
+          <!-- div id="product-view">
             <div class="product-view">
               <img src="./img/thumb-product01.jpg" alt="">
             </div>
@@ -34,7 +30,7 @@
             <div class="product-view">
               <img src="./img/thumb-product04.jpg" alt="">
             </div>
-          </div>
+          </div -->
         </div>
 
 
@@ -60,7 +56,13 @@
               </div>
               <a href="#">3 Commentaire / Ajouter Commentaire</a>
             </div>
-            <p><strong>Disponibilité:</strong> Disponible</p>
+            <p><strong>Disponibilité:</strong>
+              <?php if ($product[0]->StockDispo == 0){ ?>
+                Non Disponible
+              <?php } else{ ?>
+                Disponible
+              <?php } ?>
+            </p>
             <p><strong>Vendeur:</strong> <?php echo $boutique[0]->NomBoutique; ?> </p>
             <p><?php echo $product[0]->DescriptionProd; ?></p>
 
@@ -82,27 +84,34 @@
               </ul>
             </div> -->
 
-            <div class="product-btns">
-              <div class="qty-input" >
-                <span class="text-uppercase">Quantité: </span>
-                <input class="input" type="number">
-              </div>
-              <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Ajouter au panier</button>
+            <?php if ($product[0]->StockDispo != 0){ ?>
 
-              <!--
-              <div class="qty-input">
-                <span class="text-uppercase">Quantité: </span>
-                <input class="input" type="number">
-              </div>
-              <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Reserver</button>
-              -->
+              <div class="product-btns">
+                <div class="qty-input" >
+                  <span class="text-uppercase">Quantité: </span>
+                  <input class="input" type="number" min="1" max="<?php echo $product[0]->StockDispo; ?>">
+                </div>
+                <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Ajouter au panier</button>
 
-              <div class="pull-right">
-                <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-                <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                <button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
+                <!--
+                <div class="qty-input">
+                  <span class="text-uppercase">Quantité: </span>
+                  <input class="input" type="number">
+                </div>
+                <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Reserver</button>
+
+
+                <div class="pull-right">
+                  <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+                  <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
+                  <button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
+                </div>
+                -->
+
               </div>
-            </div>
+
+            <?php } ?>
+
           </div>
         </div>
         <div class="col-md-12">
@@ -136,9 +145,6 @@
                             irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                         </div>
                       </div>
-
-
-
 
                       <ul class="reviews-pages">
                         <li class="active">1</li>

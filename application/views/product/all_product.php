@@ -72,38 +72,55 @@
           <!-- row -->
           <div class="row">
 
-            <table class="table table-hover">
+            <table class="shopping-cart-table table table-hover">
               <thead>
                 <tr>
-                  <th scope="col">Image</th>
-                  <th scope="col">Nom Produit + Vendeur + evaluation</th>
-                  <th scope="col">Disponibilité</th>
-                  <th scope="col">Prix + bouton ajout panier</th>
+                  <th>Image</th>
+                  <th>Nom Produit + Vendeur + evaluation</th>
+                  <th>Disponibilité</th>
+                  <th>Prix</th>
+                  <th>Prix + bouton ajout panier</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
                   foreach ($product as $item){
-                  $lien = site_url("Product/product_page/$item->CodeProduit");?>
+                  $lien = site_url("Product/product_page/$item->CodeProduit");
+                  $link = $item->ImgProd;
+                  ?>
+
                   <tr>
-                    <td><img src="./img/thumb-product01.jpg" alt="Image du produit" width="160" height="90" ></td>
-                    <td>
-                      <div class="row">
-                        <a href="<?php echo $lien ?>"><h4 class="product-name"><?php if (isset($item)) echo $item->LibelleProduit;?></h2></a>
-                      </div>
-                      <div class="row">
-                        <?php  if (isset($item)) echo $item->NomBoutique ?>
-                      </div>
+                    <td class="thumb">
+                      <img src="<?php echo base_url() . "assets/img/" . $link ?>" alt="<?php echo $item->LibelleProduit ?>" >
                     </td>
-                    <td><?php echo $item->CodeProduit; ?></td>
-                    <td>
-                        <div class="row">
-                          <?php echo $item->PrixProd . " €"; ?>
-                        </div>
-                        <div class="row">
+
+                    <td class="details">
+                        <a href="<?php echo $lien ?>"><?php if (isset($item)) echo $item->LibelleProduit;?></a>
+                        <ul>
+                          <li><?php  if (isset($item)) echo $item->NomBoutique ?></li>
+                          <li><span>Evaluation a mettre</span></li>
+                        </ul>
+                    </td>
+
+                    <td class="etatstock text-center">
+                      <?php
+                        $stockMsg = "EN STOCK";
+                        if ($item->StockDispo == 0){ $stockMsg = "RUPTURE";}
+                      ?>
+                      <strong><?php echo $stockMsg; ?></strong>
+                    </td>
+
+                    <td class="price text-center"><?php echo $item->PrixProd; ?> €</td>
+
+
+                    <td  class="text-center">
+                      <?php
+                        if ($item->StockDispo != 0){ ?>
                           <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                        </div>
+                          <button class="btn btn-warning"><i class="fa fa-clock-o"></i></button>
+                      <?php } ?>
                     </td>
+
                   </tr>
                 <?php } ?>
               </tbody>

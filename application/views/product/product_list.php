@@ -39,11 +39,12 @@
                 foreach ($p_unavailable as $item){
                 $lien = site_url("Product/product_page/$item->CodeProduit");
                 $lien1 = site_url("Product/update_product_page/$item->CodeProduit");
+                $img = $item->ImgProd;
                 ?>
 
                 <tr>
                   <td><?php echo $item->CodeProduit; ?></td>
-                  <td class="thumb"><img src="<?php echo base_url() ?>assets/img/thumb-product01.jpg" alt=""></td>
+                  <td class="thumb"><img src="<?php echo base_url() . "assets/img/" . $img ?>"></td>
                   <td class="details">
                     <a href="<?php echo $lien ?>"><?php echo $item->LibelleProduit; ?></a>
                   </td>
@@ -101,11 +102,12 @@
                 foreach ($p_available as $item){
                 $lien = site_url("Product/product_page/$item->CodeProduit");
                 $lien1 = site_url("Product/update_product_page/$item->CodeProduit");
+                $img = $item->ImgProd;
                 ?>
 
                 <tr>
                   <td><?php echo $item->CodeProduit; ?></td>
-                  <td class="thumb"><img src="<?php echo base_url() ?>assets/img/thumb-product01.jpg" alt=""></td>
+                  <td class="thumb"><img src="<?php echo base_url() . "assets/img/" . $img ?>"></td>
                   <td class="details">
                     <a href="<?php echo $lien ?>"><?php echo $item->LibelleProduit; ?></a>
                   </td>

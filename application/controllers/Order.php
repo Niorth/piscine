@@ -21,4 +21,10 @@ class Order extends CI_Controller {
     $this->load->view('layout/footer');
   }
 
+  public function order_reservation_list(){
+    $this->load->view('layout/header');
+    $this->load->view('order/order_reservation');
+    $this->load->view('layout/footer');
+  }
+
 }
