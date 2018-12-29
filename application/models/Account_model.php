@@ -33,3 +33,4 @@ class Account_Model extends CI_Model
             ->insert($this->table);
     }
 }
+

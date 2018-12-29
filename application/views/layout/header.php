@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-    <script src = "<?php echo base_url(); ?>js/cart.js"></script>
+
 
 </head>
 
@@ -115,7 +115,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</div>
 								<strong class="text-uppercase">Mon panier:</strong>
 								<br>
-								<span><?php
+								<span id = "total"><?php
                                     if(isset($_SESSION["cart"])) {
                                         echo($total);
                                     }
@@ -135,8 +135,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         <img src="./img/thumb-product01.jpg" alt="">
                                                     </div>
                                                     <div class="product-body">
-                                                        <h3 class="product-price"><?php echo($infos[2]); ?>€<span
-                                                                    class="qty"> x<?php echo($infos[1]); ?></span></h3>
+                                                        <h3 class="product-price"><?php echo($infos[2]); ?>€
+                                                            <span class="qty"> x<?php echo($infos[1]); ?></span>
+                                                        </h3>
                                                         <h2 class="product-name"><a
                                                                     href="#"><?php echo($infos[0]); ?></a></h2>
                                                     </div>
@@ -535,5 +536,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 		<!-- /container -->
 	</div>
+    <script src = "<?php echo base_url(); ?>node_modules/jquery/dist/jquery.min.js"></script>
+    <script type='text/javascript'>
+        const baseURL= "<?php echo base_url();?>";
+    </script>
+    <script src = "<?php echo base_url(); ?>js/cart.js"></script>
 
 	<!-- /NAVIGATION -->

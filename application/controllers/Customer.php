@@ -22,7 +22,7 @@ class Customer extends CI_Controller {
         $_SESSION["cart"] = serialize($cart);
 	}
 
-    public function removeProductFromCart($id){
+    public static function removeProductFromCart($id){
         $cart = unserialize($_SESSION["cart"]);
         unset($cart[$id]);
         $_SESSION["cart"] = serialize($cart);
