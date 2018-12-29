@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<!-- Logo -->
 					<div class="header-logo">
 						<a class="logo" href="#">
-							<img src="<?php echo base_url() ?>assets/img/cci_herault.jpeg" alt="">
+							<img src="<?php echo base_url() ?>assets/img/cci_herault.jpg" alt="">
 						</a>
 					</div>
 					<!-- /Logo -->
@@ -378,9 +378,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
 						<li><a href="#">Accueil</a></li>
-						<li><a href="#">Boutique</a></li>
-            <li><a href="<?php echo site_url('Product/all_product_page'); ?>">Produit</a></li>
-						<li class="dropdown mega-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Women <i class="fa fa-caret-down"></i></a>
+
+						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Boutique<i class="fa fa-caret-down"></i></a>
+							<ul class="custom-menu">
+								<li><a href="<?php echo site_url('Shop/create_shop_page'); ?>">Créer une boutique</a></li>
+							</ul>
+						</li>
+
+						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Produit <i class="fa fa-caret-down"></i></a>
+							<ul class="custom-menu">
+								<li><a href="<?php echo site_url('Product/all_product_page'); ?>">Liste des Produit</a></li>
+								<li><a href="<?php echo site_url('Product/product_list_page'); ?>">Stock</a></li>
+								<li><a href="<?php echo site_url('Product/create_product_page'); ?>">Créer un produit</a></li>
+							</ul>
+						</li>
+
+						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Commandes<i class="fa fa-caret-down"></i></a>
+							<ul class="custom-menu">
+								<li><a href="<?php echo site_url('Order/tableau_de_bord'); ?>">Stats</a></li>
+								<li><a href="<?php echo site_url('Order/order_reservation_list'); ?>">Liste commandes et reservations</a></li>
+							</ul>
+						</li>
+
 						<li class="dropdown mega-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Femmes <i class="fa fa-caret-down"></i></a>
 							<div class="custom-menu">
 								<div class="row">

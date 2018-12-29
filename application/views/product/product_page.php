@@ -7,21 +7,17 @@
       <!--  Product Details -->
       <div class="product product-details clearfix">
         <div class="col-md-6">
+
+
           <div id="product-main-view">
             <div class="product-view">
-              <img src="./img/main-product01.jpg" alt="">
-            </div>
-            <div class="product-view">
-              <img src="./img/main-product02.jpg" alt="">
-            </div>
-            <div class="product-view">
-              <img src="./img/main-product03.jpg" alt="">
-            </div>
-            <div class="product-view">
-              <img src="./img/main-product04.jpg" alt="">
+              <?php $link = $product[0]->ImgProd ?>
+              <img src="<?php echo base_url() . "assets/img/" . $link ?>" alt="" >
             </div>
           </div>
-          <div id="product-view">
+
+
+          <!-- div id="product-view">
             <div class="product-view">
               <img src="./img/thumb-product01.jpg" alt="">
             </div>
@@ -34,9 +30,19 @@
             <div class="product-view">
               <img src="./img/thumb-product04.jpg" alt="">
             </div>
-          </div>
+          </div -->
         </div>
+
+
         <div class="col-md-6">
+
+          <!-- A afficher qu'en mode admin et commercant -->
+
+          <a href="<?php $code = $product[0]->CodeProduit; echo site_url("Product/update_product_page/$code"); ?>" class="btn btn-warning" role="button">Modifier</a>
+          <a href="<?php $code = $product[0]->CodeProduit; echo site_url("Product/delete_product/$code"); ?>" class="btn btn-danger" role="button">Supprimer</a>
+
+          <!-- fin commentaire -->
+
           <div class="product-body">
             <h2 class="product-name"><?php echo $product[0]->LibelleProduit; ?></h2>
             <h3 class="product-price"><?php echo $product[0]->PrixProd . " €"; ?></h3>
@@ -50,7 +56,13 @@
               </div>
               <a href="#">3 Commentaire / Ajouter Commentaire</a>
             </div>
-            <p><strong>Disponibilité:</strong> Disponible</p>
+            <p><strong>Disponibilité:</strong>
+              <?php if ($product[0]->StockDispo == 0){ ?>
+                Non Disponible
+              <?php } else{ ?>
+                Disponible
+              <?php } ?>
+            </p>
             <p><strong>Vendeur:</strong> <?php echo $boutique[0]->NomBoutique; ?> </p>
             <p><?php echo $product[0]->DescriptionProd; ?></p>
 
@@ -72,18 +84,34 @@
               </ul>
             </div> -->
 
-            <div class="product-btns">
-              <div class="qty-input">
-                <span class="text-uppercase">Quantité: </span>
-                <input class="input" type="number">
+            <?php if ($product[0]->StockDispo != 0){ ?>
+
+              <div class="product-btns">
+                <div class="qty-input" >
+                  <span class="text-uppercase">Quantité: </span>
+                  <input class="input" type="number" min="1" max="<?php echo $product[0]->StockDispo; ?>">
+                </div>
+                <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Ajouter au panier</button>
+
+                <!--
+                <div class="qty-input">
+                  <span class="text-uppercase">Quantité: </span>
+                  <input class="input" type="number">
+                </div>
+                <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Reserver</button>
+
+
+                <div class="pull-right">
+                  <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+                  <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
+                  <button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
+                </div>
+                -->
+
               </div>
-              <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Ajouter au panier</button>
-              <div class="pull-right">
-                <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-                <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                <button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
-              </div>
-            </div>
+
+            <?php } ?>
+
           </div>
         </div>
         <div class="col-md-12">
@@ -102,52 +130,14 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="product-reviews">
-                      <div class="single-review">
-                        <div class="review-heading">
-                          <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                          <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                          <div class="review-rating pull-right">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o empty"></i>
-                          </div>
-                        </div>
-                        <div class="review-body">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                        </div>
-                      </div>
+
 
                       <div class="single-review">
                         <div class="review-heading">
                           <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
                           <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
                           <div class="review-rating pull-right">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o empty"></i>
-                          </div>
-                        </div>
-                        <div class="review-body">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                        </div>
-                      </div>
 
-                      <div class="single-review">
-                        <div class="review-heading">
-                          <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                          <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                          <div class="review-rating pull-right">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o empty"></i>
                           </div>
                         </div>
                         <div class="review-body">

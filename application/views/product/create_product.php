@@ -12,43 +12,88 @@
   <!-- container -->
   <div class="container">
     <!-- row -->
+
     <div class="row">
-      <form action="<?php echo site_url("Product/$action") ?>" method="post" id="checkout-form" class="clearfix" >
 
-          <input name="key" type="hidden" <?php if (isset($key)) echo "value = \"" .  $key . "\""?>>
-
-        <div class="col-md-6">
-          <div class="billing-details">
+        <div class="col-md-10">
             <div class="section-title">
               <h3 class="title">Créer un produit</h3>
             </div>
+
+            <form action="<?php echo site_url("Product/create_product") ?>" method="post" id="checkout-form" class="form-horizontal" enctype="multipart/form-data" >
+
             <div class="form-group">
-              <label class=" form-control-label">Libellé :</label>
-              <input class="input" type="text" name="libelle" placeholder="Libellé" required <?php if (isset($product)) echo "value = \"" . $product[0]['LibelleProduit'] . "\""?>>
-            </div>
-            <div class="form-group">
-              <label class=" form-control-label">Prix :</label>
-              <input class="input" type="text" name="prix" placeholder="Prix" required  <?php if (isset($product)) echo "value = \"" . $product[0]['PrixProd'] . "\""?>>
-            </div>
-              <div class="form-group">
-                  <label class=" form-control-label">Stock Disponible :</label>
-                  <input class="input" type="number" name="stockDispo"  placeholder="Stock" required  <?php if (isset($product)) echo "value = \"" . $product[0]['StockDispo'] . "\""?> >
+              <label class="control-label col-sm-2">Nom :</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="text" name="libelle" placeholder="Nom" required>
               </div>
-            <div class="form-group">
-                  <label class=" form-control-label">Durée de la reservation :</label>
-                  <input class="input" type="number" name="duree" placeholder="Durée" required  <?php if (isset($product)) echo "value = \"" . $product[0]['DureeReservation'] . "\""?>>
-              </div>
-              <div class="form-group">
-                  <label class=" form-control-label">Description :</label>
-                  <input class="input" type="text" name="description" placeholder="Description" required  <?php if (isset($product)) echo "value = \"" . $product[0]['DescriptionProd'] . "\""?>>
-              </div>
-            <div class="form-group">
-              <label class=" form-control-label">idBoutique (a supprimer) :</label>
-              <input class="input" type="text" name="id" placeholder="id" required>
             </div>
 
-            <input type="submit" class="primary-btn" value="Valider">
-          </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Prix :</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="number" name="prix" placeholder="Prix" step="0.01" min="0.00" required>
+              </div>
+            </div>
+
+              <div class="form-group">
+                  <label class="control-label col-sm-2">Stock Disponible :</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="number" name="stockDispo"  placeholder="Stock" min="0" required>
+                  </div>
+              </div>
+
+            <div class="form-group">
+                  <label class="control-label col-sm-2">Durée si réservation:</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="number" name="duree" placeholder="en jours" required>
+                  </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Description :</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" rows="3" name="description" required></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2">Catégorie du produit:</label>
+              <div class="col-sm-10">
+                <select class="form-control" name="categorie" required>
+                  <option selected="selected" value= "1">Autres</option>
+                  <?php
+                      foreach($categorie as $item){
+                  ?>
+                        <option value="<?php echo $item->NumCategorieP ?>"> <?php echo $item->NomCategorieProduit ?> </option>
+                      <?php  } ?>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2">idBoutique (à supprimer) :</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="number" name="id" placeholder="id" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2">Ajouter une image:</label>
+              <div class="col-sm-10">
+                <input type="file" name="img" id="img">
+              </div>
+            </div>
+
+            <?php if (isset($error)) echo $error; ?>
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" class="primary-btn" value="Valider">
+              </div>
+            </div>
+
+
         </div>
       </form>
     </div>

@@ -8,33 +8,13 @@
       <div id="aside" class="col-md-3">
         <!-- aside widget -->
         <div class="aside">
-          <h3 class="aside-title">Shop by:</h3>
+          <h3 class="aside-title">Filtrer par:</h3>
           <ul class="filter-list">
-            <li><span class="text-uppercase">color:</span></li>
-            <li><a href="#" style="color:#FFF; background-color:#8A2454;">Camelot</a></li>
-            <li><a href="#" style="color:#FFF; background-color:#475984;">East Bay</a></li>
-            <li><a href="#" style="color:#FFF; background-color:#BF6989;">Tapestry</a></li>
-            <li><a href="#" style="color:#FFF; background-color:#9A54D8;">Medium Purple</a></li>
+
           </ul>
 
-          <ul class="filter-list">
-            <li><span class="text-uppercase">Size:</span></li>
-            <li><a href="#">X</a></li>
-            <li><a href="#">XL</a></li>
-          </ul>
 
-          <ul class="filter-list">
-            <li><span class="text-uppercase">Price:</span></li>
-            <li><a href="#">MIN: $20.00</a></li>
-            <li><a href="#">MAX: $120.00</a></li>
-          </ul>
-
-          <ul class="filter-list">
-            <li><span class="text-uppercase">Gender:</span></li>
-            <li><a href="#">Men</a></li>
-          </ul>
-
-          <button class="primary-btn">Clear All</button>
+          <button class="primary-btn">Reinitialiser</button>
         </div>
         <!-- /aside widget -->
 
@@ -45,96 +25,6 @@
         </div>
         <!-- aside widget -->
 
-        <!-- aside widget -->
-        <div class="aside">
-          <h3 class="aside-title">Filter By Color:</h3>
-          <ul class="color-option">
-            <li><a href="#" style="background-color:#475984;"></a></li>
-            <li><a href="#" style="background-color:#8A2454;"></a></li>
-            <li class="active"><a href="#" style="background-color:#BF6989;"></a></li>
-            <li><a href="#" style="background-color:#9A54D8;"></a></li>
-            <li><a href="#" style="background-color:#675F52;"></a></li>
-            <li><a href="#" style="background-color:#050505;"></a></li>
-            <li><a href="#" style="background-color:#D5B47B;"></a></li>
-          </ul>
-        </div>
-        <!-- /aside widget -->
-
-        <!-- aside widget -->
-        <div class="aside">
-          <h3 class="aside-title">Filter By Size:</h3>
-          <ul class="size-option">
-            <li class="active"><a href="#">S</a></li>
-            <li class="active"><a href="#">XL</a></li>
-            <li><a href="#">SL</a></li>
-          </ul>
-        </div>
-        <!-- /aside widget -->
-
-        <!-- aside widget -->
-        <div class="aside">
-          <h3 class="aside-title">Filter by Brand</h3>
-          <ul class="list-links">
-            <li><a href="#">Nike</a></li>
-            <li><a href="#">Adidas</a></li>
-            <li><a href="#">Polo</a></li>
-            <li><a href="#">Lacost</a></li>
-          </ul>
-        </div>
-        <!-- /aside widget -->
-
-        <!-- aside widget -->
-        <div class="aside">
-          <h3 class="aside-title">Filter by Gender</h3>
-          <ul class="list-links">
-            <li class="active"><a href="#">Men</a></li>
-            <li><a href="#">Women</a></li>
-          </ul>
-        </div>
-        <!-- /aside widget -->
-
-        <!-- aside widget -->
-        <div class="aside">
-          <h3 class="aside-title">Top Rated Product</h3>
-          <!-- widget product -->
-          <div class="product product-widget">
-            <div class="product-thumb">
-              <img src="./img/thumb-product01.jpg" alt="">
-            </div>
-            <div class="product-body">
-              <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-              <h3 class="product-price">$32.50 <del class="product-old-price">$45.00</del></h3>
-              <div class="product-rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o empty"></i>
-              </div>
-            </div>
-          </div>
-          <!-- /widget product -->
-
-          <!-- widget product -->
-          <div class="product product-widget">
-            <div class="product-thumb">
-              <img src="./img/thumb-product01.jpg" alt="">
-            </div>
-            <div class="product-body">
-              <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-              <h3 class="product-price">$32.50</h3>
-              <div class="product-rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o empty"></i>
-              </div>
-            </div>
-          </div>
-          <!-- /widget product -->
-        </div>
-        <!-- /aside widget -->
       </div>
       <!-- /ASIDE -->
 
@@ -182,24 +72,55 @@
           <!-- row -->
           <div class="row">
 
-            <table class="table table-hover">
+            <table class="shopping-cart-table table table-hover">
               <thead>
                 <tr>
-                  <th scope="col">Image</th>
-                  <th scope="col">Nom Produit + Vendeur + evaluation</th>
-                  <th scope="col">Disponibilité</th>
-                  <th scope="col">Prix + bouton ajout panier</th>
+                  <th>Image</th>
+                  <th>Nom Produit + Vendeur + evaluation</th>
+                  <th>Disponibilité</th>
+                  <th>Prix</th>
+                  <th>Prix + bouton ajout panier</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
                   foreach ($product as $item){
-                  $lien = site_url("Product/product_page/$item->CodeProduit");?>
+                  $lien = site_url("Product/product_page/$item->CodeProduit");
+                  $link = $item->ImgProd;
+                  ?>
+
                   <tr>
-                    <td>Image Produit</td>
-                    <td><a href="<?php echo $lien ?>"><?php if (isset($item)){ echo $item->LibelleProduit;}  if (isset($item)) echo $item->NomBoutique ?> </td>
-                    <td><?php echo $item->CodeProduit; ?></td>
-                    <td><?php echo $item->PrixProd . " €"; ?> <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Ajouter au panier</button></td>
+                    <td class="thumb">
+                      <img src="<?php echo base_url() . "assets/img/" . $link ?>" alt="<?php echo $item->LibelleProduit ?>" >
+                    </td>
+
+                    <td class="details">
+                        <a href="<?php echo $lien ?>"><?php if (isset($item)) echo $item->LibelleProduit;?></a>
+                        <ul>
+                          <li><?php  if (isset($item)) echo $item->NomBoutique ?></li>
+                          <li><span>Evaluation a mettre</span></li>
+                        </ul>
+                    </td>
+
+                    <td class="etatstock text-center">
+                      <?php
+                        $stockMsg = "EN STOCK";
+                        if ($item->StockDispo == 0){ $stockMsg = "RUPTURE";}
+                      ?>
+                      <strong><?php echo $stockMsg; ?></strong>
+                    </td>
+
+                    <td class="price text-center"><?php echo $item->PrixProd; ?> €</td>
+
+
+                    <td  class="text-center">
+                      <?php
+                        if ($item->StockDispo != 0){ ?>
+                          <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i></button>
+                          <button class="btn btn-warning"><i class="fa fa-clock-o"></i></button>
+                      <?php } ?>
+                    </td>
+
                   </tr>
                 <?php } ?>
               </tbody>

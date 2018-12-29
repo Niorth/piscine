@@ -15,30 +15,29 @@ class Product_Model extends CI_Model
 
     public function createProduct($data){
         $this -> load -> database();
-        return $this->db->set('LibelleProduit', $data['libelle'])
-            ->set('DescriptionProd', $data['description'])
-            ->set('PrixProd', $data['prix'])
-            ->set('StockReel', $data['stockDispo'])
-            ->set('StockDispo', $data['stockDispo'])//stockDispo = stockReel
-            ->set('DureeReservation', $data['duree'])
-            ->set('IdBoutique', $data['id'])
-            //TODO
-            ->set('NumCategorieP', 1)
+        return $this->db->set('LibelleProduit', $data['LibelleProduit'])
+            ->set('DescriptionProd', $data['DescriptionProd'])
+            ->set('DureeReservation', $data['DureeReservation'])
+            ->set('PrixProd', $data['PrixProd'])
+            ->set('StockReel', $data['StockDispo'])
+            ->set('StockDispo', $data['StockDispo'])
+            ->set('IdBoutique', $data['IdBoutique'])
+            ->set('NumCategorieP', $data['NumCategorieP'])
+            ->set('ImgProd', $data['ImgProd'])
             ->insert($this->table);
     }
 
     public function updateProduct($data){
         $this -> load -> database();
-        return $this->db->set('LibelleProduit', $data['libelle'])
-            ->set('DescriptionProd', $data['description'])
-            ->set('PrixProd', $data['prix'])
+        return $this->db->set('LibelleProduit', $data['LibelleProduit'])
+            ->set('DescriptionProd', $data['DescriptionProd'])
+            ->set('PrixProd', $data['PrixProd'])
             ->set('StockReel', $data['stockDispo'])
             ->set('StockDispo', $data['stockDispo'])//stockDispo = stockReel
-            ->set('DureeReservation', $data['duree'])
-            ->set('IdBoutique', $data['id'])
-            //TODO
-            ->set('NumCategorieP', 1)
-            ->where('CodeProduit', $data['key'])
+            ->set('DureeReservation', $data['DureeReservation'])
+            ->set('IdBoutique', $data['IdBoutique'])
+            ->set('NumCategorieP', $data['NumCategorieP'])
+            ->where('CodeProduit', $data['CodeProduit'])
             ->update($this->table);
     }
 
@@ -78,7 +77,7 @@ class Product_Model extends CI_Model
     */
     public function getAllProductByCat(){
       $this->load->database();
-      return $this->db->select('CodeProduit,LibelleProduit,PrixProd,StockDispo,NomBoutique')
+      return $this->db->select('CodeProduit,LibelleProduit,PrixProd,StockDispo,NomBoutique,ImgProd')
                     ->from($this->table)
                     ->join('boutique', "boutique.IdBoutique = produit.IdBoutique")
                     ->get()
@@ -87,7 +86,7 @@ class Product_Model extends CI_Model
 
     public function getProductById($CodeProduit){
     $this->load->database();
-    return $this->db->select('CodeProduit,LibelleProduit,PrixProd,StockDispo,NomBoutique,DescriptionProd')
+    return $this->db->select('CodeProduit,LibelleProduit,PrixProd,StockDispo,NomBoutique,DescriptionProd,ImgProd')
                   ->from($this->table)
                   ->join('boutique', "boutique.IdBoutique = produit.IdBoutique")
                   ->where('CodeProduit', $CodeProduit)
@@ -95,7 +94,67 @@ class Product_Model extends CI_Model
                   ->result();
     }
 
+    /*
+      Retourne le dernier CodeProduit de la table
+    */
+    public function getLastCodeProduit() {
+      $this->load->database();
+      return $this->db->select('CodeProduit')
+                      ->from($this->table)
+                      ->order_by('CodeProduit', 'desc')
+                      ->limit(1)
+                      ->get()
+                      ->result();
+    }
 
+    /*
+      Retourne les produits en rupture de stock
+
+      SELECT CodeProduit, LibelleProduit, PrixProd, StockDispo, ImgProd, IdBoutique
+      from produit
+      where IdBoutique = $id
+      and StockDispo = 0
+    */
+    public function getProductUnavailable($id){
+      $this->load->database();
+      return $this->db->select('CodeProduit,LibelleProduit,PrixProd,StockDispo,ImgProd,IdBoutique')
+                    ->from($this->table)
+                    ->where('IdBoutique', $id)
+                    ->where('StockDispo', 0)
+                    ->get()
+                    ->result();
+    }
+
+    /*
+    Retourne les produits disponible ( qte != 0)
+
+    SELECT CodeProduit, LibelleProduit, PrixProd, StockDispo, ImgProd, IdBoutique
+    from produit
+    where IdBoutique = $id
+    and StockDispo <> 0
+
+    */
+    public function getProductAvailable($id){
+      $this->load->database();
+      return $this->db->select('CodeProduit,LibelleProduit,PrixProd,StockDispo,ImgProd,IdBoutique')
+                    ->from($this->table)
+                    ->where('IdBoutique', $id)
+                    ->where('StockDispo <>', 0)
+                    ->get()
+                    ->result();
+    }
+
+    /*
+      Met à jour le stock d'un produit
+    */
+    public function updateProductStock($data,$code){
+      $this -> load -> database();
+      return $this->db->set('StockReel', $data['stockDispo'])
+                      ->set('StockDispo', $data['stockDispo'])
+                      ->where('CodeProduit', $code)
+                      ->update($this->table);
+
+    }
 
     public function getProductBySelector($selectorName, $selector){
         $this->load->database();
