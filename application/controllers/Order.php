@@ -5,7 +5,7 @@ class Order extends CI_Controller {
 
   public function index(){
     $this->load->view('layout/header');
-    $this->load->view('order/order_reservation');
+    $this->load->view('order/to_do');
     $this->load->view('layout/footer');
 	}
 
@@ -22,9 +22,19 @@ class Order extends CI_Controller {
   }
 
   public function order_reservation_list(){
+    // à modifier l'id de la boutique
+    $data['c_nontraite'] = $this->order_ligne_model->getOrderLigne(2,"non traite");
+    $data['c_traite'] = $this->order_ligne_model->getOrderLigne(2,"traite");
+
+    $data['r_prepared'] = $this->reservation_ligne_model->getResPrepared(11);
+    $data['r_notPrepared'] = $this->reservation_ligne_model->getResNotPrepared(11);
+    $data['r_expire'] = $this->reservation_ligne_model->getResExpired(11);
+
     $this->load->view('layout/header');
-    $this->load->view('order/order_reservation');
+    $this->load->view('order/order_reservation',$data);
     $this->load->view('layout/footer');
+
   }
+
 
 }

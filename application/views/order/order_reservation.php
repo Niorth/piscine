@@ -13,28 +13,47 @@
           <table class="table table-hover table-bordered">
             <thead>
               <tr>
-                <th scope="col">Commande N°</th>
-                <th scope="col">Nom du Produit</th>
-                <th scope="col">Status</th>
-                <th scope="col">Date commande</th>
-                <th scope="col">Quantité</th>
+                <th class="text-center">Commande N°</th>
+                <th class="text-center">Nom du Produit</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Date commande</th>
+                <th class="text-center">Quantité</th>
+                <th class="text-center">Action</th>
               </tr>
             </thead>
             <tbody>
-                <tr>
-                  <td>non traité </td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+              <?php
+                foreach ($c_nontraite as $item){
+                $lien = "lien vers la commande"/*site_url("Product/product_page/$item->CodeProduit")*/;
+              ?>
+                <tr class="info">
+                  <td class="text-center"><?php echo $item->NumLigneCommande; ?></td>
+                  <td class="text-center"><?php echo $item->LibelleProduit; ?></td>
+                  <td class="text-center"><?php echo $item->StatusLigneCom; ?></td>
+                  <td class="text-center"><?php echo $item->DateCommande; ?></td>
+                  <td class="text-center"><?php echo $item->QteLigneCommande; ?></td>
+                  <td class="text-center">
+                    <a href="<?php echo $lien ?>" class="btn btn-default"><i class="fa fa-eye"></i></a>
+                  </td>
                 </tr>
-                <tr class="table-info">
-                  <td>en cours de préparation</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+              <?php } ?>
+
+              <?php
+                foreach ($c_traite as $item){
+                $lien1 = "lien vers la commande"/*site_url("Product/product_page/$item->CodeProduit")*/;
+              ?>
+                <tr class="success">
+                  <td class="text-center"><?php echo $item->NumLigneCommande; ?></td>
+                  <td class="text-center"><?php echo $item->LibelleProduit; ?></td>
+                  <td class="text-center"><?php echo $item->StatusLigneCom; ?></td>
+                  <td class="text-center"><?php echo $item->DateCommande; ?></td>
+                  <td class="text-center"><?php echo $item->QteLigneCommande; ?></td>
+                  <td class="text-center">
+                    <a href="<?php echo $lien1 ?>" class="btn btn-default"><i class="fa fa-eye"></i></a>
+                  </td>
                 </tr>
+              <?php } ?>
+
             </tbody>
           </table>
         </div>
@@ -53,52 +72,80 @@
           <table class="table table-hover table-bordered">
             <thead>
               <tr>
-                <th scope="col">Réservation N°</th>
-                <th scope="col">Nom du Produit </th>
-                <th scope="col">Payé / non payé</th>
-                <th scope="col">Status</th>
-                <th scope="col">Date commande</th>
-                <th scope="col">Quantité</th>
+                <tr>
+                  <th class="text-center">Reservation N°</th>
+                  <th class="text-center">Nom du Produit</th>
+                  <th class="text-center">Status</th>
+                  <th class="text-center">Date reservation</th>
+                  <th class="text-center">Date fin reservation</th>
+                  <th class="text-center">Quantité</th>
+                  <th class="text-center">Action</th>
+                </tr>
+
               </tr>
             </thead>
             <tbody>
-                <tr>
-                  <td>payé et non traité </td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+              <?php
+                foreach ($r_notPrepared as $item){
+                $lien2 = "lien vers la reservation"/*site_url("Product/product_page/$item->CodeProduit")*/;
+              ?>
+
+              <tr class="info">
+                <td class="text-center"><?php echo $item->NumLigneRes; ?></td>
+                <td class="text-center"><?php echo $item->LibelleProduit; ?></td>
+                <td class="text-center"><?php echo $item->StatusLigneRes; ?></td>
+                <td class="text-center"><?php echo $item->DateReservation; ?></td>
+                <td class="text-center"><?php echo $item->DateFinRes; ?></td>
+                <td class="text-center"><?php echo $item->QteLigneRes; ?></td>
+                <td class="text-center">
+                  <a href="<?php echo $lien2 ?>" class="btn btn-default"><i class="fa fa-eye"></i></a>
+                </td>
+              </tr>
+
+              <?php } ?>
+
+              <?php
+                foreach ($r_prepared as $item){
+                $lien3 = "lien vers la reservation"/*site_url("Product/product_page/$item->CodeProduit")*/;
+              ?>
+
+              <tr class="success">
+                <td class="text-center"><?php echo $item->NumLigneRes; ?></td>
+                <td class="text-center"><?php echo $item->LibelleProduit; ?></td>
+                <td class="text-center"><?php echo $item->StatusLigneRes; ?></td>
+                <td class="text-center"><?php echo $item->DateReservation; ?></td>
+                <td class="text-center"><?php echo $item->DateFinRes; ?></td>
+                <td class="text-center"><?php echo $item->QteLigneRes; ?></td>
+                <td class="text-center">
+                  <a href="<?php echo $lien3 ?>" class="btn btn-default"><i class="fa fa-eye"></i></a>
+                </td>
+              </tr>
+
+              <?php } ?>
+
+                <?php
+                  foreach ($r_expire as $item){
+                  $lien4 = "lien vers la reservation"/*site_url("Product/product_page/$item->CodeProduit")*/;
+                ?>
+
+                <tr class="danger">
+                  <td class="text-center"><?php echo $item->NumLigneRes; ?></td>
+                  <td class="text-center"><?php echo $item->LibelleProduit; ?></td>
+                  <td class="text-center"><?php echo $item->StatusLigneRes; ?></td>
+                  <td class="text-center"><?php echo $item->DateReservation; ?></td>
+                  <td class="text-center"><?php echo $item->DateFinRes; ?></td>
+                  <td class="text-center"><?php echo $item->QteLigneRes; ?></td>
+                  <td class="text-center">
+                    <a href="<?php echo $lien4 ?>" class="btn btn-default"><i class="fa fa-eye"></i></a>
+                  </td>
                 </tr>
-                <tr class="table-info">
-                  <td> payé et en cours de préparation</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr class="table-info">
-                  <td> non payé</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr class="table-info">
-                  <td> date dépassé</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
+              <?php } ?>
+
             </tbody>
           </table>
 
         </div>
-        
+
     </div>
     <!-- /row -->
   </div>

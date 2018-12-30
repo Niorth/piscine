@@ -351,7 +351,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="menu-nav">
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
-						<li><a href="#">Accueil</a></li>
+						<li><a href="<?php echo site_url('Order'); ?>">Accueil</a></li>
 
 						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Boutique<i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
