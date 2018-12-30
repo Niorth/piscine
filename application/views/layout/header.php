@@ -38,6 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
+
 </head>
 
 <body>
@@ -89,40 +90,65 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<!-- /Account -->
 
 						<!-- Cart -->
+                        <?php
+                        if(isset($_SESSION["cart"])) {
+                            $cart = (unserialize($_SESSION["cart"]));
+                            $redirectUrl = str_replace('/', '|', $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+                            $redirectUrl = str_replace('[::1]', 'localhost', $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+                            $total = 0;
+                            foreach ($cart as $infos) {
+                                $total = $total + $infos[2] * $infos[1];
+                            }
+                        }
+                        ?>
 						<li class="header-cart dropdown default-dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 								<div class="header-btns-icon">
 									<i class="fa fa-shopping-cart"></i>
-									<span class="qty">3</span>
+									<span class="qty"><?php
+                                        if(isset($_SESSION["cart"])) {
+                                            echo(sizeof($cart));
+                                        }
+                                        else {
+                                            echo("0");
+                                        }?></span>
 								</div>
 								<strong class="text-uppercase">Mon panier:</strong>
 								<br>
-								<span>35,20€</span>
+								<span id = "total"><?php
+                                    if(isset($_SESSION["cart"])) {
+                                        echo($total);
+                                    }
+                                    else {
+                                        echo("0");
+                                    }?>€</span>
 							</a>
 							<div class="custom-menu">
 								<div id="shopping-cart">
 									<div class="shopping-cart-list">
-										<div class="product product-widget">
-											<div class="product-thumb">
-												<img src="./img/thumb-product01.jpg" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-price">35,20€<span class="qty">x3</span></h3>
-												<h2 class="product-name"><a href="#">Le nom de produit va ici</a></h2>
-											</div>
-											<button class="cancel-btn"><i class="fa fa-trash"></i></button>
-										</div>
-										<div class="product product-widget">
-											<div class="product-thumb">
-												<img src="./img/thumb-product01.jpg" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-price">35,20€<span class="qty">x3</span></h3>
-												<h2 class="product-name"><a href="#">Le nom de produit va ici</a></h2>
-											</div>
-											<button class="cancel-btn"><i class="fa fa-trash"></i></button>
-										</div>
+                                        <?php
+                                        if(isset($_SESSION["cart"])) {
+                                            foreach ($cart as $id => $infos) {
+                                                ?>
+                                                <div class="product product-widget">
+                                                    <div class="product-thumb">
+                                                        <img src="./img/thumb-product01.jpg" alt="">
+                                                    </div>
+                                                    <div class="product-body">
+                                                        <h3 class="product-price"><?php echo($infos[2]); ?>€
+                                                            <span class="qty"> x<?php echo($infos[1]); ?></span>
+                                                        </h3>
+                                                        <h2 class="product-name"><a
+                                                                    href="#"><?php echo($infos[0]); ?></a></h2>
+                                                    </div>
+                                                    <button class="cancel-btn" id = "cancel_<?php echo($id); ?>"><i class="fa fa-trash"></i></button>
+                                                </div>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
 									</div>
+
 									<div class="shopping-cart-btns">
 										<button class="main-btn">Voir panier</button>
 										<button class="primary-btn">Commander <i class="fa fa-arrow-circle-right"></i></button>
@@ -529,4 +555,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 		<!-- /container -->
 	</div>
+    <script src = "<?php echo base_url(); ?>node_modules/jquery/dist/jquery.min.js"></script>
+    <script type='text/javascript'>
+        const baseURL= "<?php echo base_url();?>";
+    </script>
+    <script src = "<?php echo base_url(); ?>js/cart.js"></script>
+
 	<!-- /NAVIGATION -->
