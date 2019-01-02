@@ -39,6 +39,29 @@ class Order_Model extends CI_Model{
 
   }
 
+  /*
+    Retourne le detail des commandes d'un client donnee
+
+    SELECT c.NumCommande,QteLigneCommande,DateCommande,StatusLigneCom,lc.idBoutique,MontantCom,
+    p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,c.NumClient,b.NomBoutique
+    FROM lignecommande lc
+    inner join commande c on lc.NumCommande = c.NumCommande
+    inner join produit p on lc.CodeProduit = p.CodeProduit
+    inner join boutique b on b.idBoutique = p.idBoutique
+    where c.NumClient = ?
+  */
+  public function getOrderDetailClient($numClient){
+    $this->load->database();
+    return $this->db->select('c.NumCommande,QteLigneCommande,DateCommande,StatusLigneCom,lc.idBoutique,MontantCom,
+                            p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,NomBoutique')
+                    ->from('lignecommande as lc')
+                    ->join('commande as c', 'lc.NumCommande = c.NumCommande')
+                    ->join('produit as p', 'lc.CodeProduit = p.CodeProduit')
+                    ->join('boutique as b', 'b.idBoutique = p.idBoutique')
+                    ->where('c.NumClient', $numClient)
+                    ->get()
+                    ->result();
+  }
 
 }
 

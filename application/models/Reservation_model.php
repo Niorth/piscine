@@ -31,9 +31,35 @@ class Reservation_Model extends CI_Model{
                     ->where('lr.NumReservation', $numRes)
                     ->get()
                     ->result();
-
   }
 
+  /*
+  Retourne le detail des reservations d'un client donnee
+
+  SELECT distinct(r.NumReservation),DateReservation,lr.idBoutique,QteReserver,MontantRes
+    p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,NomBoutique,
+    DATE_ADD(DateReservation, INTERVAL p.DureeReservation DAY) as DateFinRes
+    FROM lignereservation lr
+    inner join reservation r on lr.NumReservation = r.NumReservation
+    inner join produit p on lr.CodeProduit = p.CodeProduit
+	  inner join reserver rver on rver.NumReservation = r.NumReservation
+    inner join boutique b on b.IdBoutique = p.IdBoutique
+    where r.NumClient = ?
+  */
+  public function getReservationDetailClient($numClient){
+    $this->load->database();
+    return $this->db->select('distinct(r.NumReservation),DateReservation,lr.idBoutique,QteReserver,MontantRes,
+                              p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,NomBoutique,
+                              DATE_ADD(DateReservation, INTERVAL p.DureeReservation DAY) as DateFinRes')
+                    ->from('lignereservation as lr')
+                    ->join('reservation as r', 'lr.NumReservation = r.NumReservation')
+                    ->join('produit as p', 'lr.CodeProduit = p.CodeProduit')
+                    ->join('reserver as rver', 'rver.NumReservation = r.NumReservation')
+                    ->join('boutique b', 'b.IdBoutique = p.IdBoutique')
+                    ->where('r.NumClient', $numClient)
+                    ->get()
+                    ->result();
+  }
 }
 
 ?>

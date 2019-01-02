@@ -86,7 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<ul class="custom-menu">
 								<li><a href="#"><i class="fa fa-user-o"></i>Mon compte</a></li>
 								<li><a href="#"><i class="fa fa-exchange"></i>Comparer</a></li>
-								<li><a href="#"><i class="fa fa-check"></i>Mes commandes</a></li>
+								<li><a href="<?php echo site_url('Customer/all_order_page'); ?>"><i class="fa fa-check"></i>Mes commandes</a></li>
 								<li><a href="<?php echo site_url('Account/create_account_page'); ?>"><i class="fa fa-user-plus"></i>Créer un compte</a></li>
 							</ul>
 						</li>

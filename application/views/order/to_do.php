@@ -22,9 +22,9 @@
         </li>
         <li>Commandes et reservations
           <ul>
-            <li>Button supprimer reservations perimé</li>
             <li>changer affichage heure dans le tableau</li>
             <li>Faire les reservations</li>
+            <li>Etat des reservations pour le client</li>
           </ul>
         </li>
       </ul>
