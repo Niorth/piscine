@@ -36,5 +36,33 @@ class Order extends CI_Controller {
 
   }
 
+  public function order_detail_seller($numLigne,$numCom){
+
+    $data['commande'] = $this->order_model->getOrderDetailSeller($numLigne,$numCom);
+
+    $this->load->view('layout/header');
+    $this->load->view('order/order_detail_seller',$data);
+    $this->load->view('layout/footer');
+
+  }
+
+  public function order_update_status(){
+    // idBoutique a modifier
+    $numLigne =  htmlspecialchars($_POST['NumLigneCommande']);
+    $numCom =  htmlspecialchars($_POST['NumCommande']);
+
+    $order = array(
+      "StatusLigneCom" => htmlspecialchars($_POST['status']),
+      "NumLigneCommande" => $numLigne,
+      "NumCommande" => $numCom,
+      // a modifier
+      "idBoutique" => htmlspecialchars($_POST['idBoutique'])
+    );
+
+    $this->order_ligne_model->updateStatus($order);
+
+    header('location:  ' . site_url("Order/order_reservation_list"));
+  }
+
 
 }
