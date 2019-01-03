@@ -7,13 +7,10 @@ function init() {
         const productId = eventId.split("_")[1];
 
         $.ajax({
-            url: baseURL + 'Customer/removeProductFromCart/' + productId,
+            url: baseURL + 'Cart/removeProductFromCart/' + productId,
             method: 'POST',
             error: function() {
                 alert('Something went wrong');
-            },
-            success: function() {
-
             },
         });
         $(event.currentTarget).parent().remove();
@@ -35,5 +32,18 @@ function setNumberProduct() {
     $('.header-btns-icon > .qty').text(products.length);
     $('.dropdown-toggle > #total').text(total+'€');
 }
+
+export function removeProductById(id) {
+    const product = $('#'+ id + '.product-body');
+    product.remove();
+    setNumberProduct()
+}
+
+export function changeQtyHeader(id, qty) {
+    $('#'+ id + '.product-body > .product-price > .qty').text('x' + qty);
+    setNumberProduct()
+}
+
+
 
 init();

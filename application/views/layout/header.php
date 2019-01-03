@@ -93,8 +93,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <?php
                         if(isset($_SESSION["cart"])) {
                             $cart = (unserialize($_SESSION["cart"]));
-                            $redirectUrl = str_replace('/', '|', $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-                            $redirectUrl = str_replace('[::1]', 'localhost', $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
                             $total = 0;
                             foreach ($cart as $infos) {
                                 $total = $total + $infos[2] * $infos[1];
@@ -134,7 +132,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     <div class="product-thumb">
                                                         <img src="./img/thumb-product01.jpg" alt="">
                                                     </div>
-                                                    <div class="product-body">
+                                                    <div class="product-body" id = "<?php echo($id); ?>">
                                                         <h3 class="product-price"><?php echo($infos[2]); ?>€
                                                             <span class="qty"> x<?php echo($infos[1]); ?></span>
                                                         </h3>
@@ -150,7 +148,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									</div>
 
 									<div class="shopping-cart-btns">
-										<button class="main-btn">Voir panier</button>
+                                        <a href="<?php echo site_url('Cart/cart_page'); ?>"><button class="main-btn">Voir panier</button></a>
 										<button class="primary-btn">Commander <i class="fa fa-arrow-circle-right"></i></button>
 									</div>
 								</div>
