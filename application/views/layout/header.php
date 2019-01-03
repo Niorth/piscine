@@ -31,6 +31,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>assets/css/style.css" />
 
+	<!-- Plugin Table Filter -->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/bootstrap-table-filter-control.css" />
+
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -79,12 +82,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</div>
 								<strong class="text-uppercase">Mon compte<i class="fa fa-caret-down"></i></strong>
 							</div>
-							<a href="#" class="text-uppercase">S'identifier</a> / <a href="#" class="text-uppercase">S'inscrire</a>
+							<a href="<?php echo site_url('Account/connexion_page'); ?>" class="text-uppercase">S'identifier</a> / <a href="<?php echo site_url('Account/create_account_page'); ?>" class="text-uppercase">S'inscrire</a>
 							<ul class="custom-menu">
 								<li><a href="#"><i class="fa fa-user-o"></i>Mon compte</a></li>
 								<li><a href="#"><i class="fa fa-exchange"></i>Comparer</a></li>
-								<li><a href="#"><i class="fa fa-check"></i>Mes commandes</a></li>
-								<li><a href="#"><i class="fa fa-user-plus"></i>Créer un compte</a></li>
+								<li><a href="<?php echo site_url('Customer/all_order_page'); ?>"><i class="fa fa-check"></i>Mes commandes</a></li>
+								<li><a href="<?php echo site_url('Account/create_account_page'); ?>"><i class="fa fa-user-plus"></i>Créer un compte</a></li>
 							</ul>
 						</li>
 						<!-- /Account -->
@@ -375,7 +378,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="menu-nav">
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
-						<li><a href="#">Accueil</a></li>
+						<li><a href="<?php echo site_url('Order'); ?>">Accueil</a></li>
 
 						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Boutique<i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">

@@ -37,4 +37,17 @@ class Customer_Model extends CI_Model
         }
         return $result;
     }
+
+  /*
+  Retourne les infos d'un client donnee
+  */
+  public function getCustomerByNum($num){
+      $this->load->database();
+      return $this->db->select('NomClient,PrenomClient,RueClient,VilleClient,CPClient,TelClient')
+                      ->from($this->table)
+                      ->where('NumClient', $num)
+                      ->get()
+                      ->result();
+  }
+
 }

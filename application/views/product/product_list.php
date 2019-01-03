@@ -8,7 +8,7 @@
       <div class="col-md-12">
         <div class="section-title">
           <h3 class="title">En rupture de stock</h3>
-        </div>
+        <div class="col-md-12">
 
         <?php if (empty($p_unavailable)){ ?>
 

@@ -51,7 +51,6 @@ class Account extends CI_Controller {
                 $this->session->set_userdata('login', $account[0]['login']);
                 $this->session->set_userdata('privilege', $account[0]['privilege']);
 
-
                 //Redirection
                 redirect('Index/index_page');
             }
