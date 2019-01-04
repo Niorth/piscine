@@ -16,7 +16,7 @@
             <li>Modification image dans le formulaire de modification</li>
             <li>Affichage en grille</li>
             <li>Restreindre le nombre d'affichage par page</li>
-            <li>modifier la taille image dans la fiche du produit</li>
+            <li>Modifier la taille image dans la fiche du produit</li>
             <li>Les filtres</li>
           </ul>
         </li>
