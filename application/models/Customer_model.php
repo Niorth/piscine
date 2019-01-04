@@ -39,7 +39,7 @@ class Customer_Model extends CI_Model
     }
 
   /*
-  Retourne les infos d'un client donnee
+  Retourne les infos d'un client donnee en fonction de son num de client
   */
   public function getCustomerByNum($num){
       $this->load->database();
@@ -49,5 +49,22 @@ class Customer_Model extends CI_Model
                       ->get()
                       ->result();
   }
+
+  /*
+    Met a jour les infos du client identife par son mail/login
+  */
+  public function updateCustomer($data){
+    $this -> load -> database();
+    return $this->db->set('NomClient', $data['nom'])
+        ->set('PrenomClient', $data['prenom'])
+        ->set('RueClient', $data['rue'])
+        ->set('VilleClient', $data['ville'])
+        ->set('CPClient', $data['cp'])
+        ->set('TelClient', $data['tel'])
+        ->where('MailClient', $data['mail'])
+        ->update($this->table);
+  }
+
+
 
 }

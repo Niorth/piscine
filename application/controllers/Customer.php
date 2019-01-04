@@ -9,6 +9,12 @@ class Customer extends CI_Controller {
         $this->load->view('layout/footer');
 	}
 
+	public function home_page(){
+		$this->load->view('layout/header');
+    $this->load->view('client/home_client');
+    $this->load->view('layout/footer');
+	}
+
 
 	/*
 		Affiche toute les commandes du client
@@ -24,6 +30,9 @@ class Customer extends CI_Controller {
 
 	}
 
+	/*
+		Affiche toute les reservations du client
+	*/
 	public function all_reservation_page(){
 		// id du client à changer
 		$data["reservation"] = $this->reservation_model->getReservationDetailClient(22);

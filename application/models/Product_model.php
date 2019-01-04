@@ -72,7 +72,8 @@ class Product_Model extends CI_Model
     /*
       requete pour avoir toutes les infos sur la page de tous les produits ( par categorie par la suite)
 
-      SELECT `CodeProduit`,`LibelleProduit`,`PrixProd`,`StockDispo`,NomBoutique FROM `boutique`,produit
+      SELECT `CodeProduit`,`LibelleProduit`,`PrixProd`,`StockDispo`,NomBoutique 
+      FROM `boutique`,produit
       WHERE boutique.`IdBoutique` = produit.`IdBoutique`
     */
     public function getAllProductByCat(){

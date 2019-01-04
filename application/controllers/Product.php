@@ -159,7 +159,7 @@ class Product extends CI_Controller
       Ajoute un commentaire au produit
     */
     public function add_review(){
-      // NumClient a changer et champ a verouiller dans la vue
+      // NumClient a changer et champ a verouiller dans la vue / modification a faire
       $code = htmlspecialchars($_POST['CodeProduit']);
       $review = array(
           "CodeProduit" => $code,
