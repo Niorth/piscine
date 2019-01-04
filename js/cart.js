@@ -1,5 +1,5 @@
 
-function init() {
+export function init() {
     const cancelButtons = $('.cancel-btn');
     cancelButtons.on('click', (event) => {
 
@@ -20,7 +20,7 @@ function init() {
 }
 
 function setNumberProduct() {
-    const products = $('.product-body');
+    const products = $('.headerProductBody');
     let total = 0;
     for (let i = 0; i < products.length; i++){
         const data = $(products[i]).children().first().text();
@@ -42,6 +42,11 @@ export function removeProductById(id) {
 export function changeQtyHeader(id, qty) {
     $('#'+ id + '.product-body > .product-price > .qty').text('x' + qty);
     setNumberProduct()
+}
+
+export function addProduct(id, qty, name, price){
+    const body = $('.shopping-cart-list');
+    document.createElement('h3')
 }
 
 

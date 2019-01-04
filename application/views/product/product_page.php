@@ -43,7 +43,8 @@
 
           <!-- fin commentaire -->
 
-          <div class="product-body">
+          <div class="product-body" id="productBodyCard">
+              <input id="productCode" type="hidden" value="<?php echo $product[0]->CodeProduit; ?>">
             <h2 class="product-name"><?php echo $product[0]->LibelleProduit; ?></h2>
             <h3 class="product-price"><?php echo $product[0]->PrixProd . " €"; ?></h3>
             <div>
@@ -96,7 +97,7 @@
               <div class="product-btns">
                 <div class="qty-input" >
                   <span class="text-uppercase">Quantité: </span>
-                  <input class="input" type="number" min="1" max="<?php echo $product[0]->StockDispo; ?>">
+                  <input class="input" type="number" min="1" max="<?php echo $product[0]->StockDispo; ?>" value="1">
                 </div>
                 <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Ajouter au panier</button>
 
@@ -217,4 +218,5 @@
   </div>
   <!-- /container -->
 </div>
+<script type = "module" src = "<?php echo base_url(); ?>js/product_page.js"></script>
 <!-- /section -->
