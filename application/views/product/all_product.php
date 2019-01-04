@@ -84,43 +84,64 @@
               </thead>
               <tbody>
                 <?php
-                  foreach ($product as $item){
-                  $lien = site_url("Product/product_page/$item->CodeProduit");
-                  $link = $item->ImgProd;
+                  $k = count($product);
+                  for($i=0; $i <$k; $i++){
+                  $code = $product[$i]->CodeProduit;
+                  $lien = site_url("Product/product_page/$code");
+                  $link = $product[$i]->ImgProd;
                   ?>
 
                   <tr>
                     <td class="thumb">
-                      <img src="<?php echo base_url() . "assets/img/" . $link ?>" alt="<?php echo $item->LibelleProduit ?>" >
+                      <img src="<?php echo base_url() . "assets/img/" . $link ?>" alt="<?php echo $product[$i]->LibelleProduit ?>" >
                     </td>
 
                     <td class="details">
-                        <a href="<?php echo $lien ?>"><?php if (isset($item)) echo $item->LibelleProduit;?></a>
+                        <a href="<?php echo $lien ?>"><?php if (isset($product[$i])) echo $product[$i]->LibelleProduit;?></a>
                         <ul>
-                          <li><?php  if (isset($item)) echo $item->NomBoutique ?></li>
-                          <li><span>Evaluation a mettre</span></li>
+                          <li><?php  if (isset($product[$i])) echo $product[$i]->NomBoutique; ?></li>
+                          <li>
+
+                            <?php  if ($review_stats[$i][0]->nbAvis != 0) { ?>
+                            <div class="product-body">
+                              <div class="product-rating">
+                                <?php
+                                  $n = intval($review_stats[$i][0]->moyenne);
+                                  for ($j = 0; $j < $n; $j++){
+                                ?>
+                                <i class="fa fa-star" style="color:#FFB656"></i>
+                                <?php };
+                                for ($j = $n ; $j < 5; $j++){
+                                ?>
+                                <i class="fa fa-star-o empty"></i>
+                                <?php }; ?>
+        										  </div>
+                            </div>
+
+                            <?php } ?>
+
+                          </li>
                         </ul>
                     </td>
 
                     <td class="etatstock text-center">
                       <?php
                         $stockMsg = "EN STOCK";
-                        if ($item->StockDispo == 0){ $stockMsg = "RUPTURE";}
+                        if ($product[$i]->StockDispo == 0){ $stockMsg = "RUPTURE";}
                       ?>
                       <strong><?php echo $stockMsg; ?></strong>
                     </td>
 
-                    <td class="price text-center"><?php echo $item->PrixProd; ?> €</td>
+                    <td class="price text-center"><?php echo $product[$i]->PrixProd; ?> €</td>
 
 
                     <td  class="text-center">
                       <?php
-                        if ($item->StockDispo != 0){ ?>
+                        if ($product[$i]->StockDispo != 0){ ?>
                           <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i></button>
                           <button class="btn btn-warning"><i class="fa fa-clock-o"></i></button>
                       <?php } ?>
                     </td>
-
                   </tr>
                 <?php } ?>
               </tbody>

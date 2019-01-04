@@ -62,7 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<!-- Search -->
 					<div class="header-search">
 						<form>
-							<input class="input search-input" type="text" placeholder="Enter your keyword">
+							<input id='searchBar' class="input search-input" type="text" placeholder="Enter your keyword">
 							<select class="input search-Catégories">
 								<option value="0">Toutes les catégories</option>
 								<option value="1">Category test01</option>
@@ -132,10 +132,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             foreach ($cart as $id => $infos) {
                                                 ?>
                                                 <div class="product product-widget">
-                                                    <div class="product-thumb">
+                                                    <!--<div class="product-thumb">
                                                         <img src="./img/thumb-product01.jpg" alt="">
-                                                    </div>
-                                                    <div class="product-body" id = "<?php echo($id); ?>">
+                                                    </div> -->
+                                                    <div class="product-body headerProductBody" id = "<?php echo($id); ?>">
                                                         <h3 class="product-price"><?php echo($infos[2]); ?>€
                                                             <span class="qty"> x<?php echo($infos[1]); ?></span>
                                                         </h3>

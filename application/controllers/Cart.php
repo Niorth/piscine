@@ -21,9 +21,16 @@ class Cart extends CI_Controller {
 
 
     public function addProductToCart($id, $name, $qte, $price){
+        $name = str_replace('%28', '(', $name);
+        $name = str_replace('%29', ')', $name);
         $cart = unserialize($_SESSION['cart']);
-        $cart[$id] = array($name, $qte, $price);
-        $_SESSION["cart"] = serialize($cart);
+        if(!isset($cart[$id])) {
+            $cart[$id] = array(urldecode($name), $qte, $price);
+            $_SESSION["cart"] = serialize($cart);
+        }
+        else {
+            self::changeQty($id, $qte);
+        }
     }
 
     public static function removeProductFromCart($id){
