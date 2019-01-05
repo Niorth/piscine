@@ -17,7 +17,8 @@ function init() {
         $(event.currentTarget).parent().parent().remove();
 
         removeProductById(productId);
-        setTotal()
+        setTotalBooking();
+        setTotalDelivery()
     });
 
     const qtys = $(".input#qty");
@@ -32,7 +33,8 @@ function init() {
         });
         changeQtyHeader($(event.currentTarget).parent().attr('id'), $(event.currentTarget).val())
         setSubTotal($(event.currentTarget).parent().attr('id'))
-        setTotal()
+        setTotalBooking();
+        setTotalDelivery()
     })
 }
 
@@ -42,9 +44,23 @@ function setTotal() {
     $total.text($totalHeader.text())
 }
 
-function setSubTotal(id) {
-    const price = $('tr#' + id + '> .price').text().split('€')[0];
-    const qty = $('tr#' + id + '> .qty > #qty').val();
-    $('tr#' + id + '> .total > strong').text(price * qty + '€');
+function setTotalBooking() {
+    const prices = $("table#booking > tbody >> .total > strong");
+    let total = 0;
+    for (let i = 0; i < prices.length; i++) {
+        total = total + + $(prices[i]).text().split('€')[0]
+    }
+    $("#totalFinalBooking").text(total + "€")
 }
+
+function setTotalDelivery() {
+    const prices = $("table#delivery > tbody >> .total > strong");
+    let total = 0;
+    for (let i = 0; i < prices.length; i++) {
+        total = total + + $(prices[i]).text().split('€')[0]
+    }
+    console.log($("#totalFinal "))
+    $("#totalFinalDelivery").text(total + "€")
+}
+
 init();
