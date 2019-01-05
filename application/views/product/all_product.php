@@ -116,7 +116,7 @@
                     <td  class="text-center">
                       <?php
                         if ($item->StockDispo != 0){ ?>
-                          <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i></button>
+                            <a href="<?php echo $lien ?>"><button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i></button></a>
                           <button class="btn btn-warning"><i class="fa fa-clock-o"></i></button>
                       <?php } ?>
                     </td>

@@ -44,11 +44,6 @@ export function changeQtyHeader(id, qty) {
     setNumberProduct()
 }
 
-export function addProduct(id, qty, name, price){
-    const body = $('.shopping-cart-list');
-    document.createElement('h3')
-}
-
 
 
 init();

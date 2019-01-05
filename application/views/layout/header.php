@@ -94,10 +94,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 						<!-- Cart -->
                         <?php
-                        if(isset($_SESSION["cart"])) {
-                            $cart = (unserialize($_SESSION["cart"]));
+                        if(isset($_SESSION["cartBooking"]) and isset($_SESSION["cartDelivery"])) {
+                            $cartBooking = (unserialize($_SESSION["cartBooking"]));
+                            $cartDelivery = (unserialize($_SESSION["cartDelivery"]));
                             $total = 0;
-                            foreach ($cart as $infos) {
+                            foreach ($cartBooking as $infos) {
+                                $total = $total + $infos[2] * $infos[1];
+                            }
+                            foreach ($cartDelivery as $infos) {
                                 $total = $total + $infos[2] * $infos[1];
                             }
                         }
@@ -107,8 +111,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<div class="header-btns-icon">
 									<i class="fa fa-shopping-cart"></i>
 									<span class="qty"><?php
-                                        if(isset($_SESSION["cart"])) {
-                                            echo(sizeof($cart));
+                                        if(isset($_SESSION["cartBooking"]) and isset($_SESSION["cartDelivery"])) {
+                                            echo(sizeof($cartDelivery) + sizeof($cartBooking));
                                         }
                                         else {
                                             echo("0");
@@ -117,7 +121,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<strong class="text-uppercase">Mon panier:</strong>
 								<br>
 								<span id = "total"><?php
-                                    if(isset($_SESSION["cart"])) {
+                                    if(isset($_SESSION["cartBooking"])) {
                                         echo($total);
                                     }
                                     else {
@@ -127,9 +131,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<div class="custom-menu">
 								<div id="shopping-cart">
 									<div class="shopping-cart-list">
+                                        <h3 class="section-title">Reservations</h3>
                                         <?php
-                                        if(isset($_SESSION["cart"])) {
-                                            foreach ($cart as $id => $infos) {
+                                        if(isset($_SESSION["cartBooking"])) {
+                                            foreach ($cartBooking as $id => $infos) {
+                                                ?>
+                                                <div class="product product-widget">
+                                                    <!--<div class="product-thumb">
+                                                        <img src="./img/thumb-product01.jpg" alt="">
+                                                    </div> -->
+                                                    <div class="product-body headerProductBody" id = "<?php echo($id); ?>">
+                                                        <h3 class="product-price"><?php echo($infos[2]); ?>€
+                                                            <span class="qty"> x<?php echo($infos[1]); ?></span>
+                                                        </h3>
+                                                        <h2 class="product-name"><a
+                                                                    href="#"><?php echo($infos[0]); ?></a></h2>
+                                                    </div>
+                                                    <button class="cancel-btn" id = "cancel_<?php echo($id); ?>"><i class="fa fa-trash"></i></button>
+                                                </div>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+
+                                        <h3 class="section-title">Commandes</h3>
+                                        <?php
+                                        if(isset($_SESSION["cartDelivery"])) {
+                                            foreach ($cartDelivery as $id => $infos) {
                                                 ?>
                                                 <div class="product product-widget">
                                                     <!--<div class="product-thumb">

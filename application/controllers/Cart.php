@@ -16,47 +16,94 @@ class Cart extends CI_Controller {
 
     public function createCart() {
         $cart = array();
-        $_SESSION["cart"] = serialize($cart);
+        $_SESSION["cartBooking"] = serialize($cart);
+        $_SESSION["cartDelivery"] = serialize($cart);
     }
 
 
-    public function addProductToCart($id, $name, $qte, $price){
+    public function addProductToCart($id, $name, $qte, $price, $type){
         $name = str_replace('%28', '(', $name);
         $name = str_replace('%29', ')', $name);
-        $cart = unserialize($_SESSION['cart']);
-        if(!isset($cart[$id])) {
-            $cart[$id] = array(urldecode($name), $qte, $price);
-            $_SESSION["cart"] = serialize($cart);
+
+        $cartBooking = unserialize($_SESSION['cartBooking']);
+        $cartDelivery = unserialize($_SESSION['cartDelivery']);
+
+        if($type == 1) { //booking
+            if(!isset($cartBooking[$id])) {
+                if(isset($cartDelivery[$id])){
+                    //if already in deliveries remove it
+                   self::removeProductFromCart($id, 2);
+                }
+                $cartBooking[$id] = array(urldecode($name), $qte, $price);
+                $_SESSION["cartBooking"] = serialize($cartBooking);
+            }
+            else {
+                self::changeQty($id, $qte, $type);
+            }
         }
-        else {
-            self::changeQty($id, $qte);
+        else { //Delivery
+            if(!isset($cartDelivery[$id])) {
+                if(isset($cartBooking[$id])){
+                    // if already in booking remove it
+                    self::removeProductFromCart($id, 1);
+                }
+                $cartDelivery[$id] = array(urldecode($name), $qte, $price);
+                $_SESSION["cartDelivery"] = serialize($cartDelivery);
+            }
+            else {
+                self::changeQty($id, $qte, $type);
+            }
         }
     }
 
     public static function removeProductFromCart($id){
-        $cart = unserialize($_SESSION["cart"]);
-        unset($cart[$id]);
-        $_SESSION["cart"] = serialize($cart);
+        $cartBooking = unserialize($_SESSION["cartBooking"]);
+        $cartDelivery = unserialize($_SESSION["cartDelivery"]);
+
+        if(isset($cartBooking[$id])){ //booking
+            unset($cartBooking[$id]);
+            $_SESSION["cartBooking"] = serialize($cartBooking);
+        }
+        else { //Delivery
+            unset($cartDelivery[$id]);
+            $_SESSION["cartDelivery"] = serialize($cartDelivery);
+        }
     }
 
     public static function changeQty($id, $qty) {
-        $cart = unserialize($_SESSION["cart"]);
-        $cart[$id][1] = $qty;
-        echo($cart);
-        $_SESSION["cart"] = serialize($cart);
+        $cartBooking = unserialize($_SESSION["cartBooking"]);
+        $cartDelivery = unserialize($_SESSION["cartDelivery"]);
+
+        if(isset($cartBooking[$id])){ //booking
+            $cartBooking[$id][1] = $qty;
+            $_SESSION["cartBooking"] = serialize($cartBooking);
+        }
+        else { //Delivery
+            $cartDelivery[$id][1] = $qty;
+            $_SESSION["cartDelivery"] = serialize($cartDelivery);
+        }
     }
 
     public function test() {
         $this->createCart();
-        if (isset($_SESSION['cart'])) {
-            $this->addProductToCart(1, "Tshirt", 3, 100);
-            $this->addProductToCart(4, "Tshirt", 3, 100);
-            $this->addProductToCart(5, "Tshirt", 3, 100);
-            $this->addProductToCart(6, "Tshirt", 3, 100);
+        if (isset($_SESSION['cartDelivery'])) {
+            $this->addProductToCart(1, "Chat", 3, 100, 1);
+            $this->addProductToCart(4, "Basquette", 3, 100, 1);
+            $this->addProductToCart(5, "Short", 3, 100, 1);
+            $this->addProductToCart(6, "Casquette", 3, 100, 1);
 
-            $this->addProductToCart(2, "Pull", 1, 50);
-            $this->addProductToCart(3, "Pantalon", 3, 90);
-            print_r(unserialize($_SESSION["cart"]));
+            $this->addProductToCart(2, "Pull", 1, 50, 1);
+            $this->addProductToCart(3, "Pantalon", 3, 90, 1);
+            print_r(unserialize($_SESSION["cartBooking"]));
+        }
+        if (isset($_SESSION['cartBooking'])) {
+            $this->addProductToCart(7, "Enfant", 3, 100, 2);
+            $this->addProductToCart(8, "chien", 3, 100, 2);
+            $this->addProductToCart(9, "Cahier", 3, 100, 2);
+            $this->addProductToCart(10, "ardoise", 3, 100, 2);
+            print_r(unserialize($_SESSION["cartDelivery"]));
+
+
         }
     }
 }
