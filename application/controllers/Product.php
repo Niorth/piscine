@@ -21,6 +21,9 @@ class Product extends CI_Controller
     public function product_page($CodeProduit){
         $data['product'] =  $this->product_model->getProductById($CodeProduit);
         $data['boutique'] =  $this->product_model->getBoutiqueProductById($CodeProduit);
+        $data['review_stats'] = $this->review_model->getAvgByNum($CodeProduit);
+        $data['all_review'] = $this->review_model->getAllReview($CodeProduit);
+
         $this->load->view('layout/header');
         $this->load->view('product/product_page', $data);
         $this->load->view('layout/footer');
@@ -40,6 +43,13 @@ class Product extends CI_Controller
 
     public function all_product_page(){
       $data['product'] = $this->product_model->getAllProductByCat();
+      $data['review_stats'] = array();
+
+      // recupere l'evaluation du produit
+      foreach ($data['product'] as $item) {
+        array_push($data['review_stats'], $this->review_model->getAvgByNum($item->CodeProduit));
+      }
+
       $this->load->view('layout/header');
       $this->load->view('product/all_product', $data);
       $this->load->view('layout/footer');
@@ -145,9 +155,25 @@ class Product extends CI_Controller
         //  supprimer dans le reservations et commentaires par la suite
     }
 
+    /*
+      Ajoute un commentaire au produit
+    */
+    public function add_review(){
+      // NumClient a changer et champ a verouiller dans la vue / modification a faire
+      $code = htmlspecialchars($_POST['CodeProduit']);
+      $review = array(
+          "CodeProduit" => $code,
+          "Commentaire" => htmlspecialchars($_POST['commentaire']),
+          "NoteAvis" => htmlspecialchars($_POST['note']),
+          "NumClient" => 22,
+      );
+
+       $this->review_model->addReview($review);
+       header('location:  ' . site_url("Product/product_page/$code"));
+    }
+
     public function getAll(){
         print_r($this->product_model->getAllProducts());
-
     }
 }
 

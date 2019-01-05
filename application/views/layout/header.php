@@ -53,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="pull-left">
 					<!-- Logo -->
 					<div class="header-logo">
-						<a class="logo" href="#">
+						<a class="logo" href="http://www.herault.cci.fr/">
 							<img src="<?php echo base_url() ?>assets/img/cci_herault.jpg" alt="">
 						</a>
 					</div>

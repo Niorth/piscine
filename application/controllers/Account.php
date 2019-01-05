@@ -39,6 +39,26 @@ class Account extends CI_Controller {
         $this->load->view('layout/footer');
     }
 
+    public function parameters_page(){
+  		$this->load->view('layout/header');
+  		$this->load->view('account/parameters');
+  		$this->load->view('layout/footer');
+  	}
+
+    public function modify_informations_page(){
+      // email a recuperer dans la session et en fonction du type d'utilisateur
+      $data['info'] = $this->getMyAccountInfo();
+  		$this->load->view('layout/header');
+  		$this->load->view('account/modify_informations',$data);
+  		$this->load->view('layout/footer');
+  	}
+
+    public function modify_password_page(){
+      $this->load->view('layout/header');
+  		$this->load->view('account/modify_password');
+  		$this->load->view('layout/footer');
+    }
+
     public function connexion(){
         $this->load->library('session');
         $mail = htmlspecialchars($_POST['mail']);
@@ -127,5 +147,32 @@ class Account extends CI_Controller {
         );
 
         return $data;
+    }
+
+    /*
+      Met a jour les infos de l'utilisateur
+    */
+    public function update_info(){
+      $mail = $this->session->userdata('login');
+
+      $dataInfo = array(
+        "nom" => htmlspecialchars($_POST['Nom']),
+        "prenom" => htmlspecialchars($_POST['Prenom']),
+        "rue" => htmlspecialchars($_POST['Rue']),
+        "ville" => htmlspecialchars($_POST['Ville']),
+        "cp" => htmlspecialchars($_POST['CP']),
+        "tel" => htmlspecialchars($_POST['Tel']),
+        "mail" => $mail,
+      );
+
+      if($privilege == 1){
+          $this->customer_model->updateCustomer($dataInfo);
+      }
+      else{
+          $this->trader_model->updateTrader($dataInfo);
+      }
+
+      header('location:  ' . site_url("Account/parameters_page"));
+
     }
 }

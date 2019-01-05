@@ -47,4 +47,21 @@ class Trader_Model extends CI_Model
             ->insert("gererboutique");
 
     }
+
+    /*
+      Met a jour les infos du commercant identife par son mail/login
+    */
+    public function updateTrader($data){
+      $this -> load -> database();
+      return $this->db->set('NomCommercant', $data['nom'])
+          ->set('PrenomCommercant', $data['prenom'])
+          ->set('RueCommercant', $data['rue'])
+          ->set('VilleCommercant', $data['ville'])
+          ->set('CPCommercant', $data['cp'])
+          ->set('TelCommercant', $data['tel'])
+          ->where('MailCommercant', $data['mail'])
+          ->update($this->table);
+    }
+
+
 }

@@ -9,9 +9,9 @@
         <div class="section-title">
           <h3 class="title">En rupture de stock</h3>
         <div class="col-md-12">
-
+          <br>
         <?php if (empty($p_unavailable)){ ?>
-
+          
           <p><strong>Vous n'avez aucun produit en rupture de stock</strong></p>
 
         <?php } else{ ?>

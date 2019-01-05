@@ -48,15 +48,22 @@
             <h2 class="product-name"><?php echo $product[0]->LibelleProduit; ?></h2>
             <h3 class="product-price"><?php echo $product[0]->PrixProd . "€"; ?></h3>
             <div>
+
               <div class="product-rating">
+                <?php
+                  $n = intval($review_stats[0]->moyenne);
+                  for ($i = 0; $i < $n; $i++){
+                ?>
                 <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
+                <?php };
+                for ($i = $n ; $i < 5; $i++){
+                ?>
                 <i class="fa fa-star-o empty"></i>
+                <?php }; ?>
               </div>
-              <a href="#">3 Commentaire / Ajouter Commentaire</a>
+              <a href="#"><?php echo $review_stats[0]->nbAvis; ?> Commentaires / Ajouter un Commentaire</a>
             </div>
+
             <p><strong>Disponibilité:</strong>
               <?php if ($product[0]->StockDispo == 0){ ?>
                 Non Disponible
@@ -67,7 +74,7 @@
             <p><strong>Vendeur:</strong> <?php echo $boutique[0]->NomBoutique; ?> </p>
             <p><?php echo $product[0]->DescriptionProd; ?></p>
 
-            <!-- A faire  -->
+            <!-- A faire Variante -->
 
             <!-- <div class="product-options">
               <ul class="size-option">
@@ -135,20 +142,36 @@
                   <div class="col-md-6">
                     <div class="product-reviews">
 
+                      <?php
+                        foreach ($all_review as $item){
+                      ?>
 
                       <div class="single-review">
                         <div class="review-heading">
-                          <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
+                          <div><a href="#"><i class="fa fa-user-o"></i> <?php echo $item->NomClient ." ". $item->PrenomClient ?></a></div>
+                          <!--
                           <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
+                          -->
+                          <div><a href="#"><i class="fa fa-clock-o"></i> <?php echo $item->DateAvis ?> </a></div>
                           <div class="review-rating pull-right">
+                            <?php
+                              $n = intval($item->NoteAvis);
+                              for ($j = 0; $j < $n; $j++){
+                            ?>
+                            <i class="fa fa-star"></i>
+                            <?php };
+                            for ($j = $n ; $j < 5; $j++){
+                            ?>
+                            <i class="fa fa-star-o empty"></i>
+                            <?php }; ?>
 
                           </div>
                         </div>
                         <div class="review-body">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                          <p><?php echo $item->Commentaire ?></p>
                         </div>
                       </div>
+                      <?php } ?>
 
                       <ul class="reviews-pages">
                         <li class="active">1</li>
@@ -156,39 +179,35 @@
                         <li><a href="#">3</a></li>
                         <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
                       </ul>
+
                     </div>
+
                   </div>
                   <div class="col-md-6">
-                    <h4 class="text-uppercase">Write Your Review</h4>
-                    <p>Your email address will not be published.</p>
-                    <form class="review-form">
+                    <h4 class="text-uppercase">Décrivez votre expérience</h4>
+
+                    <form class="review-form" method="post" action="<?php echo site_url("Product/add_review") ?>" >
+                      <input name="CodeProduit" type="hidden" <?php if (isset($product)) echo "value = \"" .  $product[0]->CodeProduit. "\""?>>
                       <div class="form-group">
-                        <input class="input" type="text" placeholder="Your Name" />
-                      </div>
-                      <div class="form-group">
-                        <input class="input" type="email" placeholder="Email Address" />
-                      </div>
-                      <div class="form-group">
-                        <textarea class="input" placeholder="Your review"></textarea>
+                        <textarea class="input" name="commentaire" rows="20" required placeholder="Qu'est ce que vous avez aimé ou n'avez pas aimé ?"></textarea>
                       </div>
                       <div class="form-group">
                         <div class="input-rating">
-                          <strong class="text-uppercase">Your Rating: </strong>
+                          <strong class="text-uppercase">Evaluation: </strong>
                           <div class="stars">
-                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+                            <input type="radio" id="star5" name="note" value="5" required /><label for="star5"></label>
+                            <input type="radio" id="star4" name="note" value="4" required /><label for="star4"></label>
+                            <input type="radio" id="star3" name="note" value="3" required /><label for="star3"></label>
+                            <input type="radio" id="star2" name="note" value="2" required /><label for="star2"></label>
+                            <input type="radio" id="star1" name="note" value="1" required /><label for="star1"></label>
                           </div>
                         </div>
                       </div>
-                      <button class="primary-btn">Submit</button>
+                      <button class="primary-btn">Envoyer</button>
                     </form>
+
                   </div>
                 </div>
-
-
 
               </div>
             </div>
