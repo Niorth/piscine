@@ -85,8 +85,6 @@
               </div>
             </div>
 
-            <?php if (isset($error)) echo $error; ?>
-
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <input type="submit" class="primary-btn" value="Valider">

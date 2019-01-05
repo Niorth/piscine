@@ -10,58 +10,95 @@ class Order extends CI_Controller {
 	}
 
   public function tableau_de_bord(){
-    // à modifier l'id
-    $data['totalLigneCommande'] =  $this->order_ligne_model->total(2);
-    $data['totalLigneCommandeCours'] =  $this->order_ligne_model->totalStatus(2,"en cours de preparation");
-    $data['totalLigneCommandeTraite'] =  $this->order_ligne_model->totalStatus(2,"traite");
-    $data['totalLigneCommandeNonTraite'] =  $this->order_ligne_model->totalStatus(2,"non traite");
 
-    $this->load->view('layout/header');
-    $this->load->view('order/stats_order_res', $data);
-    $this->load->view('layout/footer');
+    if (!($this->session->has_userdata('login'))) {
+       header('location: ' . site_url('Account/connexion_page'));
+     }else{
+       if($this->session->privilege == 1){
+         // accueil a mettre par la suite
+         header('location: ' . site_url('Index'));
+       }else{
+         $idBoutique = $this->session->idBoutique;
+         $data['totalLigneCommande'] =  $this->order_ligne_model->total($idBoutique);
+         $data['totalLigneCommandeCours'] =  $this->order_ligne_model->totalStatus($idBoutique,"en cours de preparation");
+         $data['totalLigneCommandeTraite'] =  $this->order_ligne_model->totalStatus($idBoutique,"traite");
+         $data['totalLigneCommandeNonTraite'] =  $this->order_ligne_model->totalStatus($idBoutique,"non traite");
+
+         $this->load->view('layout/header_seller');
+         $this->load->view('order/stats_order_res', $data);
+         $this->load->view('layout/footer');
+       }
+    }
   }
 
   public function order_reservation_list(){
-    // à modifier l'id de la boutique
-    $data['c_nontraite'] = $this->order_ligne_model->getOrderLigne(2,"non traite");
-    $data['c_traite'] = $this->order_ligne_model->getOrderLigne(2,"traite");
 
-    $data['r_prepared'] = $this->reservation_ligne_model->getResPrepared(11);
-    $data['r_notPrepared'] = $this->reservation_ligne_model->getResNotPrepared(11);
-    $data['r_expire'] = $this->reservation_ligne_model->getResExpired(11);
+    if (!($this->session->has_userdata('login'))) {
+       header('location: ' . site_url('Account/connexion_page'));
+     }else{
+       if($this->session->privilege == 1){
+         // accueil a mettre par la suite
+         header('location: ' . site_url('Index'));
+       }else{
+        $idBoutique = $this->session->idBoutique;
+        $data['c_nontraite'] = $this->order_ligne_model->getOrderLigne($idBoutique,"non traite");
+        $data['c_traite'] = $this->order_ligne_model->getOrderLigne($idBoutique,"traite");
 
-    $this->load->view('layout/header');
-    $this->load->view('order/order_reservation',$data);
-    $this->load->view('layout/footer');
+        $data['r_prepared'] = $this->reservation_ligne_model->getResPrepared($idBoutique);
+        $data['r_notPrepared'] = $this->reservation_ligne_model->getResNotPrepared($idBoutique);
+        $data['r_expire'] = $this->reservation_ligne_model->getResExpired($idBoutique);
 
+        $this->load->view('layout/header_seller');
+        $this->load->view('order/order_reservation',$data);
+        $this->load->view('layout/footer');
+      }
+    }
   }
 
   public function order_detail_seller($numLigne,$numCom){
 
-    $data['commande'] = $this->order_model->getOrderDetailSeller($numLigne,$numCom);
-
-    $this->load->view('layout/header');
-    $this->load->view('order/order_detail_seller',$data);
-    $this->load->view('layout/footer');
-
+    if (!($this->session->has_userdata('login'))) {
+       header('location: ' . site_url('Account/connexion_page'));
+     }else{
+       if($this->session->privilege == 1){
+         // accueil a mettre par la suite
+         header('location: ' . site_url('Index'));
+       }else{
+        $data['commande'] = $this->order_model->getOrderDetailSeller($numLigne,$numCom);
+        $this->load->view('layout/header_seller');
+        $this->load->view('order/order_detail_seller',$data);
+        $this->load->view('layout/footer');
+      }
+    }
   }
 
   public function order_update_status(){
-    // idBoutique a modifier
+
     $numLigne =  htmlspecialchars($_POST['NumLigneCommande']);
     $numCom =  htmlspecialchars($_POST['NumCommande']);
 
-    $order = array(
-      "StatusLigneCom" => htmlspecialchars($_POST['status']),
-      "NumLigneCommande" => $numLigne,
-      "NumCommande" => $numCom,
-      // a modifier
-      "idBoutique" => htmlspecialchars($_POST['idBoutique'])
-    );
+    if (!($this->session->has_userdata('login'))) {
+       header('location: ' . site_url('Account/connexion_page'));
+     }else{
+       if($this->session->privilege == 1){
+         // accueil a mettre par la suite
+         header('location: ' . site_url('Index'));
+       }else{
 
-    $this->order_ligne_model->updateStatus($order);
+          $order = array(
+            "StatusLigneCom" => htmlspecialchars($_POST['status']),
+            "NumLigneCommande" => $numLigne,
+            "NumCommande" => $numCom,
+            // a modifier
+            "idBoutique" => htmlspecialchars($_POST['idBoutique'])
+          );
 
-    header('location:  ' . site_url("Order/order_reservation_list"));
+          $this->order_ligne_model->updateStatus($order);
+
+          header('location:  ' . site_url("Order/order_reservation_list"));
+      }
+    }
+
   }
 
 

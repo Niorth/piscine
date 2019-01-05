@@ -32,5 +32,23 @@ class Account_Model extends CI_Model
             ->set('privilege', $data['privilege'])
             ->insert($this->table);
     }
+    /*
+    select IdBoutique
+    from commercant c
+    inner join gererboutique gb on gb.NumCommercant=c.NumCommercant
+    where c.MailCommercant = "test@gmail.com"
+    order by gb.idBoutique DESC
+    limit 1
+    */
+    public function getIdboutiqueByLogin($login){
+      $this->load->database();
+      return $this->db->select('gb.IdBoutique,gb.NumCommercant')
+                    ->from('commercant c')
+                    ->join('gererboutique gb', 'gb.NumCommercant=c.NumCommercant')
+                    ->where('c.MailCommercant', $login)
+                    ->order_by('gb.idBoutique', 'desc')
+                    ->limit(1)
+                    ->get()
+                    ->result();
+    }
 }
-

@@ -71,8 +71,16 @@ class Account extends CI_Controller {
                 $this->session->set_userdata('login', $account[0]['login']);
                 $this->session->set_userdata('privilege', $account[0]['privilege']);
 
+                if( $account[0]['privilege'] == 2){
+                  $id = $this->account_model->getIdboutiqueByLogin($account[0]['login']);
+                  $this->session->set_userdata('idBoutique', $id[0]->IdBoutique);
+                  $this->session->set_userdata('NumCommercant', $id[0]->NumCommercant);
+                }else{
+
+                }
+
                 //Redirection
-                redirect('Index/index_page');
+                redirect('Order');
             }
             else{
                 //TODO : Handle wrong password
