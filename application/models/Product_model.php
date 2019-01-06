@@ -69,11 +69,13 @@ class Product_Model extends CI_Model
                     ->result();
     }
 
+
+
     /*
       requete pour avoir toutes les infos sur la page de tous les produits ( par categorie par la suite)
 
-      SELECT `CodeProduit`,`LibelleProduit`,`PrixProd`,`StockDispo`,NomBoutique 
-      FROM `boutique`,produit
+      SELECT `CodeProduit`,`LibelleProduit`,`PrixProd`,`StockDispo`,NomBoutique
+      FROM `boutique`
       WHERE boutique.`IdBoutique` = produit.`IdBoutique`
     */
     public function getAllProductByCat(){
@@ -81,6 +83,26 @@ class Product_Model extends CI_Model
       return $this->db->select('CodeProduit,LibelleProduit,PrixProd,StockDispo,NomBoutique,ImgProd')
                     ->from($this->table)
                     ->join('boutique', "boutique.IdBoutique = produit.IdBoutique")
+                    ->get()
+                    ->result();
+    }
+
+    /*
+    SELECT CodeProduit,LibelleProduit,PrixProd,StockDispo,NomBoutique
+      FROM produit p
+      inner join boutique b on p.IdBoutique = b.IdBoutique
+      where b.IdBoutique = 11
+      order by P.CodeProduit DESC
+      limit 4
+    */
+    public function getLastProductByShop($id){
+      $this->load->database();
+      return $this->db->select('CodeProduit,LibelleProduit,PrixProd,StockDispo,NomBoutique,ImgProd')
+                    ->from('produit p')
+                    ->join('boutique b', "p.IdBoutique = b.IdBoutique")
+                    ->where('b.IdBoutique', $id)
+                    ->order_by('b.IdBoutique', 'desc')
+                    ->limit(4)
                     ->get()
                     ->result();
     }

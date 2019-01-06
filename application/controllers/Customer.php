@@ -34,7 +34,9 @@ class Customer extends CI_Controller {
 				 // accueil a mettre par la suite
 				 header('location: ' . site_url('Trader/home_page'));
 			 }else{
-				$data["commande"] = $this->order_model->getOrderDetailClient(21);
+				$data["commande"] = $this->order_model->getOrderDetailClient(21,"non traite");
+				$data["commande_c"] = $this->order_model->getOrderDetailClient(21,"traite");
+
 				$data["client"] = $this->customer_model->getCustomerByNum(21);
 
 				$this->load->view('layout/header');
@@ -57,7 +59,8 @@ class Customer extends CI_Controller {
 				 // accueil a mettre par la suite
 				 header('location: ' . site_url('Trader/home_page'));
 			 }else{
-					$data["reservation"] = $this->reservation_model->getReservationDetailClient(22);
+					$data["reservation"] = $this->reservation_model->getReservationDetailClient(22,"traite");
+					$data["reservation_c"] = $this->reservation_model->getReservationDetailClient(22,"non traite");
 					$data["client"] = $this->customer_model->getCustomerByNum(22);
 
 					$this->load->view('layout/header');

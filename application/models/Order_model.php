@@ -42,23 +42,25 @@ class Order_Model extends CI_Model{
   /*
     Retourne le detail des commandes d'un client donnee
 
-    SELECT c.NumCommande,QteLigneCommande,DateCommande,StatusLigneCom,lc.idBoutique,MontantCom,
-    p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,c.NumClient,b.NomBoutique
-    FROM lignecommande lc
-    inner join commande c on lc.NumCommande = c.NumCommande
-    inner join produit p on lc.CodeProduit = p.CodeProduit
+    SELECT c.NumCommande,DateCommande,StatusCom,p.idBoutique,MontantCom,
+    p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,c.NumClient,b.NomBoutique,QteCommander
+    FROM commande c
+    inner join commander cr on cr.NumCommande = c.NumCommande
+    inner join produit p on cr.CodeProduit = p.CodeProduit
     inner join boutique b on b.idBoutique = p.idBoutique
-    where c.NumClient = ?
+    where c.NumClient = 21
+    and StatusCom = "non traite"
   */
-  public function getOrderDetailClient($numClient){
+  public function getOrderDetailClient($numClient,$status){
     $this->load->database();
-    return $this->db->select('c.NumCommande,QteLigneCommande,DateCommande,StatusLigneCom,lc.idBoutique,MontantCom,
-                            p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,NomBoutique')
-                    ->from('lignecommande as lc')
-                    ->join('commande as c', 'lc.NumCommande = c.NumCommande')
-                    ->join('produit as p', 'lc.CodeProduit = p.CodeProduit')
+    return $this->db->select('c.NumCommande,DateCommande,StatusCom,p.idBoutique,MontantCom,
+                            p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,c.NumClient,b.NomBoutique,QteCommander')
+                    ->from('commande c')
+                    ->join('commander as cr', 'cr.NumCommande = c.NumCommande')
+                    ->join('produit as p', 'cr.CodeProduit = p.CodeProduit')
                     ->join('boutique as b', 'b.idBoutique = p.idBoutique')
                     ->where('c.NumClient', $numClient)
+                    ->where('StatusCom', $status)
                     ->get()
                     ->result();
   }

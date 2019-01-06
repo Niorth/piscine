@@ -35,6 +35,7 @@ class Order extends CI_Controller {
     Page de gestion des reservations pour le commercant
   */
   public function order_reservation_list(){
+    // id boutique a mettre
 
     if (!($this->session->has_userdata('login'))) {
        header('location: ' . site_url('Account/connexion_page'));

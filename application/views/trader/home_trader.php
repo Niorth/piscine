@@ -21,7 +21,7 @@
                </a>
              </div>
              <div class="col-xs-4">
-               <a href="<?php echo site_url("") ?>" class="btn btn-default  btn-lg btn-block">
+               <a href="<?php echo site_url("Shop/shop_card/$idBoutique") ?>" class="btn btn-default  btn-lg btn-block">
                  <img src="<?php echo base_url() . "assets/img/shop_icon"?>" alt="mes reservations" height="100" width="100">
                  <strong>Ma boutique</strong>
                </a>

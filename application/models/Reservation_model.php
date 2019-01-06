@@ -34,31 +34,58 @@ class Reservation_Model extends CI_Model{
   }
 
   /*
-  Retourne le detail des reservations d'un client donnee
+  Retourne les reservations pour un client
 
-  SELECT distinct(r.NumReservation),DateReservation,lr.idBoutique,QteReserver,MontantRes
-    p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,NomBoutique,
-    DATE_ADD(DateReservation, INTERVAL p.DureeReservation DAY) as DateFinRes
-    FROM lignereservation lr
-    inner join reservation r on lr.NumReservation = r.NumReservation
-    inner join produit p on lr.CodeProduit = p.CodeProduit
-	  inner join reserver rver on rver.NumReservation = r.NumReservation
+  SELECT distinct(r.NumReservation),DateReservation,StatusRes,p.idBoutique,QteReserver,MontantRes,
+  p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,b.idBoutique,NomBoutique,RueBoutique,VilleBoutique,CPBoutique,TelBoutique,
+    FROM reservation r
+    inner join reserver rver on rver.NumReservation = r.NumReservation
+    inner join produit p on rver.CodeProduit = p.CodeProduit
     inner join boutique b on b.IdBoutique = p.IdBoutique
     where r.NumClient = ?
+    and StatusRes = "traite"
   */
-  public function getReservationDetailClient($numClient){
+  public function getReservationDetailClient($numClient,$status){
     $this->load->database();
-    return $this->db->select('distinct(r.NumReservation),DateReservation,lr.idBoutique,QteReserver,MontantRes,
-                              p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,NomBoutique,
-                              DATE_ADD(DateReservation, INTERVAL p.DureeReservation DAY) as DateFinRes')
-                    ->from('lignereservation as lr')
-                    ->join('reservation as r', 'lr.NumReservation = r.NumReservation')
-                    ->join('produit as p', 'lr.CodeProduit = p.CodeProduit')
+    return $this->db->select('distinct(r.NumReservation),DateReservation,StatusRes,p.idBoutique,QteReserver,MontantRes,
+                        p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,b.idBoutique,NomBoutique,RueBoutique,VilleBoutique,CPBoutique,TelBoutique,')
+                    ->from('reservation as r')
                     ->join('reserver as rver', 'rver.NumReservation = r.NumReservation')
+                    ->join('produit as p', 'rver.CodeProduit = p.CodeProduit')
                     ->join('boutique b', 'b.IdBoutique = p.IdBoutique')
                     ->where('r.NumClient', $numClient)
+                    ->where('StatusRes', $status)
                     ->get()
                     ->result();
+  }
+  /*
+    Retourne les reservations non traitees et non expirees pour un client
+
+    SELECT distinct(r.NumReservation),DateReservation,StatusRes,p.idBoutique,QteReserver,MontantRes, p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,
+    b.idBoutique,NomBoutique,RueBoutique,VilleBoutique,CPBoutique,TelBoutique,
+    DATE_ADD(DateReservation, INTERVAL p.DureeReservation DAY) as DateFinRes
+    FROM reservation r
+    inner join reserver rver on rver.NumReservation = r.NumReservation
+    inner join produit p on rver.CodeProduit = p.CodeProduit
+    inner join boutique b on b.IdBoutique = p.IdBoutique
+    where r.NumClient = 22 and StatusRes = "non traite"
+    and DATE_ADD(DateReservation, INTERVAL p.DureeReservation DAY) >= CURRENT_TIMESTAMP()
+  */
+  public function getReservationEncoursDetailClient($numClient){
+    $this->load->database();
+    return $this->db->select('distinct(r.NumReservation),DateReservation,StatusRes,p.idBoutique,QteReserver,MontantRes, p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,
+                          b.idBoutique,NomBoutique,RueBoutique,VilleBoutique,CPBoutique,TelBoutique,
+                          DATE_ADD(DateReservation, INTERVAL p.DureeReservation DAY) as DateFinRes')
+                    ->from('reservation as r')
+                    ->join('reserver as rver', 'rver.NumReservation = r.NumReservation')
+                    ->join('produit as p', 'rver.CodeProduit = p.CodeProduit')
+                    ->join('boutique b', 'b.IdBoutique = p.IdBoutique')
+                    ->where('r.NumClient', $numClient)
+                    ->where('StatusRes', "non traite")
+                    ->where('DATE_ADD(DateReservation, INTERVAL p.DureeReservation DAY) >=', date("Y-m-d H:i:s"))
+                    ->get()
+                    ->result();
+
   }
 }
 
