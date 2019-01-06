@@ -36,12 +36,58 @@ function init() {
         setTotalBooking();
         setTotalDelivery()
     })
+
+    const order = $("#orderButton");
+
+    order.on('click', () => {
+        if ($("#totalFinalBooking").text().split("€")[0] > 0) {
+            ajaxInsertResa()
+        }
+    })
+
 }
 
-function setTotal() {
-    const $total = $("#totalFinal");
-    const $totalHeader = $("#total");
-    $total.text($totalHeader.text())
+
+function ajaxInsertResa() {
+    const bookingTotal = $("#totalFinalBooking").text().split("€")[0];
+
+    $.ajax({
+        url: baseURL + 'Reservation/addReservation/' + bookingTotal,
+        method: 'POST',
+        error: function() {
+            alert('Something went wrong');
+        },
+        success: (data) => {
+            ajaxInsertLigneResa(data)
+        }
+    })
+}
+
+function ajaxInsertLigneResa(numResa) {
+    const qtys = $("table#booking > tbody >> .qty")
+
+    for (let i = 0; i < qtys.length; i++) {
+        const qty = $(qtys[i]).children().val()
+        const id = $(qtys[i]).attr("id")
+
+        $.ajax({
+            url: baseURL + 'Reservation/addLigneReservation/' + numResa +'/' + i + '/' + qty + '/' + id,
+            method: 'POST',
+            error: function() {
+                alert('Something went wrong');
+            },
+            success : () => {
+                $.ajax({
+                    url: baseURL + 'Reservation/addReserver/' + numResa + '/' + qty + '/' + id,
+                    method: 'POST',
+                    error: function() {
+                        alert('Something went wrong');
+                    },
+                })
+            }
+        })
+
+    }
 }
 
 function setTotalBooking() {

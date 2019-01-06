@@ -42,4 +42,5 @@ class Customer extends CI_Controller {
 		$this->load->view('client/all_reservation',$data);
 		$this->load->view('layout/footer');
 	}
+
 }

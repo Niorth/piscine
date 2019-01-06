@@ -69,6 +69,15 @@ class Product_Model extends CI_Model
                     ->result();
     }
 
+    public function getIdBoutiqueProductById($CodeProduit){
+        $this->load->database();
+        return $this->db->select('IdBoutique')
+            ->from('produit')
+            ->where('CodeProduit', $CodeProduit)
+            ->get()
+            ->result();
+    }
+
     /*
       requete pour avoir toutes les infos sur la page de tous les produits ( par categorie par la suite)
 

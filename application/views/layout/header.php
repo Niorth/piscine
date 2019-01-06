@@ -179,8 +179,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									</div>
 
 									<div class="shopping-cart-btns">
-                                        <a href="<?php echo site_url('Cart/cart_page'); ?>"><button class="main-btn">Voir panier</button></a>
-										<button class="primary-btn">Commander <i class="fa fa-arrow-circle-right"></i></button>
+                                        <a href="<?php echo site_url('Cart/cart_page'); ?>"><button class="main-btn">Voir panier<br><i class="fa fa-arrow-circle-right"></i></button></a>
 									</div>
 								</div>
 							</div>

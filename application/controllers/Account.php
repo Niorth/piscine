@@ -71,6 +71,10 @@ class Account extends CI_Controller {
                 $this->session->set_userdata('login', $account[0]['login']);
                 $this->session->set_userdata('privilege', $account[0]['privilege']);
 
+                $cart = array();
+                $_SESSION["cartBooking"] = serialize($cart);
+                $_SESSION["cartDelivery"] = serialize($cart);
+
                 //Redirection
                 redirect('Index/index_page');
             }
@@ -124,6 +128,7 @@ class Account extends CI_Controller {
         $customerInfo = $this->customer_model->getCustomerByMail($mail);
         $accountInfo = $this->account_model->getAccountByMail($mail);
 
+        $num = $customerInfo[0]['NumClient'];
         $name = $customerInfo[0]['NomClient'];
         $firstName = $customerInfo[0]['PrenomClient'];
         $street = $customerInfo[0]['RueClient'];
@@ -135,6 +140,7 @@ class Account extends CI_Controller {
         $pw = $accountInfo[0]['password'];
 
         $data = array(
+            'num' => $num,
             'name' => $name,
             'firstName' => $firstName,
             'street' => $street,

@@ -60,6 +60,18 @@ class Reservation_Model extends CI_Model{
                     ->get()
                     ->result();
   }
+
+  public function insertReservation($total, $remise, $customer) {
+      $this->load->database();
+      $this->db->set('MontantRes', $total)
+          ->set('PrixRemiseRes', $remise)
+          ->set('NumClient', $customer)
+          ->insert($this->table);
+
+      return $this->db->insert_id();
+  }
+
+
 }
 
 ?>

@@ -113,7 +113,7 @@
                                 </tfoot>
                             </table>
                             <div class="pull-right">
-                                <button class="primary-btn">Commander</button>
+                                <button class="primary-btn" id="orderButton">Commander</button>
 							</div>
 						</div>
                         <script src = "<?php echo base_url(); ?>node_modules/jquery/dist/jquery.min.js"></script>

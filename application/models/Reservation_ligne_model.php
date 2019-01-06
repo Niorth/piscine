@@ -123,6 +123,16 @@ class Reservation_ligne_Model extends CI_Model{
                     ->update($this->table);
   }
 
+    public function insertLigneReservation($numResa, $numLigne, $qte, $shop, $numProd) {
+        $this->load->database();
+        return $this->db->set('NumReservation', $numResa)
+            ->set('qteLigneRes', $qte)
+            ->set('NumLigneRes', $numLigne)
+            ->set('idBoutique', $shop)
+            ->set('CodeProduit', $numProd)
+            ->insert($this->table);
+    }
+
 }
 
 ?>
