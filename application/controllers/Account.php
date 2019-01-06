@@ -72,6 +72,11 @@ class Account extends CI_Controller {
                 $this->session->set_userdata('login', $account[0]['login']);
                 $this->session->set_userdata('privilege', $account[0]['privilege']);
 
+
+                $cart = array();
+                $_SESSION["cartBooking"] = serialize($cart);
+                $_SESSION["cartDelivery"] = serialize($cart);
+
                 if( $account[0]['privilege'] == 2){
                   $id = $this->account_model->getIdboutiqueByLogin($account[0]['login']);
                   $this->session->set_userdata('idBoutique', $id[0]->IdBoutique);
@@ -134,7 +139,9 @@ class Account extends CI_Controller {
 
         if($this->session->privilege == 1){
             $customerInfo = $this->customer_model->getCustomerByMail($mail);
+
             $name = $customerInfo[0]['NomClient'];
+            $num = $customerInfo[0]['NumClient'];
             $firstName = $customerInfo[0]['PrenomClient'];
             $street = $customerInfo[0]['RueClient'];
             $city = $customerInfo[0]['VilleClient'];
@@ -145,6 +152,7 @@ class Account extends CI_Controller {
         else{
           $traderInfo = $this->trader_model->getTraderByMail($mail);
           $name = $traderInfo[0]['NomCommercant'];
+          $num = $traderInfo[0]['NumCommercant'];
           $firstName = $traderInfo[0]['PrenomCommercant'];
           $street = $traderInfo[0]['RueCommercant'];
           $city = $traderInfo[0]['VilleCommercant'];
@@ -158,6 +166,7 @@ class Account extends CI_Controller {
         $pw = $accountInfo[0]['password'];
 
         $data = array(
+            'num' => $num,
             'name' => $name,
             'firstName' => $firstName,
             'street' => $street,

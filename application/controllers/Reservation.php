@@ -50,5 +50,23 @@ class Reservation extends CI_Controller {
     header('location:  ' . site_url("Order/order_reservation_list"));
   }
 
+  public function addReservation($total) {
+    $remise = null;
+    $mail = $this->session->userdata('login');
+    $customerInfo = $this->customer_model->getCustomerByMail($mail);
+    $customer = $customerInfo[0]['NumClient'];
+    echo json_encode($this->reservation_model->insertReservation($total, $remise, $customer));
+  }
+
+    public function addLigneReservation($numReservation, $numLigne, $qte, $numProd) {
+        $ProductInfo = $this->product_model->getIdBoutiqueProductById($numProd);
+        $shop = $ProductInfo[0]->IdBoutique;
+
+        $this->reservation_ligne_model->insertLigneReservation($numReservation, $numLigne, $qte, $shop, $numProd);
+    }
+
+    public function addReserver($numReservation, $qte, $numProd) {
+        $this->reserver_model->insertReserver($numReservation, $qte, $numProd);
+    }
 
 }
