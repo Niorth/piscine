@@ -5,7 +5,7 @@ class Reserver_Model extends CI_Model
 
     protected $table = 'reserver';
 
-    public function insertReserver($numResa, $numProd, $qty) {
+    public function insertReserver($numResa, $qty, $numProd) {
         $this->load->database();
         $this->db->set('NumReservation', $numResa)
             ->set('CodeProduit', $numProd)
