@@ -36,9 +36,24 @@ class Shop extends CI_Controller {
 	}
 
 	public function shop_card($id){
+
 		$data['boutique'] =  $this->shop_model->selectShopById($id);
-    $data['commercant'] =  $this->trader_model->getAllTrader();
-		$this->load->view('layout/header');
+		$data['product'] = $this->product_model->getLastProductByShop($id);
+		$data['review_stats'] = array();
+		
+		// recupere l'evaluation du produit
+		foreach ($data['product'] as $item) {
+			array_push($data['review_stats'], $this->review_model->getAvgByNum($item->CodeProduit));
+		}
+
+		$header = "layout/header";
+
+		if ($this->session->has_userdata('login')) {
+			if($this->session->privilege == 2){
+				$header = "layout/header_seller";
+			}
+		}
+		$this->load->view($header);
 		$this->load->view('shop/shop_card', $data);
 		$this->load->view('layout/footer');
 	}
@@ -52,6 +67,7 @@ class Shop extends CI_Controller {
 	}
 
 	public function edit_shop(){
+		// id boutique a modifier
 		$data = array(
 							"NumSIRET" => htmlspecialchars($_POST['siret']),
 							"NomBoutique" => htmlspecialchars($_POST['nom']),

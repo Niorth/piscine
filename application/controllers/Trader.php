@@ -24,8 +24,9 @@ class Trader extends CI_Controller {
     }
 
     public function home_page(){
+      $data['idBoutique'] = $idBoutique = $this->session->idBoutique;
       $this->load->view('layout/header_seller');
-      $this->load->view('trader/home_trader');
+      $this->load->view('trader/home_trader',$data);
       $this->load->view('layout/footer');
     }
 
