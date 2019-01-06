@@ -10,21 +10,47 @@
           <h3 class="title">Mes paramètres</h3>
         </div>
 
-        <ul class="list-group">
+        <div class="col-md-8">
 
-          <div class="col-md-12">
+
+          <ul class="list-group">
 
             <li class="list-group-item">
-              <label class="control-label col-sm-2" for="email">Email:</label>
-              <div class="col-sm-10">
-                <p class="form-control-static">someone@example.com</p>
+              <div class="row">
+                <p class="col-md-10"><strong>Mes informations</strong></p>
+                <div class="col-md-2">
+                    <a href="<?php echo site_url("Account/modify_informations_page") ?>" class="btn btn-warning" role="button">Modifier</a>
+                </div>
+                <p class="col-md-12"><strong>Nom:</strong><br>
+                   <?php echo $info['name'] ?>
+                </p>
+                <p class="col-md-12"><strong>Prenom:</strong><br>
+                  <?php echo $info['firstName'] ?>
+                </p>
+                <p class="col-md-12"><strong>Adresse:</strong><br>
+                  <?php echo $info['street'] ?><br>
+                  <?php echo $info['city'] ?><br>
+                  <?php echo $info['postalCode'] ?>
+                </p>
+                <p class="col-md-12"><strong>Numéro de Téléphone:</strong><br>
+                  <?php echo $info['phone'] ?>
+                </p>
               </div>
             </li>
-            
-          </div>
+            <li class="list-group-item">
+              <div class="row">
+                <p class="col-md-10"><strong>Mot de passe:</strong><br>
+                  **********
+                </p>
+                <div class="col-md-2">
+                    <a href="<?php echo site_url("Account/modify_password_page") ?>" class="btn btn-warning" role="button">Modifier</a>
+                </div>
 
+              </div>
+            </li>
 
-        </ul>
+          </ul>
+        </div>
 
       </div>
 

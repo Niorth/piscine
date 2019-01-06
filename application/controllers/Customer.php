@@ -36,7 +36,7 @@ class Customer extends CI_Controller {
 			 }else{
 				$data["commande"] = $this->order_model->getOrderDetailClient(21);
 				$data["client"] = $this->customer_model->getCustomerByNum(21);
-				
+
 				$this->load->view('layout/header');
 		    $this->load->view('client/all_order',$data);
 		    $this->load->view('layout/footer');

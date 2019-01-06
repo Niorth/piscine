@@ -82,12 +82,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</div>
 								<strong class="text-uppercase">Mon compte<i class="fa fa-caret-down"></i></strong>
 							</div>
-							<a href="<?php echo site_url('Account/connexion_page'); ?>" class="text-uppercase">S'identifier</a> / <a href="<?php echo site_url('Account/create_account_page'); ?>" class="text-uppercase">S'inscrire</a>
+
+							<?php if(isset($_SESSION["login"])) { ?>
+							<a href="<?php echo site_url('Account/deconnexion'); ?>" class="text-uppercase">Deconnexion</a>
+							<?php }else{ ?>
+								<a href="<?php echo site_url('Account/connexion_page'); ?>" class="text-uppercase">
+									S'identifier
+								</a> /
+								<a href="<?php echo site_url('Account/create_account_page'); ?>" class="text-uppercase">
+									S'inscrire
+								</a>
+							<?php } ?>
+
 							<ul class="custom-menu">
-								<li><a href="#"><i class="fa fa-user-o"></i>Mon compte</a></li>
-								<li><a href="#"><i class="fa fa-exchange"></i>Comparer</a></li>
-								<li><a href="<?php echo site_url('Customer/all_order_page'); ?>"><i class="fa fa-check"></i>Mes commandes</a></li>
-								<li><a href="<?php echo site_url('Account/create_account_page'); ?>"><i class="fa fa-user-plus"></i>Créer un compte</a></li>
+								<?php if(isset($_SESSION["login"])) { ?>
+									<li><a href="<?php echo site_url('Customer/home_page'); ?>"><i class="fa fa-user-o"></i>Mon compte</a></li>
+									<li><a href="<?php echo site_url('Customer/all_order_page'); ?>"><i class="fa fa-check"></i>Mes commandes</a></li>
+									<li><a href="<?php echo site_url('Customer/all_reservation_page'); ?>"><i class="fa fa-check"></i>Mes reservations</a></li>
+									<li><a href="<?php echo site_url('Account/deconnexion'); ?>"><i class="fa fa-power-off"></i>Deconnexion</a></li>
+								<?php }else{ ?>
+									<li><a href="<?php echo site_url('Account/connexion_page'); ?>"><i class="fa fa-unlock-alt"></i>Se connecter</a></li>
+									<li><a href="<?php echo site_url('Account/create_account_page'); ?>"><i class="fa fa-user-plus"></i>Créer un compte</a></li>
+								<?php } ?>
 							</ul>
 						</li>
 						<!-- /Account -->
@@ -179,8 +195,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									</div>
 
 									<div class="shopping-cart-btns">
-                                        <a href="<?php echo site_url('Cart/cart_page'); ?>"><button class="main-btn">Voir panier</button></a>
-										<button class="primary-btn">Commander <i class="fa fa-arrow-circle-right"></i></button>
+                      <a href="<?php echo site_url('Cart/cart_page'); ?>"><button class="primary-btn">Voir panier <i class="fa fa-arrow-circle-right"></i></button></a>
 									</div>
 								</div>
 							</div>
@@ -407,6 +422,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
 						<li><a href="<?php echo site_url('Order'); ?>">Accueil</a></li>
+						<li><a href="<?php echo site_url('Customer/home_page'); ?>">Mon compte</a></li>
 
 						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Boutique<i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">

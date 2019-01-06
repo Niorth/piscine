@@ -23,6 +23,12 @@ class Trader extends CI_Controller {
         $this->trader_model->insertGererBoutique($data);
     }
 
+    public function home_page(){
+      $this->load->view('layout/header_seller');
+      $this->load->view('trader/home_trader');
+      $this->load->view('layout/footer');
+    }
+
 
 
 }

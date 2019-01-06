@@ -40,8 +40,9 @@ class Account extends CI_Controller {
     }
 
     public function parameters_page(){
+      $data['info'] = $this->getMyAccountInfo();
   		$this->load->view('layout/header');
-  		$this->load->view('account/parameters');
+  		$this->load->view('account/parameters',$data);
   		$this->load->view('layout/footer');
   	}
 
@@ -96,7 +97,7 @@ class Account extends CI_Controller {
     public function deconnexion(){
         $this->load->library('session');
         $this->session->sess_destroy();
-        redirect('Index/index_page');
+        redirect('Order');
     }
 
     public function create_account(){
@@ -128,18 +129,32 @@ class Account extends CI_Controller {
     }
 
     public function getMyAccountInfo(){
+
         $mail = $this->session->userdata('login');
-        $customerInfo = $this->customer_model->getCustomerByMail($mail);
+
+        if($this->session->privilege == 1){
+            $customerInfo = $this->customer_model->getCustomerByMail($mail);
+            $name = $customerInfo[0]['NomClient'];
+            $firstName = $customerInfo[0]['PrenomClient'];
+            $street = $customerInfo[0]['RueClient'];
+            $city = $customerInfo[0]['VilleClient'];
+            $postalCode = $customerInfo[0]['CPClient'];
+            $phone = $customerInfo[0]['TelClient'];
+            $point = $customerInfo[0]['PointClient'];
+        }
+        else{
+          $traderInfo = $this->trader_model->getTraderByMail($mail);
+          $name = $traderInfo[0]['NomCommercant'];
+          $firstName = $traderInfo[0]['PrenomCommercant'];
+          $street = $traderInfo[0]['RueCommercant'];
+          $city = $traderInfo[0]['VilleCommercant'];
+          $postalCode = $traderInfo[0]['CPCommercant'];
+          $phone = $traderInfo[0]['TelCommercant'];
+          $point = 0;
+
+        }
+
         $accountInfo = $this->account_model->getAccountByMail($mail);
-
-        $name = $customerInfo[0]['NomClient'];
-        $firstName = $customerInfo[0]['PrenomClient'];
-        $street = $customerInfo[0]['RueClient'];
-        $city = $customerInfo[0]['VilleClient'];
-        $postalCode = $customerInfo[0]['CPClient'];
-        $phone = $customerInfo[0]['TelClient'];
-        $point = $customerInfo[0]['PointClient'];
-
         $pw = $accountInfo[0]['password'];
 
         $data = array(
@@ -173,7 +188,7 @@ class Account extends CI_Controller {
         "mail" => $mail,
       );
 
-      if($privilege == 1){
+      if($this->session->privilege == 1){
           $this->customer_model->updateCustomer($dataInfo);
       }
       else{
