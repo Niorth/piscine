@@ -40,8 +40,9 @@ class Account extends CI_Controller {
     }
 
     public function parameters_page(){
+      $data['info'] = $this->getMyAccountInfo();
   		$this->load->view('layout/header');
-  		$this->load->view('account/parameters');
+  		$this->load->view('account/parameters',$data);
   		$this->load->view('layout/footer');
   	}
 
@@ -71,12 +72,21 @@ class Account extends CI_Controller {
                 $this->session->set_userdata('login', $account[0]['login']);
                 $this->session->set_userdata('privilege', $account[0]['privilege']);
 
+
                 $cart = array();
                 $_SESSION["cartBooking"] = serialize($cart);
                 $_SESSION["cartDelivery"] = serialize($cart);
 
+                if( $account[0]['privilege'] == 2){
+                  $id = $this->account_model->getIdboutiqueByLogin($account[0]['login']);
+                  $this->session->set_userdata('idBoutique', $id[0]->IdBoutique);
+                  $this->session->set_userdata('NumCommercant', $id[0]->NumCommercant);
+                }else{
+
+                }
+
                 //Redirection
-                redirect('Index/index_page');
+                redirect('Order');
             }
             else{
                 //TODO : Handle wrong password
@@ -92,7 +102,7 @@ class Account extends CI_Controller {
     public function deconnexion(){
         $this->load->library('session');
         $this->session->sess_destroy();
-        redirect('Index/index_page');
+        redirect('Order');
     }
 
     public function create_account(){
@@ -124,19 +134,35 @@ class Account extends CI_Controller {
     }
 
     public function getMyAccountInfo(){
+
         $mail = $this->session->userdata('login');
-        $customerInfo = $this->customer_model->getCustomerByMail($mail);
+
+        if($this->session->privilege == 1){
+            $customerInfo = $this->customer_model->getCustomerByMail($mail);
+
+            $name = $customerInfo[0]['NomClient'];
+            $num = $customerInfo[0]['NumClient'];
+            $firstName = $customerInfo[0]['PrenomClient'];
+            $street = $customerInfo[0]['RueClient'];
+            $city = $customerInfo[0]['VilleClient'];
+            $postalCode = $customerInfo[0]['CPClient'];
+            $phone = $customerInfo[0]['TelClient'];
+            $point = $customerInfo[0]['PointClient'];
+        }
+        else{
+          $traderInfo = $this->trader_model->getTraderByMail($mail);
+          $name = $traderInfo[0]['NomCommercant'];
+          $num = $traderInfo[0]['NumCommercant'];
+          $firstName = $traderInfo[0]['PrenomCommercant'];
+          $street = $traderInfo[0]['RueCommercant'];
+          $city = $traderInfo[0]['VilleCommercant'];
+          $postalCode = $traderInfo[0]['CPCommercant'];
+          $phone = $traderInfo[0]['TelCommercant'];
+          $point = 0;
+
+        }
+
         $accountInfo = $this->account_model->getAccountByMail($mail);
-
-        $num = $customerInfo[0]['NumClient'];
-        $name = $customerInfo[0]['NomClient'];
-        $firstName = $customerInfo[0]['PrenomClient'];
-        $street = $customerInfo[0]['RueClient'];
-        $city = $customerInfo[0]['VilleClient'];
-        $postalCode = $customerInfo[0]['CPClient'];
-        $phone = $customerInfo[0]['TelClient'];
-        $point = $customerInfo[0]['PointClient'];
-
         $pw = $accountInfo[0]['password'];
 
         $data = array(
@@ -171,7 +197,7 @@ class Account extends CI_Controller {
         "mail" => $mail,
       );
 
-      if($privilege == 1){
+      if($this->session->privilege == 1){
           $this->customer_model->updateCustomer($dataInfo);
       }
       else{

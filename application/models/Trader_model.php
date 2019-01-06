@@ -49,6 +49,20 @@ class Trader_Model extends CI_Model
     }
 
     /*
+      Retourne les infos du commercant en fonction de son mail
+    */
+    public function getTraderByMail($mail){
+        $this->load->database();
+        $query = $this->db->get_where($this->table, array('MailCommercant' => $mail));
+
+        $result = false;
+        if ($query -> num_rows() > 0){
+            $result = $query -> result_array();
+        }
+        return $result;
+    }
+
+    /*
       Met a jour les infos du commercant identife par son mail/login
     */
     public function updateTrader($data){
