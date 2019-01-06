@@ -43,6 +43,27 @@ function init() {
         if ($("#totalFinalBooking").text().split("€")[0] > 0) {
             ajaxInsertResa()
         }
+
+        if ($("#totalFinalDelivery").text().split("€")[0] > 0) {
+            ajaxInsertOrder()
+        }
+
+        if ($("#totalFinalDelivery").text().split("€")[0] > 0 || $("#totalFinalBooking").text().split("€")[0] > 0) {
+            $.ajax({
+                url: baseURL + 'Cart/createCart',
+                method: 'POST',
+                error: function() {
+                    alert('Something went wrong');
+                },
+                success: () => {
+                    confirmModal();
+                    $(document).on('click', () => {
+                        document.location.reload();
+                    })
+                }
+            });
+
+        }
     })
 
 }
@@ -90,6 +111,48 @@ function ajaxInsertLigneResa(numResa) {
     }
 }
 
+function ajaxInsertOrder() {
+    const orderTotal = $("#totalFinalDelivery").text().split("€")[0];
+
+    $.ajax({
+        url: baseURL + 'Order/addOrder/' + orderTotal,
+        method: 'POST',
+        error: function() {
+            alert('Something went wrong');
+        },
+        success: (data) => {
+            ajaxInsertLigneOrder(data)
+        }
+    })
+}
+
+function ajaxInsertLigneOrder(numOrder) {
+    const qtys = $("table#delivery > tbody >> .qty")
+
+    for (let i = 0; i < qtys.length; i++) {
+        const qty = $(qtys[i]).children().val()
+        const id = $(qtys[i]).attr("id")
+
+        $.ajax({
+            url: baseURL + 'Order/addLigneOrder/' + numOrder +'/' + i + '/' + qty + '/' + id,
+            method: 'POST',
+            error: function() {
+                alert('Something went wrong');
+            },
+            success : () => {
+                $.ajax({
+                    url: baseURL + 'Order/addCommander/' + numOrder + '/' + qty + '/' + id,
+                    method: 'POST',
+                    error: function() {
+                        alert('Something went wrong');
+                    },
+                })
+            }
+        })
+
+    }
+}
+
 function setTotalBooking() {
     const prices = $("table#booking > tbody >> .total > strong");
     let total = 0;
@@ -105,8 +168,18 @@ function setTotalDelivery() {
     for (let i = 0; i < prices.length; i++) {
         total = total + + $(prices[i]).text().split('€')[0]
     }
-    console.log($("#totalFinal "))
+
     $("#totalFinalDelivery").text(total + "€")
+}
+
+function setSubTotal(id) {
+    const price = $('.headerProductBody#'+id+'> .product-price').text().split('€')[0]
+    const qty = $('.headerProductBody#'+id+'> .product-price > span').text().split('x')[1]
+    $('#total'+id).text(price*qty+'€')
+}
+
+function confirmModal(){
+    $('#modal').css('display', 'block')
 }
 
 init();

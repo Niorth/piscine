@@ -76,6 +76,16 @@ class Order_ligne_Model extends CI_Model{
                     ->update($this->table);
   }
 
+    public function insertLigneOrder($numOrder, $numLigne, $qte, $shop, $numProd) {
+        $this->load->database();
+        return $this->db->set('NumCommande', $numOrder)
+            ->set('qteLigneCommande', $qte)
+            ->set('NumLigneCommande', $numLigne)
+            ->set('idBoutique', $shop)
+            ->set('CodeProduit', $numProd)
+            ->insert($this->table);
+    }
+
 }
 
 ?>

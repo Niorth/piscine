@@ -104,5 +104,24 @@ class Order extends CI_Controller {
 
   }
 
+    public function addOrder($total) {
+        $remise = null;
+        $mail = $this->session->userdata('login');
+        $customerInfo = $this->customer_model->getCustomerByMail($mail);
+        $customer = $customerInfo[0]['NumClient'];
+        echo json_encode($this->order_model->insertOrder($total, $remise, $customer));
+    }
+
+    public function addLigneOrder($numOrder, $numLigne, $qte, $numProd) {
+        $ProductInfo = $this->product_model->getIdBoutiqueProductById($numProd);
+        $shop = $ProductInfo[0]->IdBoutique;
+
+        $this->order_ligne_model->insertLigneOrder($numOrder, $numLigne, $qte, $shop, $numProd);
+    }
+
+    public function addCommander($numOrder, $qte, $numProd) {
+        $this->commander_model->insertCommander($numOrder, $qte, $numProd);
+    }
+
 
 }

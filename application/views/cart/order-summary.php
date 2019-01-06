@@ -1,4 +1,15 @@
+
+<head>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/style-modal.css">
+</head>
 <div class="order-summary clearfix" style="margin : 7%">
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <p><strong>COMMANDE ENREGISTREE</strong></p>
+            <p><i class="fa fa-check-circle fa-lg"></i></p>
+        </div>
+    </div>
 							<div class="section-title">
 								<h2 class="title">Panier</h2>
 							</div>
@@ -35,7 +46,7 @@
                                                                                                         value=<?php echo($infos[1]); ?>>
                                             </td>
                                             <td class="total text-center"><strong
-                                                        class="primary-color"><?php echo($infos[2] * $infos[1]); ?>
+                                                        class="primary-color" id="total<?php echo($id); ?>"><?php echo($infos[2] * $infos[1]); ?>
                                                     €</strong>
                                             </td>
                                             <td class="text-right">
