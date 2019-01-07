@@ -10,30 +10,21 @@
 				<div id="home-slick">
 					<!-- banner -->
 					<div class="banner banner-1">
-						<img src="<?php echo base_url() ?>assets/img/banner01.jpg" alt="">
+						<img src="<?php echo base_url() ?>assets/img/noel.jpg" alt="" height='588'>
 						<div class="banner-caption text-center">
-							<h1>Bags sale</h1>
-							<button class="primary-btn">Shop Now</button>
+							<h1>Promotions de Noël !</h1>
+							<h3 class="primary-color">Avec le code promo noel2018 chez ....</h3>
+							<h2 <span class="white-color font-weak"><a href="<?php echo site_url('Reduction/list_reduction_client'); ?>">Voir toutes les réductions</a></span></h2>
 						</div>
 					</div>
 					<!-- /banner -->
 
 					<!-- banner -->
 					<div class="banner banner-1">
-						<img src="<?php echo base_url() ?>assets/img/banner02.jpg" alt="">
-						<div class="banner-caption">
-							<h1 class="primary-color">HOT DEAL<br><span class="white-color font-weak">Up to 50% OFF</span></h1>
-							<button class="primary-btn">Shop Now</button>
-						</div>
-					</div>
-					<!-- /banner -->
-
-					<!-- banner -->
-					<div class="banner banner-1">
-						<img src="<?php echo base_url() ?>assets/img/banner03.jpg" alt="">
-						<div class="banner-caption">
-							<h1 class="white-color">New Product <span>Collection</span></h1>
-							<button class="primary-btn">Shop Now</button>
+						<img src="<?php echo base_url() ?>assets/img/janvier.png" alt="" >
+						<div class="banner-caption text-center">
+							<h1 <span class="white-color font-weak">Soldes de Janvier</span></h1>
+							<h2 <span class="white-color font-weak"><a href="<?php echo site_url('Reduction/list_reduction_client'); ?>">Allez voir !</a></span></h2>
 						</div>
 					</div>
 					<!-- /banner -->
@@ -395,7 +386,7 @@
 				</div>
 				<!-- /Product Slick -->
 			</div>
-			
+
 			</div>
 			<!-- /row -->
 		</div>

@@ -331,16 +331,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</ul>
 						</li>
 
-            <li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Reduction<i class="fa fa-caret-down"></i></a>
+            <li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Réductions<i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
-								<li><a href="<?php echo site_url('Reduction/list_reduction_client'); ?>">Mes reductions</a></li>
-								<li><a href="<?php echo site_url('Reduction/list_reduction_client'); ?>">Mes reductions</a></li>
+								<li><a href="<?php echo site_url('Reduction/list_reduction_client'); ?>">Mes réductions</a></li>
+								<li><a href="<?php echo site_url('Reduction/create_reduction'); ?>">Ajouter réduction</a></li>
 							</ul>
 						</li>
 
-						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Produit <i class="fa fa-caret-down"></i></a>
+						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Produits <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
-								<li><a href="<?php echo site_url('Product/product_list_page'); ?>"> Mes Stock</a></li>
+								<li><a href="<?php echo site_url('Product/product_list_page'); ?>"> Mes Stocks</a></li>
 								<li><a href="<?php echo site_url('Product/create_product_page'); ?>">Créer un produit</a></li>
 							</ul>
 						</li>
