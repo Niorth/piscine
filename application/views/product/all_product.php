@@ -20,7 +20,7 @@
 
         <!-- aside widget -->
         <div class="aside">
-          <h3 class="aside-title">Filter by Price</h3>
+          <h3 class="aside-title">Filtrer par prix</h3>
           <div id="price-slider"></div>
         </div>
         <!-- aside widget -->
@@ -76,10 +76,10 @@
               <thead>
                 <tr>
                   <th>Image</th>
-                  <th>Nom Produit + Vendeur + evaluation</th>
+                  <th>Nom Produit / Vendeur / evaluation</th>
                   <th>Disponibilité</th>
                   <th>Prix</th>
-                  <th>Prix + bouton ajout panier</th>
+                  <th>Ajouter au panier</th>
                 </tr>
               </thead>
               <tbody>
