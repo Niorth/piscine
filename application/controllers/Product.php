@@ -28,6 +28,11 @@ class Product extends CI_Controller
     }
 
     public function product_page($CodeProduit){
+        if(!isset($_SESSION['cartBooking'])){
+            $cart = array();
+            $_SESSION["cartBooking"] = serialize($cart);
+            $_SESSION["cartDelivery"] = serialize($cart);
+        }
         $data['product'] =  $this->product_model->getProductById($CodeProduit);
         $data['boutique'] =  $this->product_model->getBoutiqueProductById($CodeProduit);
         $data['review_stats'] = $this->review_model->getAvgByNum($CodeProduit);

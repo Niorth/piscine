@@ -60,9 +60,15 @@ function init() {
                     alert('Something went wrong');
                 },
                 success: () => {
-                    confirmModal();
+                    confirmModalAppear();
                     $(document).on('click', () => {
-                        document.location.reload();
+                        confirmModalDisppear()
+                        $('tbody>tr').remove()
+                        $('.headerProductBody').remove()
+                        $('#totalFinalDelivery').text('0€')
+                        $('#totalFinalBooking').text('0€')
+                        $('span.qty').text(0)
+                        $('span#total').text('0€')
                     })
                 }
             });
@@ -74,8 +80,7 @@ function init() {
 
 function ajaxInsertResa() {
     let bookingTotal = $("#totalFinalBooking").text().split("€")[0];
-    console.log($("#remise"))
-    if($("#remise").prop('checked', true)) {
+    if($("#remise").prop('checked')) {
         bookingTotal = Math.round((bookingTotal * 0.9)*100)/100
     }
 
@@ -123,7 +128,7 @@ function ajaxInsertLigneResa(numResa) {
 
 function ajaxInsertOrder() {
     let orderTotal = $("#totalFinalDelivery").text().split("€")[0];
-    if($("#remise").prop('checked', true)) {
+    if($("#remise").prop('checked')) {
         orderTotal = Math.round((orderTotal * 0.9)*100)/100
     }
     $.ajax({
@@ -193,8 +198,12 @@ function setSubTotal(id) {
     $('#total'+id).text(price*qty+'€')
 }
 
-function confirmModal(){
+function confirmModalAppear(){
     $('#modal').css('display', 'block')
+}
+
+function confirmModalDisppear(){
+    $('#modal').css('display', 'none')
 }
 
 function updateStock(id, qty) {
