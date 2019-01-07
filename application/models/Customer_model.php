@@ -65,6 +65,12 @@ class Customer_Model extends CI_Model
         ->update($this->table);
   }
 
+  public function updatePointsCustomer($pts, $mail) {
+      $this -> load -> database();
+      return $this->db->set('PointClient', $pts)
+          ->where('MailClient', $mail);
+  }
+
 
 
 }

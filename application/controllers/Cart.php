@@ -9,8 +9,14 @@
 class Cart extends CI_Controller {
 
     function cart_page() {
+        $pts = 0;
+        if (isset($_SESSION['login'])) {
+            $pts = $this->customer_model->getCustomerByMail($_SESSION['login']);
+            $pts = $pts[0]['PointClient'];
+        }
+        $data["pts"] = $pts;
         $this->load->view('layout/header');
-        $this->load->view('cart/order-summary');
+        $this->load->view('cart/order-summary', $data);
         $this->load->view('layout/footer');
     }
 

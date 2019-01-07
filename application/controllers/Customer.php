@@ -71,4 +71,13 @@ class Customer extends CI_Controller {
 
 	}
 
+	public function usePoints() {
+	    if(isset($_SESSION['login'])){
+	        $mail = $_SESSION['login'];
+	        $pts = $this->customer_model->getCustomerByMail($mail);
+	        $pts = $pts[0]['PointClient'] - 100;
+	        $this->customer_model->updatePointsCustomer($pts, $mail);
+        }
+    }
+
 }

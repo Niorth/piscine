@@ -1,7 +1,7 @@
 import {removeProductById, changeQtyHeader} from "./cart";
 
 function init() {
-    const closeButtons = $('.main-btn');
+    const closeButtons = $('.closeButton');
 
     closeButtons.on('click', (event) => {
 
@@ -40,6 +40,10 @@ function init() {
     const order = $("#orderButton");
 
     order.on('click', () => {
+        if($("#remise").prop('checked', true)) {
+            updatePoints()
+        }
+
         if ($("#totalFinalBooking").text().split("€")[0] > 0) {
             ajaxInsertResa()
         }
@@ -69,7 +73,11 @@ function init() {
 
 
 function ajaxInsertResa() {
-    const bookingTotal = $("#totalFinalBooking").text().split("€")[0];
+    let bookingTotal = $("#totalFinalBooking").text().split("€")[0];
+    console.log($("#remise"))
+    if($("#remise").prop('checked', true)) {
+        bookingTotal = Math.round((bookingTotal * 0.9)*100)/100
+    }
 
     $.ajax({
         url: baseURL + 'Reservation/addReservation/' + bookingTotal,
@@ -103,6 +111,9 @@ function ajaxInsertLigneResa(numResa) {
                     error: function() {
                         alert('Something went wrong');
                     },
+                    success: () => {
+                        updateStock(id, qty)
+                    }
                 })
             }
         })
@@ -111,8 +122,10 @@ function ajaxInsertLigneResa(numResa) {
 }
 
 function ajaxInsertOrder() {
-    const orderTotal = $("#totalFinalDelivery").text().split("€")[0];
-
+    let orderTotal = $("#totalFinalDelivery").text().split("€")[0];
+    if($("#remise").prop('checked', true)) {
+        orderTotal = Math.round((orderTotal * 0.9)*100)/100
+    }
     $.ajax({
         url: baseURL + 'Order/addOrder/' + orderTotal,
         method: 'POST',
@@ -145,6 +158,9 @@ function ajaxInsertLigneOrder(numOrder) {
                     error: function() {
                         alert('Something went wrong');
                     },
+                    success: () => {
+                        updateStock(id, qty)
+                    }
                 })
             }
         })
@@ -179,6 +195,26 @@ function setSubTotal(id) {
 
 function confirmModal(){
     $('#modal').css('display', 'block')
+}
+
+function updateStock(id, qty) {
+    $.ajax({
+        url: baseURL + 'Product/updateStock/' + id + '/' + qty,
+        method: 'POST',
+        error: function() {
+            alert('Something went wrong');
+        },
+    })
+}
+
+function updatePoints() {
+    $.ajax({
+        url: baseURL + 'Customer/usePoints',
+        method: 'POST',
+        error: function() {
+            alert('Something went wrong');
+        },
+    })
 }
 
 init();

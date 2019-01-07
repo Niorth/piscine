@@ -220,6 +220,16 @@ class Product extends CI_Controller
       }
     }
 
+    public function updateStock($id, $qty){
+        $product = $this->product_model->getProductBySelector('CodeProduit', $id);
+        $dispo = $product[0]['StockDispo'];
+        $reel = $product[0]['StockReel'];
+
+        $dispo = $dispo - $qty;
+        $data = Array('stockDispo' => $dispo, 'stockReel' => $reel);
+        $this->product_model->updateProductStock($data,$id);
+    }
+
     public function delete_product($code){
 
       if (!($this->session->has_userdata('login'))) {

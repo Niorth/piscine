@@ -50,7 +50,7 @@
                                                     €</strong>
                                             </td>
                                             <td class="text-right">
-                                                <button id="<?php echo($id); ?>" class="main-btn icon-btn"><i
+                                                <button id="<?php echo($id); ?>" class="main-btn icon-btn closeButton"><i
                                                             class="fa fa-close"></i></button>
                                             </td>
                                         </tr>
@@ -106,7 +106,7 @@
                                                     €</strong>
                                             </td>
                                             <td class="text-right">
-                                                <button id="<?php echo($id); ?>" class="main-btn icon-btn"><i
+                                                <button id="<?php echo($id); ?>" class="main-btn icon-btn closeButton"><i
                                                             class="fa fa-close"></i></button>
                                             </td>
                                         </tr>
@@ -123,6 +123,15 @@
                                 </tr>
                                 </tfoot>
                             </table>
+                            <?php if($pts >= 100) { ?>
+                                <div class="pull-left">
+                                    <h4><strong>Vous avez <?php echo $pts ?> points de fidélité</strong></h4>
+                                    <h4><strong>Utiliser 100 points pour obtenir une remise de 10% : </strong><input
+                                                id="remise" type="checkbox"></h4>
+                                </div>
+                                <?php
+                            }
+                            ?>
                             <div class="pull-right">
                                 <button class="primary-btn" id="orderButton">Commander</button>
 							</div>
