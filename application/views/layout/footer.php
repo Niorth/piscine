@@ -10,7 +10,7 @@
           <!-- footer logo -->
           <div class="footer-logo">
             <a class="logo" href="http://www.herault.cci.fr/">
-              <img src="assets/img/cci_herault.png" alt="">
+              <img src="<?php echo base_url() ?>assets/img/cci_herault.png" alt="">
             </a>
           </div>
           <!-- /footer logo -->

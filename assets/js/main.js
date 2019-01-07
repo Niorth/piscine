@@ -126,12 +126,12 @@
   var slider = document.getElementById('price-slider');
   if (slider) {
     noUiSlider.create(slider, {
-      start: [1, 999],
+      start: [1, 1000],
       connect: true,
       tooltips: [true, true],
       format: {
         to: function(value) {
-          return value.toFixed(2) + '$';
+          return value.toFixed(2) + '€';
         },
         from: function(value) {
           return value
@@ -139,7 +139,7 @@
       },
       range: {
         'min': 1,
-        'max': 999
+        'max': 1000
       }
     });
   }
