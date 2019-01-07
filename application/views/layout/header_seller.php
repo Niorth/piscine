@@ -61,12 +61,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 					<!-- Search -->
 					<div class="header-search">
-						<form>
-							<input id='searchBar' class="input search-input" type="text" placeholder="Entrez votre mot-clé">
-							<select class="input search-Catégories">
+						<form action="<?php echo site_url("Search/recherche") ?>" method="post">
+							<input id='searchBar'  name= "recherche" class="input search-input" type="text" placeholder="Entrez votre mot-clé">
+							<select  name= "cat" class="input search-Catégories">
 								<option value="0">Toutes les catégories</option>
-								<option value="1">High-Tech</option>
-								<option value="2">Vêtements,Bijoux,Sacs</option>
+								<option value="Smartphones">Smartphones</option>
+								<option value="GPS">GPS</option>
+								<option value="Ordinateur portable">Ordinateur portable</option>
+								<option value="Sac à main">Ordinateur</option>
+								<option value="Bijoux">Bijoux</option>
+								<option value="T-shirt">T-shirt</option>
+								<option value="Pull">Pull</option>
+								<option value="Pull">Chaussures</option>
+								<option value="Audio">Pantalons</option>
 							</select>
 							<button class="search-btn"><i class="fa fa-search"></i></button>
 						</form>
@@ -218,11 +225,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Téléphones</h3></li>
-											<li><a href="#">Téléphones fixes</a></li>
-											<li><a href="#">Smartphones</a></li>
-											<li><a href="#">Protections</a></li>
-											<li><a href="#">Connectique</a></li>
-											<li><a href="#">Accessoires</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Smartphones") ?>">Téléphones fixes</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Smartphones") ?>">Smartphones</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Smartphones") ?>">Protections</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Smartphones") ?>">Connectique</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Smartphones") ?>">Accessoires</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
@@ -230,11 +237,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Ordinateurs</h3></li>
-											<li><a href="#">Ordinateurs portables</a></li>
-											<li><a href="#">Ordinateurs fixes</a></li>
-											<li><a href="#">Accessoires</a></li>
-											<li><a href="#">Connectique</a></li>
-											<li><a href="#">Logiciels</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Ordinateur") ?>">Ordinateurs portables</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Ordinateur") ?>">Ordinateurs fixes</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Ordinateur") ?>">Accessoires</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Ordinateur") ?>">Connectique</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/GPS") ?>">GPS</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
@@ -271,11 +278,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Vêtements</h3></li>
-											<li><a href="#">T-shirts</a></li>
-											<li><a href="#">Pulls</a></li>
-											<li><a href="#">Vestes</a></li>
-											<li><a href="#">Pantalons</a></li>
-											<li><a href="#">Shorts</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/T-shirt") ?>">T-shirts</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Pull") ?>">Pulls</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/T-shirt") ?>">Vestes</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Pantalons") ?>">Pantalons</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/T-shirt") ?>">Shorts</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
@@ -283,10 +290,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Bijoux</h3></li>
-											<li><a href="#">Bagues</a></li>
-											<li><a href="#">Bracelets</a></li>
-											<li><a href="#">Colliers</a></li>
-											<li><a href="#">Montres</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Bijoux") ?>">Bagues</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Bijoux") ?>">Bracelets</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Bijoux") ?>">Colliers</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Bijoux") ?>">Montres</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>

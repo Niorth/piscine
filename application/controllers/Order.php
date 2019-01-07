@@ -19,10 +19,10 @@ class Order extends CI_Controller {
          header('location: ' . site_url('Index'));
        }else{
          $idBoutique = $this->session->idBoutique;
-         $data['totalLigneCommande'] =  $this->order_ligne_model->total($id);
-         $data['totalLigneCommandeCours'] =  $this->order_ligne_model->totalStatus($id,"en cours de preparation");
-         $data['totalLigneCommandeTraite'] =  $this->order_ligne_model->totalStatus($id,"traite");
-         $data['totalLigneCommandeNonTraite'] =  $this->order_ligne_model->totalStatus($id,"non traite");
+         $data['totalLigneCommande'] =  $this->order_ligne_model->total($idBoutique);
+         $data['totalLigneCommandeCours'] =  $this->order_ligne_model->totalStatus($idBoutique,"en cours de preparation");
+         $data['totalLigneCommandeTraite'] =  $this->order_ligne_model->totalStatus($idBoutique,"traite");
+         $data['totalLigneCommandeNonTraite'] =  $this->order_ligne_model->totalStatus($idBoutique,"non traite");
 
          $this->load->view('layout/header_seller');
          $this->load->view('order/stats_order_res', $data);
