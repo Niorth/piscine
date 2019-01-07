@@ -15,7 +15,8 @@ class Product_Model extends CI_Model
 
     public function createProduct($data){
         $this -> load -> database();
-        return $this->db->set('LibelleProduit', $data['LibelleProduit'])
+        return $this->db->set('CodeProduit', $data['CodeProduit'])
+            ->set('LibelleProduit', $data['LibelleProduit'])
             ->set('DescriptionProd', $data['DescriptionProd'])
             ->set('DureeReservation', $data['DureeReservation'])
             ->set('PrixProd', $data['PrixProd'])

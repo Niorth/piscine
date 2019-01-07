@@ -4,6 +4,7 @@
   <div class="container">
     <!-- row -->
     <div class="row">
+
       <!-- ASIDE -->
       <div id="aside" class="col-md-3">
         <!-- aside widget -->
@@ -27,6 +28,11 @@
 
       </div>
       <!-- /ASIDE -->
+
+      <?php  if (empty( $product )){ ?>
+
+        <div id="main" class="col-md-9 text-center"><p>Aucun resultat pour la recherche</p></div>
+      <?php }else{ ?>
 
       <!-- MAIN -->
       <div id="main" class="col-md-9">
@@ -190,6 +196,7 @@
         <!-- /store bottom filter -->
       </div>
       <!-- /MAIN -->
+      <?php } ?>
     </div>
     <!-- /row -->
   </div>

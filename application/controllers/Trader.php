@@ -24,7 +24,7 @@ class Trader extends CI_Controller {
     }
 
     public function home_page(){
-      $data['idBoutique'] = $this->session->IdBoutique;
+      $data['idBoutique'] = $this->session->idBoutique;
       $this->load->view('layout/header_seller');
       $this->load->view('trader/home_trader',$data);
       $this->load->view('layout/footer');
@@ -41,7 +41,7 @@ class Trader extends CI_Controller {
     }
 
     public function change_shop(){
-      $this->session->IdBoutique = $_POST['boutique'];
+      $this->session->idBoutique = $_POST['boutique'];
       header('location:  ' . site_url('Trader/home_page'));
     }
 
