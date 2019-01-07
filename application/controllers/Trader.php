@@ -24,10 +24,25 @@ class Trader extends CI_Controller {
     }
 
     public function home_page(){
-      $data['idBoutique'] = $idBoutique = $this->session->idBoutique;
+      $data['idBoutique'] = $this->session->IdBoutique;
       $this->load->view('layout/header_seller');
       $this->load->view('trader/home_trader',$data);
       $this->load->view('layout/footer');
+    }
+
+    public function other_option_page(){
+      $idBoutique = $this->session->IdBoutique;
+      $numCommercant = $this->session->NumCommercant;
+      $data['boutique'] = $this->shop_model->getShopGestion($numCommercant);
+      $data['idCourant'] = $idBoutique;
+      $this->load->view('layout/header_seller');
+      $this->load->view('trader/other_parameters',$data);
+      $this->load->view('layout/footer');
+    }
+
+    public function change_shop(){
+      $this->session->IdBoutique = $_POST['boutique'];
+      header('location:  ' . site_url('Trader/home_page'));
     }
 
 

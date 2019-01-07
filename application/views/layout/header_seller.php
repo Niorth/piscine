@@ -80,9 +80,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<div class="header-btns-icon">
 									<i class="fa fa-user-o"></i>
 								</div>
-								<a href="<?php echo site_url('Account/deconnexion'); ?>" class="text-uppercase">Deconnexion</a>
+								<strong class="text-uppercase">Mon compte<i class="fa fa-caret-down"></i></strong>
 							</div>
-							<a href="<?php echo site_url('Account/connexion_page'); ?>" class="text-uppercase">S'identifier</a> / <a href="<?php echo site_url('Account/create_account_page'); ?>" class="text-uppercase">S'inscrire</a>
+							<a href="<?php echo site_url('Account/deconnexion'); ?>" class="text-uppercase">Deconnexion</a>
 							<ul class="custom-menu">
 								<li><a href="<?php echo site_url('Trader/home_page'); ?>"><i class="fa fa-user-o"></i>Mon compte</a></li>
 								<li><a href="<?php echo site_url('Order/order_reservation_list'); ?>"><i class="fa fa-check"></i>Mes commandes</a></li>

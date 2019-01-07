@@ -71,6 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</form>
 					</div>
 					<!-- /Search -->
+					
 				</div>
 				<div class="pull-right">
 					<ul class="header-btns">

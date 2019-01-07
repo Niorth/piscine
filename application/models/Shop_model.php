@@ -58,4 +58,22 @@ class Shop_Model extends CI_Model {
                     ->result();
   }
 
+  /*
+    Selection pour changement boutique
+
+    Select gr.NumCommercant,gr.IdBoutique,NomBoutique
+    from gererboutique gr
+    inner join boutique b on b.IdBoutique = gr.IdBoutique
+    where gr.NumCommercant = ?
+  */
+  public function getShopGestion($numCommercant){
+    $this->load->database();
+    return $this->db->select('gr.NumCommercant,gr.IdBoutique,NomBoutique')
+                    ->from('gererboutique gr')
+                    ->join('boutique b', 'on b.IdBoutique = gr.IdBoutique')
+                    ->where('gr.NumCommercant',$numCommercant)
+                    ->get()
+                    ->result();
+  }
+
 }

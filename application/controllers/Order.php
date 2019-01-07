@@ -19,10 +19,10 @@ class Order extends CI_Controller {
          header('location: ' . site_url('Index'));
        }else{
          $idBoutique = $this->session->idBoutique;
-         $data['totalLigneCommande'] =  $this->order_ligne_model->total($idBoutique);
-         $data['totalLigneCommandeCours'] =  $this->order_ligne_model->totalStatus($idBoutique,"en cours de preparation");
-         $data['totalLigneCommandeTraite'] =  $this->order_ligne_model->totalStatus($idBoutique,"traite");
-         $data['totalLigneCommandeNonTraite'] =  $this->order_ligne_model->totalStatus($idBoutique,"non traite");
+         $data['totalLigneCommande'] =  $this->order_ligne_model->total($id);
+         $data['totalLigneCommandeCours'] =  $this->order_ligne_model->totalStatus($id,"en cours de preparation");
+         $data['totalLigneCommandeTraite'] =  $this->order_ligne_model->totalStatus($id,"traite");
+         $data['totalLigneCommandeNonTraite'] =  $this->order_ligne_model->totalStatus($id,"non traite");
 
          $this->load->view('layout/header_seller');
          $this->load->view('order/stats_order_res', $data);
@@ -45,12 +45,12 @@ class Order extends CI_Controller {
          header('location: ' . site_url('Index'));
        }else{
         $idBoutique = $this->session->idBoutique;
-        $data['c_nontraite'] = $this->order_ligne_model->getOrderLigne($idBoutique,"non traite");
-        $data['c_traite'] = $this->order_ligne_model->getOrderLigne($idBoutique,"traite");
+        $data['c_nontraite'] = $this->order_ligne_model->getOrderLigne(11,"non traite");
+        $data['c_traite'] = $this->order_ligne_model->getOrderLigne(11,"traite");
 
-        $data['r_prepared'] = $this->reservation_ligne_model->getResPrepared($idBoutique);
-        $data['r_notPrepared'] = $this->reservation_ligne_model->getResNotPrepared($idBoutique);
-        $data['r_expire'] = $this->reservation_ligne_model->getResExpired($idBoutique);
+        $data['r_prepared'] = $this->reservation_ligne_model->getResPrepared(11);
+        $data['r_notPrepared'] = $this->reservation_ligne_model->getResNotPrepared(11);
+        $data['r_expire'] = $this->reservation_ligne_model->getResExpired(11);
 
         $this->load->view('layout/header_seller');
         $this->load->view('order/order_reservation',$data);
