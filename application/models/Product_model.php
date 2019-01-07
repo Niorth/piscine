@@ -117,6 +117,15 @@ class Product_Model extends CI_Model
                   ->result();
     }
 
+    public function getIdBoutiqueProductById($id){
+        return $this->db->select('IdBoutique')
+            ->from($this->table)
+            ->where('CodeProduit', $id)
+            ->get()
+            ->result();
+    }
+
+
     /*
       Retourne le dernier CodeProduit de la table
     */

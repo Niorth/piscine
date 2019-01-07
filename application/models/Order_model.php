@@ -65,6 +65,16 @@ class Order_Model extends CI_Model{
                     ->result();
   }
 
+    public function insertOrder($total, $remise, $customer) {
+        $this->load->database();
+        $this->db->set('MontantCom', $total)
+            ->set('PrixRemiseCom', $remise)
+            ->set('NumClient', $customer)
+            ->insert($this->table);
+
+        return $this->db->insert_id();
+    }
+
 }
 
 ?>
