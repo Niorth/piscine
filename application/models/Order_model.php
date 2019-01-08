@@ -27,7 +27,7 @@ class Order_Model extends CI_Model{
   */
   public function getOrderDetailSeller($numLigne,$numCom){
     $this->load->database();
-    return $this->db->select('NumLigneCommande,c.NumCommande,DateCommande,StatusLigneCom,QteLigneCommande,lc.idBoutique,p.CodeProduit,p.LibelleProduit,p.ImgProd,cl.NomClient,cl.PrenomClient,cl.RueClient,cl.VilleClient,cl.CPClient,cl.TelClient,p.PrixProd')
+    return $this->db->select('NumLigneCommande,c.NumCommande,DATE_FORMAT(DateCommande,\'%d/%m/%Y %H:%i:%s\') as DateCommande,StatusLigneCom,QteLigneCommande,lc.idBoutique,p.CodeProduit,p.LibelleProduit,p.ImgProd,cl.NomClient,cl.PrenomClient,cl.RueClient,cl.VilleClient,cl.CPClient,cl.TelClient,p.PrixProd')
                     ->from('lignecommande as lc')
                     ->join('commande as c', 'lc.NumCommande = c.NumCommande')
                     ->join('produit as p', 'lc.CodeProduit = p.CodeProduit')
@@ -53,7 +53,7 @@ class Order_Model extends CI_Model{
   */
   public function getOrderDetailClient($numClient,$status){
     $this->load->database();
-    return $this->db->select('c.NumCommande,DateCommande,StatusCom,p.idBoutique,MontantCom,
+    return $this->db->select('c.NumCommande,DATE_FORMAT(DateCommande,\'%d/%m/%Y %H:%i:%s\') as DateCommande,StatusCom,p.idBoutique,MontantCom,
                             p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,c.NumClient,b.NomBoutique,QteCommander')
                     ->from('commande c')
                     ->join('commander as cr', 'cr.NumCommande = c.NumCommande')
@@ -68,6 +68,8 @@ class Order_Model extends CI_Model{
     public function insertOrder($total, $remise, $customer) {
         $this->load->database();
         $this->db->set('MontantCom', $total)
+            ->set('StatusCom', "non traite")
+            ->set('DateCommande', date("Y-m-d H:i:s"))
             ->set('PrixRemiseCom', $remise)
             ->set('NumClient', $customer)
             ->insert($this->table);

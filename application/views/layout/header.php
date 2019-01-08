@@ -487,7 +487,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<ul class="menu-list">
 						<li><a href="<?php echo site_url('Accueil/home'); ?>">Accueil</a></li>
 						<li><a href="<?php echo site_url('Customer/home_page'); ?>">Mon compte</a></li>
-						<li><a href="<?php echo site_url('Shop/home_page'); ?>">Boutique</a></li>
+						<li><a href="<?php echo site_url('Shop/shop_list_page'); ?>">Boutique</a></li>
 						<li><a href="<?php echo site_url('Reduction/list_reduction_client'); ?>">Reduction</a></li>
 						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Commandes<i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">

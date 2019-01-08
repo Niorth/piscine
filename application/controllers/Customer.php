@@ -37,8 +37,8 @@ class Customer extends CI_Controller {
 				$mail = $this->session->userdata('login');
         $customerInfo = $this->customer_model->getCustomerByMail($mail);
         $customer = $customerInfo[0]['NumClient'];
-				$data["commande"] = $this->order_model->getOrderDetailClient($customer,"non traite");
-				$data["commande_c"] = $this->order_model->getOrderDetailClient($customer,"traite");
+				$data["commande"] = $this->order_model->getOrderDetailClient($customer,"traite");
+				$data["commande_c"] = $this->order_model->getOrderDetailClient($customer,"non traite");
 
 				$data["client"] = $this->customer_model->getCustomerByNum($customer);
 
