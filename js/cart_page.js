@@ -9,7 +9,7 @@ function init() {
 
         $.ajax({
             url: baseURL + 'Cart/removeProductFromCart/' + productId,
-            method: 'POST',
+            method: 'GET',
             error: function() {
                 alert('Something went wrong');
             },
@@ -26,7 +26,7 @@ function init() {
     qtys.change((event) => {
         $.ajax({
             url: baseURL + 'Cart/changeQty/' + $(event.currentTarget).parent().attr('id') + '/' + $(event.currentTarget).val(),
-            method: 'POST',
+            method: 'GET',
             error: function() {
                 alert('Something went wrong');
             },
@@ -40,8 +40,14 @@ function init() {
     const order = $("#orderButton");
 
     order.on('click', () => {
-        if($("#remise").prop('checked', true)) {
-            updatePoints()
+        const total = $("#totalFinalDelivery").text().split("€")[0] + $("#totalFinalBooking").text().split("€")[0]
+
+        if($("#remise").is(':checked')) {
+            usePoints()
+        }
+
+        if (total > 100) {
+            addPoints(Math.round(total/10))
         }
 
         if ($("#totalFinalBooking").text().split("€")[0] > 0) {
@@ -52,27 +58,13 @@ function init() {
             ajaxInsertOrder()
         }
 
-        if ($("#totalFinalDelivery").text().split("€")[0] > 0 || $("#totalFinalBooking").text().split("€")[0] > 0) {
-            $.ajax({
-                url: baseURL + 'Cart/createCart',
-                method: 'POST',
-                error: function() {
-                    alert('Something went wrong');
-                },
-                success: () => {
-                    confirmModalAppear();
-                    $(document).on('click', () => {
-                        confirmModalDisppear()
-                        $('tbody>tr').remove()
-                        $('.headerProductBody').remove()
-                        $('#totalFinalDelivery').text('0€')
-                        $('#totalFinalBooking').text('0€')
-                        $('span.qty').text(0)
-                        $('span#total').text('0€')
-                    })
-                }
-            });
-        }
+
+        setTimeout(function(){
+            if ($("#totalFinalDelivery").text().split("€")[0] > 0 || $("#totalFinalBooking").text().split("€")[0] > 0) {
+                resetCart()
+            }
+        }, 1000);
+
     })
 
 }
@@ -80,13 +72,13 @@ function init() {
 
 function ajaxInsertResa() {
     let bookingTotal = $("#totalFinalBooking").text().split("€")[0];
-    if($("#remise").prop('checked')) {
+    if($("#remise").is(':checked')) {
         bookingTotal = Math.round((bookingTotal * 0.9)*100)/100
     }
 
     $.ajax({
         url: baseURL + 'Reservation/addReservation/' + bookingTotal,
-        method: 'POST',
+        method: 'GET',
         error: function() {
             alert('Something went wrong');
         },
@@ -105,14 +97,14 @@ function ajaxInsertLigneResa(numResa) {
 
         $.ajax({
             url: baseURL + 'Reservation/addLigneReservation/' + numResa +'/' + i + '/' + qty + '/' + id,
-            method: 'POST',
+            method: 'GET',
             error: function() {
                 alert('Something went wrong');
             },
             success : () => {
                 $.ajax({
                     url: baseURL + 'Reservation/addReserver/' + numResa + '/' + qty + '/' + id,
-                    method: 'POST',
+                    method: 'GET',
                     error: function() {
                         alert('Something went wrong');
                     },
@@ -128,12 +120,12 @@ function ajaxInsertLigneResa(numResa) {
 
 function ajaxInsertOrder() {
     let orderTotal = $("#totalFinalDelivery").text().split("€")[0];
-    if($("#remise").prop('checked')) {
+    if($("#remise").is(':checked')) {
         orderTotal = Math.round((orderTotal * 0.9)*100)/100
     }
     $.ajax({
         url: baseURL + 'Order/addOrder/' + orderTotal,
-        method: 'POST',
+        method: 'GET',
         error: function() {
             alert('Something went wrong');
         },
@@ -152,14 +144,14 @@ function ajaxInsertLigneOrder(numOrder) {
 
         $.ajax({
             url: baseURL + 'Order/addLigneOrder/' + numOrder +'/' + i + '/' + qty + '/' + id,
-            method: 'POST',
+            method: 'GET',
             error: function() {
                 alert('Something went wrong');
             },
             success : () => {
                 $.ajax({
                     url: baseURL + 'Order/addCommander/' + numOrder + '/' + qty + '/' + id,
-                    method: 'POST',
+                    method: 'GET',
                     error: function() {
                         alert('Something went wrong');
                     },
@@ -209,21 +201,53 @@ function confirmModalDisppear(){
 function updateStock(id, qty) {
     $.ajax({
         url: baseURL + 'Product/updateStock/' + id + '/' + qty,
-        method: 'POST',
+        method: 'GET',
         error: function() {
             alert('Something went wrong');
         },
     })
 }
 
-function updatePoints() {
+function usePoints() {
     $.ajax({
         url: baseURL + 'Customer/usePoints',
-        method: 'POST',
+        method: 'GET',
         error: function() {
             alert('Something went wrong');
         },
     })
+}
+
+function addPoints(nb) {
+    $.ajax({
+        url: baseURL + 'Customer/earnPoints/' + nb,
+        method: 'GET',
+        error: function() {
+            alert('Something went wrong');
+        },
+    })
+}
+
+function resetCart() {
+    $.ajax({
+        url: baseURL + 'Cart/createCart',
+        method: 'GET',
+        error: function() {
+            alert('Something went wrong');
+        },
+        success: () => {
+            confirmModalAppear();
+            $(document).on('click', () => {
+                confirmModalDisppear()
+                $('tbody>tr').remove()
+                $('.headerProductBody').remove()
+                $('#totalFinalDelivery').text('0€')
+                $('#totalFinalBooking').text('0€')
+                $('span.qty').text(0)
+                $('span#total').text('0€')
+            })
+        }
+    });
 }
 
 init();

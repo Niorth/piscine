@@ -90,13 +90,11 @@ class Account extends CI_Controller {
                 redirect('Order');
             }
             else{
-                //TODO : Handle wrong password
-                echo 'mauvais mdp';
+                $this->connexion_page();
             }
         }
         else{
-            //TODO : Handle mail doesn't exist
-            echo 'Mauvais mail';
+            $this->connexion_page();
         }
     }
 
