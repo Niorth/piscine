@@ -336,12 +336,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 						<li><a href="<?php echo site_url('Trader/home_page'); ?>">Mon compte</a></li>
 
-						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Boutique<i class="fa fa-caret-down"></i></a>
-							<ul class="custom-menu">
-								<li><a href="<?php echo site_url('Shop/create_shop_page'); ?>">Créer une boutique</a></li>
-							</ul>
-						</li>
-
             <li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Réductions<i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
 								<li><a href="<?php echo site_url('Reduction/list_reduction_seller'); ?>">Mes réductions</a></li>

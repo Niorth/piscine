@@ -84,14 +84,6 @@
               </div>
             </div>
 
-            <!-- a supprimer -->
-            <div class="form-group">
-              <label class="control-label col-sm-2">idBoutique (à supprimer) :</label>
-              <div class="col-sm-10">
-                <input class="form-control" type="number" name="id" placeholder="id" required <?php if (isset($product)) echo "value = \"" . $product[0]['IdBoutique'] . "\""?>>
-              </div>
-            </div>
-
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <input type="submit" class="primary-btn" value="Valider">

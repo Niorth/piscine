@@ -5,7 +5,7 @@
     <!-- row -->
     <div class="row">
 
-      <!-- ASIDE
+
       <div id="aside" class="col-md-3">
         <div class="aside">
           <h3 class="aside-title">Filtrer par:</h3>
@@ -16,7 +16,7 @@
 
           <button class="primary-btn">Reinitialiser</button>
         </div>
-        -->
+
         <!-- /aside widget -->
 
         <!-- aside widget -->
@@ -79,15 +79,7 @@
           <div class="row">
 
             <table class="shopping-cart-table table table-hover">
-              <thead>
-                <tr>
-                  <th>Image</th>
-                  <th>Nom Produit / Vendeur / evaluation</th>
-                  <th>Disponibilité</th>
-                  <th>Prix</th>
-                  <th>Ajouter au panier</th>
-                </tr>
-              </thead>
+              
               <tbody>
                 <?php
                   $k = count($product);
