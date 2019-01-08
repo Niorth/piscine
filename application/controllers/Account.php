@@ -139,10 +139,11 @@ class Account extends CI_Controller {
                 $this->session->set_userdata('login', $account[0]['login']);
                 $this->session->set_userdata('privilege', $account[0]['privilege']);
 
-
-                $cart = array();
-                $_SESSION["cartBooking"] = serialize($cart);
-                $_SESSION["cartDelivery"] = serialize($cart);
+                if(!isset($_SESSION['cartBooking'])) {
+                    $cart = array();
+                    $_SESSION["cartBooking"] = serialize($cart);
+                    $_SESSION["cartDelivery"] = serialize($cart);
+                }
 
                 if( $account[0]['privilege'] == 2){
                   $id = $this->account_model->getIdboutiqueByLogin($account[0]['login']);
@@ -155,13 +156,11 @@ class Account extends CI_Controller {
 
             }
             else{
-                //TODO : Handle wrong password
-                echo 'mauvais mdp';
+                $this->connexion_page();
             }
         }
         else{
-            //TODO : Handle mail doesn't exist
-            echo 'Mauvais mail';
+            $this->connexion_page();
         }
     }
 

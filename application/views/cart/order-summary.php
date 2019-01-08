@@ -30,12 +30,12 @@
                                 $totalBooking = 0;
                                 if(isset($_SESSION["cartBooking"]) and isset($_SESSION["cartDelivery"])) {
                                     $cartBooking = unserialize($_SESSION["cartBooking"]);
-
+                                    $cpt = 0;
                                     foreach ($cartBooking as $id => $infos) {
                                         $totalBooking = $totalBooking + $infos[2] * $infos[1]
                                         ?>
                                         <tr id="<?php echo($id); ?>">
-                                            <td class="thumb"><img src="./img/thumb-product01.jpg" alt=""></td>
+                                            <td class="thumb"><img src="<?php echo base_url() . "assets/img/" . $linkBooking[$cpt] ?>" alt=""></td>
                                             <td class="details">
                                                 <a href="#"><?php echo($infos[0]); ?></a>
                                             </td>
@@ -50,11 +50,12 @@
                                                     €</strong>
                                             </td>
                                             <td class="text-right">
-                                                <button id="<?php echo($id); ?>" class="main-btn icon-btn"><i
+                                                <button id="<?php echo($id); ?>" class="main-btn icon-btn closeButton"><i
                                                             class="fa fa-close"></i></button>
                                             </td>
                                         </tr>
                                         <?php
+                                        $cpt = $cpt +1;
                                     }
                                 }
                                 ?>
@@ -87,11 +88,12 @@
                                 $totalDelivery = 0;
                                 if(isset($_SESSION["cartBooking"]) and isset($_SESSION["cartDelivery"])) {
                                     $cartDelivery = unserialize($_SESSION["cartDelivery"]);
+                                    $cpt = 0;
                                     foreach ($cartDelivery as $id => $infos) {
                                         $totalDelivery = $totalDelivery + $infos[2] * $infos[1]
                                         ?>
                                         <tr id="<?php echo($id); ?>">
-                                            <td class="thumb"><img src="./img/thumb-product01.jpg" alt=""></td>
+                                            <td class="thumb"><img src="<?php echo base_url() . "assets/img/" . $linkDelivery[$cpt] ?>" alt=""></td>
                                             <td class="details">
                                                 <a href="#"><?php echo($infos[0]); ?></a>
                                             </td>
@@ -106,11 +108,12 @@
                                                     €</strong>
                                             </td>
                                             <td class="text-right">
-                                                <button id="<?php echo($id); ?>" class="main-btn icon-btn"><i
+                                                <button id="<?php echo($id); ?>" class="main-btn icon-btn closeButton"><i
                                                             class="fa fa-close"></i></button>
                                             </td>
                                         </tr>
                                         <?php
+                                        $cpt = $cpt +1;
                                     }
                                 }
                                 ?>
@@ -123,9 +126,30 @@
                                 </tr>
                                 </tfoot>
                             </table>
-                            <div class="pull-right">
-                                <button class="primary-btn" id="orderButton">Commander</button>
-							</div>
+                            <?php if($pts >= 100) { ?>
+                                <div class="pull-left">
+                                    <h4><strong>Vous avez <?php echo $pts ?> points de fidélité</strong></h4>
+                                    <h4><strong>Utiliser 100 points pour obtenir une remise de 10% : </strong><input
+                                                id="remise" type="checkbox"></h4>
+                                </div>
+                                <?php
+                            }
+                            if(isset($_SESSION['login'])) {
+
+                                ?>
+                                <div class="pull-right">
+                                    <button class="primary-btn" id="orderButton">Commander</button>
+                                </div>
+                                <?php
+                            }
+                            else {
+                                ?>
+                                <div class="pull-right">
+                                    <a href="<?php echo base_url(); ?>/Account/connexion_page"><button class="primary-btn">Connectez vous pour commander</button></a>
+                                </div>
+                            <?php
+                            }
+                        ?>
 						</div>
                         <script src = "<?php echo base_url(); ?>node_modules/jquery/dist/jquery.min.js"></script>
                         <script type = "module" src = "<?php echo base_url(); ?>js/cart_page.js"></script>

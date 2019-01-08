@@ -28,6 +28,11 @@ class Product extends CI_Controller
     }
 
     public function product_page($CodeProduit){
+        if(!isset($_SESSION['cartBooking'])){
+            $cart = array();
+            $_SESSION["cartBooking"] = serialize($cart);
+            $_SESSION["cartDelivery"] = serialize($cart);
+        }
         $data['product'] =  $this->product_model->getProductById($CodeProduit);
         $data['boutique'] =  $this->product_model->getBoutiqueProductById($CodeProduit);
         $data['review_stats'] = $this->review_model->getAvgByNum($CodeProduit);
@@ -219,6 +224,16 @@ class Product extends CI_Controller
           header('location:  ' . site_url("Product/product_list_page"));
         }
       }
+    }
+
+    public function updateStock($id, $qty){
+        $product = $this->product_model->getProductBySelector('CodeProduit', $id);
+        $dispo = $product[0]['StockDispo'];
+        $reel = $product[0]['StockReel'];
+
+        $dispo = $dispo - $qty;
+        $data = Array('stockDispo' => $dispo, 'stockReel' => $reel);
+        $this->product_model->updateProductStock($data,$id);
     }
 
     public function delete_product($code){

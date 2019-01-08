@@ -182,7 +182,7 @@ class Product_Model extends CI_Model
     */
     public function updateProductStock($data,$code){
       $this -> load -> database();
-      return $this->db->set('StockReel', $data['stockDispo'])
+      return $this->db->set('StockReel', $data['stockReel'])
                       ->set('StockDispo', $data['stockDispo'])
                       ->where('CodeProduit', $code)
                       ->update($this->table);

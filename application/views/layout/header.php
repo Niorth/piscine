@@ -61,6 +61,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 					<!-- Search -->
 					<div class="header-search">
+
 						<form action="<?php echo site_url("Search/recherche") ?>" method="post">
 							<input id='searchBar' name= "recherche" class="input search-input" type="text" placeholder="Entrez votre mot-clé">
 							<select name= "cat" class="input search-Catégories">
@@ -171,8 +172,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         </h3>
                                                         <h2 class="product-name"><a
                                                                     href="#"><?php echo($infos[0]); ?></a></h2>
+                                                        <button class="cancel-btn" id = "cancel_<?php echo($id); ?>"><i class="fa fa-trash"></i></button>
                                                     </div>
-                                                    <button class="cancel-btn" id = "cancel_<?php echo($id); ?>"><i class="fa fa-trash"></i></button>
+
                                                 </div>
                                                 <?php
                                             }
@@ -194,8 +196,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         </h3>
                                                         <h2 class="product-name"><a
                                                                     href="#"><?php echo($infos[0]); ?></a></h2>
+                                                        <button class="cancel-btn" id = "cancel_<?php echo($id); ?>"><i class="fa fa-trash"></i></button>
                                                     </div>
-                                                    <button class="cancel-btn" id = "cancel_<?php echo($id); ?>"><i class="fa fa-trash"></i></button>
                                                 </div>
                                                 <?php
                                             }

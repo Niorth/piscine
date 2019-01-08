@@ -153,8 +153,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         </h3>
                                                         <h2 class="product-name"><a
                                                                     href="#"><?php echo($infos[0]); ?></a></h2>
+                                                        <button class="cancel-btn" id = "cancel_<?php echo($id); ?>"><i class="fa fa-trash"></i></button>
+
                                                     </div>
-                                                    <button class="cancel-btn" id = "cancel_<?php echo($id); ?>"><i class="fa fa-trash"></i></button>
                                                 </div>
                                                 <?php
                                             }
@@ -176,8 +177,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         </h3>
                                                         <h2 class="product-name"><a
                                                                     href="#"><?php echo($infos[0]); ?></a></h2>
+                                                        <button class="cancel-btn" id = "cancel_<?php echo($id); ?>"><i class="fa fa-trash"></i></button>
+
                                                     </div>
-                                                    <button class="cancel-btn" id = "cancel_<?php echo($id); ?>"><i class="fa fa-trash"></i></button>
                                                 </div>
                                                 <?php
                                             }
