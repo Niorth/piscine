@@ -14,7 +14,7 @@ class Order_ligne_Model extends CI_Model{
   */
   public function total($id){
     $this->load->database();
-    return $this->db->select('count(NumLigneCommande) as total')
+    return $this->db->select('COUNT(NumLigneCommande) as total')
                   ->from($this->table)
                   ->where('IdBoutique', $id)
                   ->get()
@@ -33,7 +33,7 @@ class Order_ligne_Model extends CI_Model{
   */
   public function totalStatus($id,$status){
     $this->load->database();
-    return $this->db->select('count(NumLigneCommande) as total')
+    return $this->db->select('COUNT(NumLigneCommande) as total')
                   ->from($this->table)
                   ->where('IdBoutique', $id)
                   ->where('StatusLigneCom', $status)

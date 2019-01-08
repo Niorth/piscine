@@ -46,34 +46,65 @@
     <!-- row -->
     <div class="row">
 
-      <div class="col-md-12">
+      <div class="col-md-6">
           <div class="section-title">
             <h3 class="title">Etat de mes commandes:</h3>
           </div>
 
           <div class="row1">
-
             <div class="column1">
               <div class="card1">
-                <p><i class="fa fa-user" style="font-size:50px;"></i></p>
-                <h3 style="color: white;">11+</h3>
+                <p><i class="fa fa-truck" style="font-size:50px;"></i></p>
+                <h3 style="color: white;"><?php echo $totalLigneCommande[0]->total; ?></h3>
                 <p>Total</p>
               </div>
             </div>
 
             <div class="column1">
               <div class="card1">
-                <p><i class="fa fa-user" style="font-size:50px;"></i></p>
-                <h3 style="color: white;">11+</h3>
-                <p>Non livré</p>
+                <p><i class="fa fa-smile-o" style="font-size:50px;"></i></p>
+                <h3 style="color: white;"><?php echo $totalLigneCommandeTraite[0]->total; ?></h3>
+                <p>Livré</p>
               </div>
             </div>
 
             <div class="column1">
               <div class="card1">
-                <p><i class="fa fa-user" style="font-size:50px;"></i></p>
-                <h3 style="color: white;">11+</h3>
-                <p>Non livré</p>
+                <p><i class="fa fa-spinner" style="font-size:50px;"></i></p>
+                <h3 style="color: white;"><?php echo $totalLigneCommandeCours[0]->total; ?></h3>
+                <p>En cours</p>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="col-md-6">
+          <div class="section-title">
+            <h3 class="title">Etat de mes Stock:</h3>
+          </div>
+
+          <div class="row1">
+            <div class="column1">
+              <div class="card1">
+                <p><i class="fa fa-gift" style="font-size:50px;"></i></p>
+                <h3 style="color: white;"><?php echo $totalStock[0]->total; ?></h3>
+                <p>Total</p>
+              </div>
+            </div>
+
+            <div class="column1">
+              <div class="card1">
+                <p><i class="fa fa-times" style="font-size:50px;"></i></p>
+                <h3 style="color: white;"><?php echo $totalStockRupture[0]->total; ?></h3>
+                <p>Rupture</p>
+              </div>
+            </div>
+
+            <div class="column1">
+              <div class="card1">
+                <p><i class="fa fa-check" style="font-size:50px;"></i></p>
+                <h3 style="color: white;"><?php echo $totalStockDispo[0]->total; ?></h3>
+                <p>Disponible</p>
               </div>
             </div>
 
@@ -84,48 +115,58 @@
     </div>
     <!-- /row -->
 
+    <div class="row">
+      <br>
+      <br>
+    </div>
+
     <!-- row -->
     <div class="row">
-      <div class="col-md-12">
-        <div class="billing-details">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
           <div class="section-title">
-            <h3 class="title">Etat de mes Reservations:</h3>
+            <h3 class="title">Etat de mes reservation:</h3>
           </div>
 
-          <ul>
-            <div class="col-md-6">
-              <li>Total : <span class="badge badge-primary badge-pill">4</span>
-                <div class="col-md-12">
-                  <ul style="list-style-type:circle">
-                    <li>
-                      Traité : <span class="badge badge-primary badge-pill">12</span>
-                    </li>
-                    <li>
-                      Payé : <span class="badge badge-primary badge-pill">12</span>
-                      <ul style="list-style-type:disc">
-                        <li>
-                          Non traité : <span class="badge badge-primary badge-pill">12</span>
-                        </li>
-                        <li>
-                          En cours de préparation : <span class="badge badge-primary badge-pill">12</span>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      Non Payé : <span class="badge badge-primary badge-pill">12</span>
-                    </li>
-                    <li>
-                      Date dépassé : <span class="badge badge-primary badge-pill">12</span>
-                    </li>
-                  </ul>
-                </div>
-              </li>
+          <div class="row1 text-center">
+
+            <div class="column1">
+              <div class="card1">
+                <p><i class="fa fa-shopping-cart" style="font-size:50px;"></i></p>
+                <h3 style="color: white;">11+</h3>
+                <p>Total</p>
+              </div>
             </div>
-          </ul>
 
+            <div class="column1">
+              <div class="card1">
+                <p><i class="fa fa-smile-o" style="font-size:50px;"></i></p>
+                <h3 style="color: white;">11+</h3>
+                <p>Retiré</p>
+              </div>
+            </div>
 
-        </div>
+            <div class="column1">
+              <div class="card1">
+                <p><i class="fa fa-spinner" style="font-size:50px;"></i></p>
+                <h3 style="color: white;">11+</h3>
+                <p>En cours</p>
+              </div>
+            </div>
+
+            <div class="column1">
+              <div class="card1">
+                <p><i class="fa fa-times" style="font-size:50px;"></i></p>
+                <h3 style="color: white;">11+</h3>
+                <p>Expiré</p>
+              </div>
+            </div>
+
+          </div>
+
       </div>
+      <div class="col-md-2"></div>
+
     </div>
     <!-- /row -->
 

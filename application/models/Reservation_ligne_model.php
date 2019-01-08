@@ -133,6 +133,49 @@ class Reservation_ligne_Model extends CI_Model{
             ->insert($this->table);
     }
 
+    public function total($id){
+      $this->load->database();
+      return $this->db->select('COUNT(NumLigneRes) as total')
+                    ->from($this->table)
+                    ->where('IdBoutique', $id)
+                    ->get()
+                    ->result();
+    }
+
+    public function totalLivred($id){
+      $this->load->database();
+      return $this->db->select('COUNT(NumLigneRes) as total')
+                    ->from($this->table)
+                    ->where('IdBoutique', $id)
+                    ->where('StatusLigneRes', 'traite')
+                    ->get()
+                    ->result();
+    }
+
+    /*
+      Select COUNT(NumLigneRes) as total,DATE_ADD(DateReservation, INTERVAL p.DureeReservation DAY) as DateFinRes
+      FROM lignereservation lr
+      inner join produit p on lr.CodeProduit = p.CodeProduit
+      where lr.IdBoutique = ?
+      and lr.StatusLigneRes = "non traite"
+      and DATE_ADD(DateReservation, INTERVAL p.DureeReservation DAY) >= CURRENT_TIMESTAMP()
+    */
+    public function totalEncours($id){
+      $this->load->database();
+      return $this->db->select('COUNT(NumLigneRes) as total')
+                    ->from('lignereservation as lr')
+                    ->join('produit as p', 'lr.CodeProduit = p.CodeProduit')
+                    ->join('reservation as r', 'lr.NumReservation = r.NumReservation')
+                    ->where('lr.IdBoutique', $id)
+                    ->where('lr.StatusLigneRes', 'non traite')
+                    ->where('DATE_ADD(DateReservation, INTERVAL p.DureeReservation DAY) >=', date("Y-m-d H:i:s"))
+                    ->where('StatusLigneRes', 'traite')
+                    ->get()
+                    ->result();
+    }
+
+
+
 }
 
 ?>
