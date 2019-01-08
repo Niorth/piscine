@@ -503,17 +503,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Produits <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
 								<li><a href="<?php echo site_url('Product/all_product_page'); ?>">Liste des Produits</a></li>
-								<li><a href="<?php echo site_url('Product/product_list_page'); ?>">Stock</a></li>
-								<li><a href="<?php echo site_url('Product/create_product_page'); ?>">Créer un produit</a></li>
 							</ul>
 						</li>
 
-						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Commandes<i class="fa fa-caret-down"></i></a>
-							<ul class="custom-menu">
-								<li><a href="<?php echo site_url('Order/tableau_de_bord'); ?>">Stats</a></li>
-								<li><a href="<?php echo site_url('Order/order_reservation_list'); ?>">Liste commandes et reservations</a></li>
-							</ul>
-						</li>
+
 					</ul>
 				</div>
 				<!-- menu nav -->
