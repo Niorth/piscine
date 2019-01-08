@@ -332,6 +332,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<ul class="menu-list">
 						<li><a href="<?php echo site_url('Order'); ?>">Accueil</a></li>
 
+						<li><a href="<?php echo site_url('Trader/home_page'); ?>">Mon compte</a></li>
+
 						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Boutique<i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
 								<li><a href="<?php echo site_url('Shop/create_shop_page'); ?>">Créer une boutique</a></li>

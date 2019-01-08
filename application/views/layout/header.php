@@ -61,6 +61,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 					<!-- Search -->
 					<div class="header-search">
+<<<<<<< HEAD
+						<form>
+							<input id='searchBar' class="input search-input" type="text" placeholder="Entrez votre mot-clé">
+							<select class="input search-Catégories">
+								<option value="0">A rechercher dans toutes les catégories</option>
+								<option value="1">High-Tech</option>
+								<option value="2">Vêtements,Bijoux,Sacs</option>
+								<option value="3">Chaussures</option>
+								<option value="4">Décorations</option>
+								<option value="5">Livres</option>
+=======
 						<form action="<?php echo site_url("Search/recherche") ?>" method="post">
 							<input id='searchBar' name= "recherche" class="input search-input" type="text" placeholder="Entrez votre mot-clé">
 							<select name= "cat" class="input search-Catégories">
@@ -74,6 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<option value="Pull">Pull</option>
 								<option value="Pull">Chaussures</option>
 								<option value="Audio">Pantalons</option>
+>>>>>>> 03ffd7dcb45d0cdbbc5944353cf16dee53e0df56
 							</select>
 							<button class="search-btn"><i class="fa fa-search"></i></button>
 						</form>
