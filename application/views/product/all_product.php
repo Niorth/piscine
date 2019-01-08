@@ -5,9 +5,8 @@
     <!-- row -->
     <div class="row">
 
-      <!-- ASIDE -->
+
       <div id="aside" class="col-md-3">
-        <!-- aside widget -->
         <div class="aside">
           <h3 class="aside-title">Filtrer par:</h3>
           <ul class="filter-list">
@@ -17,6 +16,7 @@
 
           <button class="primary-btn">Reinitialiser</button>
         </div>
+
         <!-- /aside widget -->
 
         <!-- aside widget -->
@@ -79,15 +79,7 @@
           <div class="row">
 
             <table class="shopping-cart-table table table-hover">
-              <thead>
-                <tr>
-                  <th>Image</th>
-                  <th>Nom Produit / Vendeur / evaluation</th>
-                  <th>Disponibilité</th>
-                  <th>Prix</th>
-                  <th>Ajouter au panier</th>
-                </tr>
-              </thead>
+              
               <tbody>
                 <?php
                   $k = count($product);
@@ -146,7 +138,6 @@
                         if ($product[$i]->StockDispo != 0){ ?>
                           <a href="<?php echo $lien ?>"><button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i></button></a>
 
-                          <button class="btn btn-warning"><i class="fa fa-clock-o"></i></button>
                       <?php } ?>
                     </td>
                   </tr>

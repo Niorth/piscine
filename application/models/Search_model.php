@@ -39,6 +39,29 @@ class Search_Model extends CI_Model{
     return $query->result();
   }
 
+  /*
+  SELECT CodeProduit,LibelleProduit,PrixProd,StockDispo,NomBoutique,c.NomCategorieProduit,ImgProd
+    FROM boutique b
+    inner join produit p on p.IdBoutique = b.IdBoutique
+    inner join categorieproduit c on p.NumCategorieP = c.NumCategorieP
+    where c.NomCategorieProduit = "high-tech"
+    and (p.LibelleProduit LIKE '%Sony%'
+    OR p.DescriptionProd LIKE '%Sony%')
+  */
+  public function getProductByChampandCat($cat,$champ){
+    $sql = "SELECT CodeProduit,LibelleProduit,PrixProd,StockDispo,NomBoutique,c.NomCategorieProduit,ImgProd
+      FROM boutique b
+      inner join produit p on p.IdBoutique = b.IdBoutique
+      inner join categorieproduit c on p.NumCategorieP = c.NumCategorieP
+      where c.NomCategorieProduit = ?
+      and (p.LibelleProduit LIKE ?
+      OR p.DescriptionProd LIKE ?)";
+    $this->load->database();
+    $query = $this->db->query($sql,array($cat,'%'.$champ.'%','%'.$champ.'%'));
+    return $query->result();
+
+  }
+
 
 
 }

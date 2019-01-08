@@ -24,20 +24,41 @@ class Trader extends CI_Controller {
     }
 
     public function home_page(){
-      $data['idBoutique'] = $this->session->idBoutique;
-      $this->load->view('layout/header_seller');
-      $this->load->view('trader/home_trader',$data);
-      $this->load->view('layout/footer');
+
+      if (!($this->session->has_userdata('login'))) {
+         header('location: ' . site_url('Account/connexion_page'));
+       }else{
+         if($this->session->privilege == 1){
+           // accueil a mettre par la suite
+           header('location: ' . site_url('Accueil/home'));
+         }else{
+
+          $data['idBoutique'] = $this->session->idBoutique;
+          $this->load->view('layout/header_seller');
+          $this->load->view('trader/home_trader',$data);
+          $this->load->view('layout/footer');
+        }
+      }
     }
 
     public function other_option_page(){
-      $idBoutique = $this->session->IdBoutique;
-      $numCommercant = $this->session->NumCommercant;
-      $data['boutique'] = $this->shop_model->getShopGestion($numCommercant);
-      $data['idCourant'] = $idBoutique;
-      $this->load->view('layout/header_seller');
-      $this->load->view('trader/other_parameters',$data);
-      $this->load->view('layout/footer');
+
+      if (!($this->session->has_userdata('login'))) {
+         header('location: ' . site_url('Account/connexion_page'));
+       }else{
+         if($this->session->privilege == 1){
+           // accueil a mettre par la suite
+           header('location: ' . site_url('Accueil/home'));
+         }else{
+          $idBoutique = $this->session->IdBoutique;
+          $numCommercant = $this->session->NumCommercant;
+          $data['boutique'] = $this->shop_model->getShopGestion($numCommercant);
+          $data['idCourant'] = $idBoutique;
+          $this->load->view('layout/header_seller');
+          $this->load->view('trader/other_parameters',$data);
+          $this->load->view('layout/footer');
+        }
+      }
     }
 
     public function change_shop(){

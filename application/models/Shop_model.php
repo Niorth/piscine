@@ -14,6 +14,14 @@ class Shop_Model extends CI_Model {
                     ->result();
   }
 
+  public function getAll(){
+    $this->load->database();
+    return $this->db->select('*')
+                    ->from('boutique')
+                    ->get()
+                    ->result();
+  }
+
 	public function insertShop($data){
     $this->load->database();
       return $this->db->set('IdBoutique', $data['IdBoutique'])

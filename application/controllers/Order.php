@@ -16,13 +16,21 @@ class Order extends CI_Controller {
      }else{
        if($this->session->privilege == 1){
          // accueil a mettre par la suite
-         header('location: ' . site_url('Index'));
+         header('location: ' . site_url('Trader/home_page'));
        }else{
          $idBoutique = $this->session->idBoutique;
-         $data['totalLigneCommande'] =  $this->order_ligne_model->total($id);
-         $data['totalLigneCommandeCours'] =  $this->order_ligne_model->totalStatus($id,"en cours de preparation");
-         $data['totalLigneCommandeTraite'] =  $this->order_ligne_model->totalStatus($id,"traite");
-         $data['totalLigneCommandeNonTraite'] =  $this->order_ligne_model->totalStatus($id,"non traite");
+         $data['totalLigneCommande'] =  $this->order_ligne_model->total($idBoutique);
+         $data['totalLigneCommandeCours'] =  $this->order_ligne_model->totalStatus($idBoutique,"non traite");
+         $data['totalLigneCommandeTraite'] =  $this->order_ligne_model->totalStatus($idBoutique,"traite");
+
+         $data['totalStock'] = $this->product_model->countProductById($idBoutique);
+         $data['totalStockDispo'] = $this->product_model->countDispo($idBoutique);
+         $data['totalStockRupture'] = $this->product_model->countRupture($idBoutique);
+
+         /*$data['totalLigneRes'] =  $this->reservation_ligne_model->total($idBoutique);
+         $data['totalLigneResCours'] =  $this->reservation_ligne_model->totalStatus($idBoutique,"non traite");
+         $data['totalLigneResTraite'] =  $this->reservation_ligne_model->totalStatus($idBoutique,"traite");*/
+
 
          $this->load->view('layout/header_seller');
          $this->load->view('order/stats_order_res', $data);
@@ -42,15 +50,15 @@ class Order extends CI_Controller {
      }else{
        if($this->session->privilege == 1){
          // accueil a mettre par la suite
-         header('location: ' . site_url('Index'));
+         header('location: ' . site_url('Accueil/home'));
        }else{
         $idBoutique = $this->session->idBoutique;
-        $data['c_nontraite'] = $this->order_ligne_model->getOrderLigne(11,"non traite");
-        $data['c_traite'] = $this->order_ligne_model->getOrderLigne(11,"traite");
+        $data['c_nontraite'] = $this->order_ligne_model->getOrderLigne($idBoutique,"non traite");
+        $data['c_traite'] = $this->order_ligne_model->getOrderLigne($idBoutique,"traite");
 
-        $data['r_prepared'] = $this->reservation_ligne_model->getResPrepared(11);
-        $data['r_notPrepared'] = $this->reservation_ligne_model->getResNotPrepared(11);
-        $data['r_expire'] = $this->reservation_ligne_model->getResExpired(11);
+        $data['r_prepared'] = $this->reservation_ligne_model->getResPrepared($idBoutique);
+        $data['r_notPrepared'] = $this->reservation_ligne_model->getResNotPrepared($idBoutique);
+        $data['r_expire'] = $this->reservation_ligne_model->getResExpired($idBoutique);
 
         $this->load->view('layout/header_seller');
         $this->load->view('order/order_reservation',$data);
@@ -66,7 +74,7 @@ class Order extends CI_Controller {
      }else{
        if($this->session->privilege == 1){
          // accueil a mettre par la suite
-         header('location: ' . site_url('Index'));
+         header('location: ' . site_url('Accueil/home'));
        }else{
         $data['commande'] = $this->order_model->getOrderDetailSeller($numLigne,$numCom);
         $this->load->view('layout/header_seller');
@@ -86,15 +94,16 @@ class Order extends CI_Controller {
      }else{
        if($this->session->privilege == 1){
          // accueil a mettre par la suite
-         header('location: ' . site_url('Index'));
+         header('location: ' . site_url('Accueil/home'));
        }else{
+         $idBoutique = $this->session->idBoutique;
 
           $order = array(
             "StatusLigneCom" => htmlspecialchars($_POST['status']),
             "NumLigneCommande" => $numLigne,
             "NumCommande" => $numCom,
             // a modifier
-            "idBoutique" => htmlspecialchars($_POST['idBoutique'])
+            "idBoutique" => $idBoutique
           );
 
           $this->order_ligne_model->updateStatus($order);

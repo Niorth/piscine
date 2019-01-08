@@ -14,7 +14,7 @@ class Order_ligne_Model extends CI_Model{
   */
   public function total($id){
     $this->load->database();
-    return $this->db->select('count(NumLigneCommande) as total')
+    return $this->db->select('COUNT(NumLigneCommande) as total')
                   ->from($this->table)
                   ->where('IdBoutique', $id)
                   ->get()
@@ -33,7 +33,7 @@ class Order_ligne_Model extends CI_Model{
   */
   public function totalStatus($id,$status){
     $this->load->database();
-    return $this->db->select('count(NumLigneCommande) as total')
+    return $this->db->select('COUNT(NumLigneCommande) as total')
                   ->from($this->table)
                   ->where('IdBoutique', $id)
                   ->where('StatusLigneCom', $status)
@@ -54,7 +54,7 @@ class Order_ligne_Model extends CI_Model{
   */
   public function getOrderLigne($id,$status){
     $this->load->database();
-    return $this->db->select('NumLigneCommande,DateCommande,StatusLigneCom,QteLigneCommande,LibelleProduit,lc.NumCommande')
+  return $this->db->select('NumLigneCommande,DATE_FORMAT(DateCommande,\'%H:%i:%s %d/%m%Y\') as DateCommande,StatusLigneCom,QteLigneCommande,LibelleProduit,lc.NumCommande')
                     ->from('lignecommande as lc')
                     ->join('commande as c', 'lc.NumCommande = c.NumCommande')
                     ->join('produit as p', 'lc.CodeProduit = p.CodeProduit')
@@ -79,8 +79,9 @@ class Order_ligne_Model extends CI_Model{
     public function insertLigneOrder($numOrder, $numLigne, $qte, $shop, $numProd) {
         $this->load->database();
         return $this->db->set('NumCommande', $numOrder)
-            ->set('qteLigneCommande', $qte)
+            ->set('QteLigneCommande', $qte)
             ->set('NumLigneCommande', $numLigne)
+            ->set('StatusLigneCom', "non traite")
             ->set('idBoutique', $shop)
             ->set('CodeProduit', $numProd)
             ->insert($this->table);

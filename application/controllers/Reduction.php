@@ -12,7 +12,7 @@ class Reduction extends CI_Controller {
        }else{
          if($this->session->privilege == 1){
            // accueil a mettre par la suite
-           header('location: ' . site_url('Index'));
+           header('location: ' . site_url('Accueil/home'));
          }else{
           $data['action'] = "create_reduction";
           $this->load->view('layout/header_seller');
@@ -30,7 +30,7 @@ class Reduction extends CI_Controller {
        }else{
          if($this->session->privilege == 1){
            // accueil a mettre par la suite
-           header('location: ' . site_url('Index'));
+           header('location: ' . site_url('Accueil/home'));
          }else{
             $idBoutique = $this->session->idBoutique;
             $data = array(
@@ -56,7 +56,7 @@ class Reduction extends CI_Controller {
        }else{
          if($this->session->privilege == 1){
            // accueil a mettre par la suite
-           header('location: ' . site_url('Index'));
+           header('location: ' . site_url('Accueil/home'));
          }else{
             $idBoutique = $this->session->idBoutique;
             $data['reduction'] = $this->reduction_model->selectById($idBoutique);
@@ -73,6 +73,17 @@ class Reduction extends CI_Controller {
       $this->load->view('layout/header');
       $this->load->view('reduction/list_reduction_client',$data);
       $this->load->view('layout/footer');
+
+      $header = "layout/header";
+
+      if ($this->session->has_userdata('login')) {
+        if($this->session->privilege == 2){
+          $header = "layout/header_seller";
+        }
+      }
+      $this->load->view($header);
+      $this->load->view('reduction/list_reduction_client',$data);
+      $this->load->view('layout/footer');
     }
 
 
@@ -82,7 +93,7 @@ class Reduction extends CI_Controller {
        }else{
          if($this->session->privilege == 1){
            // accueil a mettre par la suite
-           header('location: ' . site_url('Index'));
+           header('location: ' . site_url('Accueil/home'));
          }else{
             $data['action'] = "edit_reduction";
             $data['reduction'] = $this->reduction_model->selectByNum($num);
@@ -101,7 +112,7 @@ class Reduction extends CI_Controller {
        }else{
          if($this->session->privilege == 1){
            // accueil a mettre par la suite
-           header('location: ' . site_url('Index'));
+           header('location: ' . site_url('Accueil/home'));
          }else{
             $idBoutique = $this->session->idBoutique;
             $data = array(
@@ -130,7 +141,7 @@ class Reduction extends CI_Controller {
        }else{
          if($this->session->privilege == 1){
            // accueil a mettre par la suite
-           header('location: ' . site_url('Index'));
+           header('location: ' . site_url('Accueil/home'));
          }else{
             $idBoutique = $this->session->idBoutique;
             $this->reduction_model->deleteReduction($num,$idBoutique);

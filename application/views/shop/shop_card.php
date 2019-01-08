@@ -7,28 +7,29 @@
 
       <div class="panel panel-default">
 
-        <div class="panel-heading">
-            <img src="<?php echo base_url() ?>assets/img/banner.jpg" alt="Avatar" style="width:40%">
-        </div>
-
         <div class="panel-body">
 
             <div class="col-md-12">
               <div class="col-md-4"></div>
               <h1 class="col-md-4 text-center"><?php echo $boutique[0]->NomBoutique ?></h1>
               <div class="col-md-4 text-right">
+                <?php if(isset($_SESSION['login']) && $_SESSION['privilege']!=1) { ?>
                 <a href="<?php $id =  $boutique[0]->IdBoutique; echo site_url("Shop/modify_shop_page/$id"); ?>" class="btn btn-warning" role="button">Modifier</a>
+                <?php } ?>
               </div>
             </div>
 
 
-            <p class="col-md-12">
-              <br>Adresse : <?php echo $boutique[0]->RueBoutique ?>
+            <p class="col-md-12" style="font-size: 15px;">
+              <br><strong>Adresse : </strong><br>
+              <?php echo $boutique[0]->RueBoutique ?>
               <br><?php echo $boutique[0]->VilleBoutique ?>
-              <br>Code Postal : <?php echo $boutique[0]->CPBoutique ?>
-              <br>N° Téléphone : <?php echo $boutique[0]->TelBoutique ?>
-              <br>E-mail : <?php echo $boutique[0]->MailBoutique ?>
-              <br>Horaires d'ouverture:
+              <br> <?php echo $boutique[0]->CPBoutique ?>
+              <br><strong>N° Téléphone :</strong> <br>
+              <?php echo $boutique[0]->TelBoutique ?>
+              <br><strong>E-mail : </strong>
+              <br><?php echo $boutique[0]->MailBoutique ?>
+              <br><strong>Horaires d'ouverture:</strong>
               <br><?php echo $boutique[0]->HorairesBoutique ?>
             </p>
 

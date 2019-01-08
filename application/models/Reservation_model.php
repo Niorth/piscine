@@ -94,6 +94,8 @@ class Reservation_Model extends CI_Model{
       $this->load->database();
       $this->db->set('MontantRes', $total)
           ->set('PrixRemiseRes', $remise)
+          ->set('StatusRes', "non traite")
+          ->set('DateReservation',date("Y-m-d H:i:s"))
           ->set('NumClient', $customer)
           ->insert($this->table);
 

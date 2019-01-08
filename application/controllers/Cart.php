@@ -8,9 +8,47 @@
 
 class Cart extends CI_Controller {
 
+  public function index(){
+    $this->cart_page;
+  }
+
     function cart_page() {
-        $this->load->view('layout/header');
-        $this->load->view('cart/order-summary');
+        $pts = 0;
+        if (isset($_SESSION['login'])) {
+            $pts = $this->customer_model->getCustomerByMail($_SESSION['login']);
+            $pts = $pts[0]['PointClient'];
+        }
+        if(isset($_SESSION['cartBooking'])){
+            $linkBooking = Array();
+            foreach(unserialize($_SESSION['cartBooking']) as $id => $value) {
+                $product = $this->product_model->getProductById($id);
+                $productImg = $product[0]->ImgProd;
+                array_push($linkBooking, $productImg);
+            }
+
+            $linkDelivery= Array();
+            foreach(unserialize($_SESSION['cartDelivery']) as $id => $value) {
+                $product = $this->product_model->getProductById($id);
+                $productImg = $product[0]->ImgProd;
+                array_push($linkDelivery, $productImg);
+            }
+
+            $data["linkBooking"] = $linkBooking;
+            $data["linkDelivery"] = $linkDelivery;
+        }
+
+
+        $data["pts"] = $pts;
+
+        $header = "layout/header";
+        if ($this->session->has_userdata('login')) {
+          if($this->session->privilege == 2){
+            $header = "layout/header_seller";
+          }
+        }
+        
+        $this->load->view($header);
+        $this->load->view('cart/order-summary', $data);
         $this->load->view('layout/footer');
     }
 

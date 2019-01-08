@@ -12,7 +12,7 @@ class Customer extends CI_Controller {
 		 }else{
 			 if($this->session->privilege == 2){
 				 // accueil a mettre par la suite
-				 header('location: ' . site_url('Trader/home_page'));
+				 header('location: ' . site_url('Accueil/home'));
 			 }else{
 				$this->load->view('layout/header');
 		    $this->load->view('client/home_client');
@@ -32,12 +32,15 @@ class Customer extends CI_Controller {
 		 }else{
 			 if($this->session->privilege == 2){
 				 // accueil a mettre par la suite
-				 header('location: ' . site_url('Trader/home_page'));
+				 header('location: ' . site_url('Accueil/home'));
 			 }else{
-				$data["commande"] = $this->order_model->getOrderDetailClient(21,"non traite");
-				$data["commande_c"] = $this->order_model->getOrderDetailClient(21,"traite");
+				$mail = $this->session->userdata('login');
+        $customerInfo = $this->customer_model->getCustomerByMail($mail);
+        $customer = $customerInfo[0]['NumClient'];
+				$data["commande"] = $this->order_model->getOrderDetailClient($customer,"traite");
+				$data["commande_c"] = $this->order_model->getOrderDetailClient($customer,"non traite");
 
-				$data["client"] = $this->customer_model->getCustomerByNum(21);
+				$data["client"] = $this->customer_model->getCustomerByNum($customer);
 
 				$this->load->view('layout/header');
 		    $this->load->view('client/all_order',$data);
@@ -57,11 +60,14 @@ class Customer extends CI_Controller {
 		 }else{
 			 if($this->session->privilege == 2){
 				 // accueil a mettre par la suite
-				 header('location: ' . site_url('Trader/home_page'));
+				 header('location: ' . site_url('Accueil/home'));
 			 }else{
-					$data["reservation"] = $this->reservation_model->getReservationDetailClient(22,"traite");
-					$data["reservation_c"] = $this->reservation_model->getReservationDetailClient(22,"non traite");
-					$data["client"] = $this->customer_model->getCustomerByNum(22);
+				 $mail = $this->session->userdata('login');
+         $customerInfo = $this->customer_model->getCustomerByMail($mail);
+         $customer = $customerInfo[0]['NumClient'];
+					$data["reservation"] = $this->reservation_model->getReservationDetailClient($customer,"traite");
+					$data["reservation_c"] = $this->reservation_model->getReservationDetailClient($customer,"non traite");
+					$data["client"] = $this->customer_model->getCustomerByNum($customer);
 
 					$this->load->view('layout/header');
 					$this->load->view('client/all_reservation',$data);
@@ -70,5 +76,23 @@ class Customer extends CI_Controller {
 			}
 
 	}
+
+	public function usePoints() {
+	    if(isset($_SESSION['login'])){
+	        $mail = $_SESSION['login'];
+	        $pts = $this->customer_model->getCustomerByMail($mail);
+	        $pts = $pts[0]['PointClient'] - 100;
+	        $this->customer_model->updatePointsCustomer($pts, $mail);
+        }
+    }
+
+    public function earnPoints($nb){
+        if(isset($_SESSION['login'])){
+            $mail = $_SESSION['login'];
+            $pts = $this->customer_model->getCustomerByMail($mail);
+            $pts = $pts[0]['PointClient'] + $nb;
+            $this->customer_model->updatePointsCustomer($pts, $mail);
+        }
+    }
 
 }

@@ -37,10 +37,16 @@
         <div class="col-md-6">
 
           <!-- A afficher qu'en mode admin et commercant -->
-
-          <a href="<?php $code = $product[0]->CodeProduit; echo site_url("Product/update_product_page/$code"); ?>" class="btn btn-warning" role="button">Modifier</a>
-          <a href="<?php $code = $product[0]->CodeProduit; echo site_url("Product/delete_product/$code"); ?>" class="btn btn-danger" role="button">Supprimer</a>
-
+            <?php if(isset($_SESSION['login']) && $_SESSION['privilege']!=1) {
+                ?>
+                <a href="<?php $code = $product[0]->CodeProduit;
+                echo site_url("Product/update_product_page/$code"); ?>" class="btn btn-warning"
+                   role="button">Modifier</a>
+                <a href="<?php $code = $product[0]->CodeProduit;
+                echo site_url("Product/delete_product/$code"); ?>" class="btn btn-danger" role="button">Supprimer</a>
+                <?php
+            }
+            ?>
           <!-- fin commentaire -->
 
           <div class="product-body" id="productBodyCard">
