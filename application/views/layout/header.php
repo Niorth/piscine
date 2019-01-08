@@ -67,6 +67,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<option value="0">A rechercher dans toutes les catégories</option>
 								<option value="1">High-Tech</option>
 								<option value="2">Vêtements,Bijoux,Sacs</option>
+								<option value="3">Chaussures</option>
+								<option value="4">Décorations</option>
+								<option value="5">Livres</option>
 							</select>
 							<button class="search-btn"><i class="fa fa-search"></i></button>
 						</form>

@@ -67,6 +67,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<option value="0">Toutes les catégories</option>
 								<option value="1">High-Tech</option>
 								<option value="2">Vêtements,Bijoux,Sacs</option>
+								<option value="3">Chaussures</option>
+								<option value="4">Décorations</option>
+								<option value="5">Livres</option>
 							</select>
 							<button class="search-btn"><i class="fa fa-search"></i></button>
 						</form>
@@ -324,6 +327,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
 						<li><a href="<?php echo site_url('Order'); ?>">Accueil</a></li>
+
+						<li><a href="<?php echo site_url('Trader/home_page'); ?>">Mon compte</a></li>
 
 						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Boutique<i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
