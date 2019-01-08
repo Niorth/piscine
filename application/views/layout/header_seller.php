@@ -54,18 +54,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<!-- Logo -->
 					<div class="header-logo">
 						<a class="logo" href="http://www.herault.cci.fr/">
-							<img src="<?php echo base_url() ?>assets/img/cci_herault.jpg" alt="">
+							<img src="<?php echo base_url() ?>assets/img/cci_herault2.png" alt="">
 						</a>
 					</div>
 					<!-- /Logo -->
 
 					<!-- Search -->
 					<div class="header-search">
-						<form>
-							<input id='searchBar' class="input search-input" type="text" placeholder="Enter your keyword">
-							<select class="input search-Catégories">
+						<form action="<?php echo site_url("Search/recherche") ?>" method="post">
+							<input id='searchBar'  name= "recherche" class="input search-input" type="text" placeholder="Entrez votre mot-clé">
+							<select  name= "cat" class="input search-Catégories">
 								<option value="0">Toutes les catégories</option>
-								<option value="1">Category test01</option>
+								<option value="Smartphones">Smartphones</option>
+								<option value="GPS">GPS</option>
+								<option value="Ordinateur portable">Ordinateur portable</option>
+								<option value="Sac à main">Ordinateur</option>
+								<option value="Bijoux">Bijoux</option>
+								<option value="T-shirt">T-shirt</option>
+								<option value="Pull">Pull</option>
+								<option value="Pull">Chaussures</option>
+								<option value="Audio">Pantalons</option>
 							</select>
 							<button class="search-btn"><i class="fa fa-search"></i></button>
 						</form>
@@ -80,9 +88,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<div class="header-btns-icon">
 									<i class="fa fa-user-o"></i>
 								</div>
-								<a href="<?php echo site_url('Account/deconnexion'); ?>" class="text-uppercase">Deconnexion</a>
+								<strong class="text-uppercase">Mon compte<i class="fa fa-caret-down"></i></strong>
 							</div>
-							<a href="<?php echo site_url('Account/connexion_page'); ?>" class="text-uppercase">S'identifier</a> / <a href="<?php echo site_url('Account/create_account_page'); ?>" class="text-uppercase">S'inscrire</a>
+							<a href="<?php echo site_url('Account/deconnexion'); ?>" class="text-uppercase">Deconnexion</a>
 							<ul class="custom-menu">
 								<li><a href="<?php echo site_url('Trader/home_page'); ?>"><i class="fa fa-user-o"></i>Mon compte</a></li>
 								<li><a href="<?php echo site_url('Order/order_reservation_list'); ?>"><i class="fa fa-check"></i>Mes commandes</a></li>
@@ -212,42 +220,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<span class="category-header">Catégories <i class="fa fa-list"></i></span>
 					<ul class="category-list">
 						<li class="dropdown side-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Vêtements femmes <i class="fa fa-angle-right"></i></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">High-Tech<i class="fa fa-angle-right"></i></a>
 							<div class="custom-menu">
 								<div class="row">
 									<div class="col-md-4">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Catégories</h3></li>
-											<li><a href="#">Vêtements femmes</a></li>
-											<li><a href="#">Vêtements hommes</a></li>
-											<li><a href="#">Téléphones & Accessoires</a></li>
-											<li><a href="#">Bijoux et montres</a></li>
-											<li><a href="#">Sacs et chaussures</a></li>
+												<h3 class="list-links-title">Téléphones</h3></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Smartphones") ?>">Téléphones fixes</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Smartphones") ?>">Smartphones</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Smartphones") ?>">Protections</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Smartphones") ?>">Connectique</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Smartphones") ?>">Accessoires</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
 									<div class="col-md-4">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Catégories</h3></li>
-											<li><a href="#">Vêtements femmes</a></li>
-											<li><a href="#">Vêtements hommes</a></li>
-											<li><a href="#">Téléphones & Accessoires</a></li>
-											<li><a href="#">Bijoux et montres</a></li>
-											<li><a href="#">Sacs et chaussures</a></li>
+												<h3 class="list-links-title">Ordinateurs</h3></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Ordinateur") ?>">Ordinateurs portables</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Ordinateur") ?>">Ordinateurs fixes</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Ordinateur") ?>">Accessoires</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Ordinateur") ?>">Connectique</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/GPS") ?>">GPS</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
 									<div class="col-md-4">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Catégories</h3></li>
-											<li><a href="#">Vêtements femmes</a></li>
-											<li><a href="#">Vêtements hommes</a></li>
-											<li><a href="#">Téléphones & Accessoires</a></li>
-											<li><a href="#">Bijoux et montres</a></li>
-											<li><a href="#">Sacs et chaussures</a></li>
+												<h3 class="list-links-title">Audio</h3></li>
+											<li><a href="#">Enceintes fixes</a></li>
+											<li><a href="#">Enceintes portatives</a></li>
+											<li><a href="#">Casques et écouteurs</a></li>
+											<li><a href="#">Accessoires</a></li>
 										</ul>
 									</div>
 								</div>
@@ -255,7 +262,58 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="col-md-12">
 										<hr>
 										<a class="banner banner-1" href="#">
-											<img src="<?php echo base_url() ?>assets/img/banner05.jpg" alt="">
+											<img src="<?php echo base_url() ?>assets/img/hightech-01.jpg" alt="" height="267" width="1060">
+											<div class="banner-caption text-center">
+												<h2 class="black-color">NOUVELLES COLLECTION</h2>
+												<h3 class="black-color font-weak">BONNE AFFAIRE</h3>
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="dropdown side-dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Vêtements,bijoux,sacs<i class="fa fa-angle-right"></i></a>
+							<div class="custom-menu">
+								<div class="row">
+									<div class="col-md-4">
+										<ul class="list-links">
+											<li>
+												<h3 class="list-links-title">Vêtements</h3></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/T-shirt") ?>">T-shirts</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Pull") ?>">Pulls</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/T-shirt") ?>">Vestes</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Pantalons") ?>">Pantalons</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/T-shirt") ?>">Shorts</a></li>
+										</ul>
+										<hr class="hidden-md hidden-lg">
+									</div>
+									<div class="col-md-4">
+										<ul class="list-links">
+											<li>
+												<h3 class="list-links-title">Bijoux</h3></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Bijoux") ?>">Bagues</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Bijoux") ?>">Bracelets</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Bijoux") ?>">Colliers</a></li>
+												<li><a href="<?php echo site_url("Search/searchByCat/Bijoux") ?>">Montres</a></li>
+										</ul>
+										<hr class="hidden-md hidden-lg">
+									</div>
+									<div class="col-md-4">
+										<ul class="list-links">
+											<li>
+												<h3 class="list-links-title">Sacs</h3></li>
+											<li><a href="#">Sacs à main</a></li>
+											<li><a href="#">Sacs à dos</a></li>
+											<li><a href="#">Sacs de voyage</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="row hidden-sm hidden-xs">
+									<div class="col-md-12">
+										<hr>
+										<a class="banner banner-1" href="#">
+											<img src="<?php echo base_url() ?>assets/img/vetements-01.jpg" alt="" height="267" width="1060">
 											<div class="banner-caption text-center">
 												<h2 class="white-color">NOUVELLES COLLECTION</h2>
 												<h3 class="white-color font-weak">BONNE AFFAIRE</h3>
@@ -265,139 +323,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</div>
 							</div>
 						</li>
-						<li><a href="#">Vêtements hommes</a></li>
-						<li class="dropdown side-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Téléphones et Accessoires<i class="fa fa-angle-right"></i></a>
-							<div class="custom-menu">
-								<div class="row">
-									<div class="col-md-4">
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Catégories</h3></li>
-											<li><a href="#">Vêtements femmes</a></li>
-											<li><a href="#">Vêtements hommes</a></li>
-											<li><a href="#">Téléphones & Accessoires</a></li>
-											<li><a href="#">Bijoux et montres</a></li>
-											<li><a href="#">Sacs et chaussures</a></li>
-										</ul>
-										<hr>
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Catégories</h3></li>
-											<li><a href="#">Vêtements femmes</a></li>
-											<li><a href="#">Vêtements hommes</a></li>
-											<li><a href="#">Téléphones & Accessoires</a></li>
-											<li><a href="#">Bijoux et montres</a></li>
-											<li><a href="#">Sacs et chaussures</a></li>
-										</ul>
-										<hr class="hidden-md hidden-lg">
-									</div>
-									<div class="col-md-4">
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Catégories</h3></li>
-											<li><a href="#">Vêtements femmes</a></li>
-											<li><a href="#">Vêtements hommes</a></li>
-											<li><a href="#">Téléphones & Accessoires</a></li>
-											<li><a href="#">Bijoux et montres</a></li>
-											<li><a href="#">Sacs et chaussures</a></li>
-										</ul>
-										<hr>
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Catégories</h3></li>
-											<li><a href="#">Vêtements femmes</a></li>
-											<li><a href="#">Vêtements hommes</a></li>
-											<li><a href="#">Téléphones & Accessoires</a></li>
-											<li><a href="#">Bijoux et montres</a></li>
-											<li><a href="#">Sacs et chaussures</a></li>
-										</ul>
-									</div>
-									<div class="col-md-4 hidden-sm hidden-xs">
-										<a class="banner banner-2" href="#">
-											<img src="<?php echo base_url() ?>assets/img/banner04.jpg" alt="">
-											<div class="banner-caption">
-												<h3 class="white-color">NOUVELLES<br>COLLECTION</h3>
-											</div>
-										</a>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li><a href="#">Ordinateurs et bureaux</a></li>
-						<li><a href="#">Composants électroniques</a></li>
-						<li class="dropdown side-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Bijoux et montres <i class="fa fa-angle-right"></i></a>
-							<div class="custom-menu">
-								<div class="row">
-									<div class="col-md-4">
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Catégories</h3></li>
-											<li><a href="#">Vêtements femmes</a></li>
-											<li><a href="#">Vêtements hommes</a></li>
-											<li><a href="#">Téléphones & Accessoires</a></li>
-											<li><a href="#">Bijoux et montres</a></li>
-											<li><a href="#">Sacs et chaussures</a></li>
-										</ul>
-										<hr>
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Catégories</h3></li>
-											<li><a href="#">Vêtements femmes</a></li>
-											<li><a href="#">Vêtements hommes</a></li>
-											<li><a href="#">Téléphones & Accessoires</a></li>
-											<li><a href="#">Bijoux et montres</a></li>
-											<li><a href="#">Sacs et chaussures</a></li>
-										</ul>
-										<hr class="hidden-md hidden-lg">
-									</div>
-									<div class="col-md-4">
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Catégories</h3></li>
-											<li><a href="#">Vêtements femmes</a></li>
-											<li><a href="#">Vêtements hommes</a></li>
-											<li><a href="#">Téléphones & Accessoires</a></li>
-											<li><a href="#">Bijoux et montres</a></li>
-											<li><a href="#">Sacs et chaussures</a></li>
-										</ul>
-										<hr>
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Catégories</h3></li>
-											<li><a href="#">Vêtements femmes</a></li>
-											<li><a href="#">Vêtements hommes</a></li>
-											<li><a href="#">Téléphones & Accessoires</a></li>
-											<li><a href="#">Bijoux et montres</a></li>
-											<li><a href="#">Sacs et chaussures</a></li>
-										</ul>
-										<hr class="hidden-md hidden-lg">
-									</div>
-									<div class="col-md-4">
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Catégories</h3></li>
-											<li><a href="#">Vêtements femmes</a></li>
-											<li><a href="#">Vêtements hommes</a></li>
-											<li><a href="#">Téléphones & Accessoires</a></li>
-											<li><a href="#">Bijoux et montres</a></li>
-											<li><a href="#">Sacs et chaussures</a></li>
-										</ul>
-										<hr>
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Catégories</h3></li>
-											<li><a href="#">Vêtements femmes</a></li>
-											<li><a href="#">Vêtements hommes</a></li>
-											<li><a href="#">Téléphones & Accessoires</a></li>
-											<li><a href="#">Bijoux et montres</a></li>
-											<li><a href="#">Sacs et chaussures</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li><a href="#">Tout voir</a></li>
+
 					</ul>
 				</div>
 				<!-- /category nav -->
@@ -408,21 +334,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<ul class="menu-list">
 						<li><a href="<?php echo site_url('Order'); ?>">Accueil</a></li>
 
+						<li><a href="<?php echo site_url('Trader/home_page'); ?>">Mon compte</a></li>
+
 						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Boutique<i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
 								<li><a href="<?php echo site_url('Shop/create_shop_page'); ?>">Créer une boutique</a></li>
 							</ul>
 						</li>
 
-            <li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Reduction<i class="fa fa-caret-down"></i></a>
+            <li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Réductions<i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
-								<li><a href="<?php echo site_url('Reduction/list_reduction_client'); ?>">Mes reductions</a></li>
+								<li><a href="<?php echo site_url('Reduction/list_reduction_client'); ?>">Mes réductions</a></li>
+								<li><a href="<?php echo site_url('Reduction/create_reduction'); ?>">Ajouter réduction</a></li>
 							</ul>
 						</li>
 
-						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Produit <i class="fa fa-caret-down"></i></a>
+						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Produits <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
-								<li><a href="<?php echo site_url('Product/product_list_page'); ?>"> Mes Stock</a></li>
+								<li><a href="<?php echo site_url('Product/product_list_page'); ?>"> Mes Stocks</a></li>
 								<li><a href="<?php echo site_url('Product/create_product_page'); ?>">Créer un produit</a></li>
 							</ul>
 						</li>

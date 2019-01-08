@@ -72,13 +72,6 @@
             </div>
 
             <div class="form-group">
-              <label class="control-label col-sm-2">idBoutique (à supprimer) :</label>
-              <div class="col-sm-10">
-                <input class="form-control" type="number" name="id" placeholder="id" required>
-              </div>
-            </div>
-
-            <div class="form-group">
               <label class="control-label col-sm-2">Ajouter une image:</label>
               <div class="col-sm-10">
                 <input type="file" name="img" id="img">

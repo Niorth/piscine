@@ -148,6 +148,7 @@ class Product extends CI_Controller
             $idBoutique = $this->session->idBoutique;
 
             $dataProduct = array(
+              "CodeProduit" => htmlspecialchars($code),
                 "LibelleProduit" => htmlspecialchars($_POST['libelle']),
                 "DureeReservation" => htmlspecialchars($_POST['duree']),
                 "StockDispo" => htmlspecialchars($_POST['stockDispo']),

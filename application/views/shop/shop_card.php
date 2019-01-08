@@ -15,13 +15,12 @@
 
             <div class="col-md-12">
               <div class="col-md-4"></div>
-              <h1 class="col-md-4"><?php echo $boutique[0]->NomBoutique ?></h1>
-              <div class="col-md-4"></div>
+              <h1 class="col-md-4 text-center"><?php echo $boutique[0]->NomBoutique ?></h1>
+              <div class="col-md-4 text-right">
+                <a href="<?php $id =  $boutique[0]->IdBoutique; echo site_url("Shop/modify_shop_page/$id"); ?>" class="btn btn-warning" role="button">Modifier</a>
+              </div>
             </div>
 
-            <div class="col-md-12">
-              <a href="<?php $id =  $boutique[0]->IdBoutique; echo site_url("Shop/modify_shop_page/$id"); ?>" class="btn btn-warning" role="button">Modifier</a>
-            </div>
 
             <p class="col-md-12">
               <br>Adresse : <?php echo $boutique[0]->RueBoutique ?>
@@ -56,7 +55,7 @@
       				<div class="col-md-3 col-sm-6 col-xs-6">
       					<div class="product product-single">
       						<div class="product-thumb">
-      							<button class="main-btn quick-view"><i class="fa fa-search-plus"></i>Détail</button>
+      							<a href="<?php echo $lien ?>"><button class="main-btn quick-view"><i class="fa fa-search-plus"></i>Détail</button></a>
       							<img src="<?php echo base_url() . "assets/img/" . $link ?>" alt="">
       						</div>
 
@@ -78,7 +77,7 @@
         							</div>
                       <?php } ?>
 
-      							<h2 class="product-name"><a href="#"><?php if (isset($product[$i])) echo $product[$i]->LibelleProduit;?></a></h2>
+      							<h2 class="product-name"><a href="<?php echo $lien ?>"><?php if (isset($product[$i])) echo $product[$i]->LibelleProduit;?></a></h2>
       							<div class="product-btns">
                       <?php
                         if ($product[$i]->StockDispo != 0){ ?>

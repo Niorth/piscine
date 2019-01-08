@@ -83,7 +83,7 @@ class Account extends CI_Controller {
                   $this->session->set_userdata('idBoutique', $id[0]->IdBoutique);
                   $this->session->set_userdata('NumCommercant', $id[0]->NumCommercant);
                 }else{
-
+                  
                 }
 
                 //Redirection

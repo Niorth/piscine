@@ -15,7 +15,8 @@ class Product_Model extends CI_Model
 
     public function createProduct($data){
         $this -> load -> database();
-        return $this->db->set('LibelleProduit', $data['LibelleProduit'])
+        return $this->db->set('CodeProduit', $data['CodeProduit'])
+            ->set('LibelleProduit', $data['LibelleProduit'])
             ->set('DescriptionProd', $data['DescriptionProd'])
             ->set('DureeReservation', $data['DureeReservation'])
             ->set('PrixProd', $data['PrixProd'])
@@ -197,6 +198,35 @@ class Product_Model extends CI_Model
             $result = $query -> result_array();
         }
         return $result;
+    }
+
+    public function countProductById($id){
+      $this->load->database();
+      return $this->db->select('COUNT(CodeProduit) as total')
+                    ->from($this->table)
+                    ->where('IdBoutique', $id)
+                    ->get()
+                    ->result();
+    }
+
+    public function countRupture($id){
+      $this->load->database();
+      return $this->db->select('COUNT(CodeProduit) as total')
+                    ->from($this->table)
+                    ->where('IdBoutique', $id)
+                    ->where('StockDispo =', 0)
+                    ->get()
+                    ->result();
+    }
+
+    public function countDispo($id){
+      $this->load->database();
+      return $this->db->select('COUNT(CodeProduit) as total')
+                    ->from($this->table)
+                    ->where('IdBoutique', $id)
+                    ->where('StockDispo !=', 0)
+                    ->get()
+                    ->result();
     }
 
     public function deleteProductById($id){

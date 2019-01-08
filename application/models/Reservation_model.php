@@ -37,7 +37,7 @@ class Reservation_Model extends CI_Model{
   Retourne les reservations pour un client
 
   SELECT distinct(r.NumReservation),DateReservation,StatusRes,p.idBoutique,QteReserver,MontantRes,
-  p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,b.idBoutique,NomBoutique,RueBoutique,VilleBoutique,CPBoutique,TelBoutique,
+  p.LibelleProduit,p.ImgProd,p.PrixProd,p.CodeProduit,b.idBoutique,NomBoutique,RueBoutique,VilleBoutique,CPBoutique,TelBoutique
     FROM reservation r
     inner join reserver rver on rver.NumReservation = r.NumReservation
     inner join produit p on rver.CodeProduit = p.CodeProduit

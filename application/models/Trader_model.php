@@ -45,7 +45,6 @@ class Trader_Model extends CI_Model
         return $this->db->set('IdBoutique', $data['IdBoutique'])
             ->set('NumCommercant', $data['NumCommercant'])
             ->insert("gererboutique");
-
     }
 
     /*

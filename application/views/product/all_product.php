@@ -4,6 +4,7 @@
   <div class="container">
     <!-- row -->
     <div class="row">
+
       <!-- ASIDE -->
       <div id="aside" class="col-md-3">
         <!-- aside widget -->
@@ -20,13 +21,18 @@
 
         <!-- aside widget -->
         <div class="aside">
-          <h3 class="aside-title">Filter by Price</h3>
+          <h3 class="aside-title">Filtrer par prix</h3>
           <div id="price-slider"></div>
         </div>
         <!-- aside widget -->
 
       </div>
       <!-- /ASIDE -->
+
+      <?php  if (empty( $product )){ ?>
+
+        <div id="main" class="col-md-9 text-center"><p>Aucun resultat pour la recherche</p></div>
+      <?php }else{ ?>
 
       <!-- MAIN -->
       <div id="main" class="col-md-9">
@@ -76,10 +82,10 @@
               <thead>
                 <tr>
                   <th>Image</th>
-                  <th>Nom Produit + Vendeur + evaluation</th>
+                  <th>Nom Produit / Vendeur / evaluation</th>
                   <th>Disponibilité</th>
                   <th>Prix</th>
-                  <th>Prix + bouton ajout panier</th>
+                  <th>Ajouter au panier</th>
                 </tr>
               </thead>
               <tbody>
@@ -190,6 +196,7 @@
         <!-- /store bottom filter -->
       </div>
       <!-- /MAIN -->
+      <?php } ?>
     </div>
     <!-- /row -->
   </div>
