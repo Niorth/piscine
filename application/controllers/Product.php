@@ -17,7 +17,7 @@ class Product extends CI_Controller
        }else{
          if($this->session->privilege == 1){
            // accueil a mettre par la suite
-           header('location: ' . site_url('Index'));
+           header('location: ' . site_url('Accueil/home'));
          }else{
             $data['categorie'] = $this->categorie_model->getAllCategorie();
             $this->load->view('layout/header_seller');
@@ -55,7 +55,7 @@ class Product extends CI_Controller
        }else{
          if($this->session->privilege == 1){
            // accueil a mettre par la suite
-           header('location: ' . site_url('Index'));
+           header('location: ' . site_url('Accueil/home'));
          }else{
             $idBoutique = $this->session->idBoutique;
             $data['p_unavailable'] =  $this->product_model->getProductUnavailable($idBoutique);
@@ -96,7 +96,7 @@ class Product extends CI_Controller
        }else{
          if($this->session->privilege == 1){
            // accueil a mettre par la suite
-           header('location: ' . site_url('Index'));
+           header('location: ' . site_url('Accueil/home'));
          }else{
           $data['product'] =  $this->product_model->getProductBySelector('CodeProduit', $id);
           $data['categorie'] = $this->categorie_model->getAllCategorie();
@@ -114,7 +114,7 @@ class Product extends CI_Controller
        }else{
          if($this->session->privilege == 1){
            // accueil a mettre par la suite
-           header('location: ' . site_url('Index'));
+           header('location: ' . site_url('Accueil/home'));
          }else{
 
             // -------------------- upload image --------------------
@@ -172,7 +172,7 @@ class Product extends CI_Controller
        }else{
          if($this->session->privilege == 1){
            // accueil a mettre par la suite
-           header('location: ' . site_url('Index'));
+           header('location: ' . site_url('Accueil/home'));
          }else{
 
             $code = htmlspecialchars($_POST['CodeProduit']);
@@ -207,7 +207,7 @@ class Product extends CI_Controller
        }else{
          if($this->session->privilege == 1){
            // accueil a mettre par la suite
-           header('location: ' . site_url('Index'));
+           header('location: ' . site_url('Accueil/home'));
          }else{
 
           $dataProduct = array(
@@ -228,7 +228,7 @@ class Product extends CI_Controller
        }else{
          if($this->session->privilege == 1){
            // accueil a mettre par la suite
-           header('location: ' . site_url('Index'));
+           header('location: ' . site_url('Accueil/home'));
          }else{
             $this->product_model->deleteProductByid($code);
             $this->order_model-> deleteLinkCommandeByCode($code);
@@ -248,15 +248,19 @@ class Product extends CI_Controller
        }else{
          if($this->session->privilege == 2){
            // accueil a mettre par la suite
-           header('location: ' . site_url('Account/connexion_page'));
+           header('location: ' . site_url('Accueil/home'));
          }else{
+
+           $mail = $this->session->userdata('login');
+           $customerInfo = $this->customer_model->getCustomerByMail($mail);
+           $customer = $customerInfo[0]['NumClient'];
 
           $code = htmlspecialchars($_POST['CodeProduit']);
           $review = array(
               "CodeProduit" => $code,
               "Commentaire" => htmlspecialchars($_POST['commentaire']),
               "NoteAvis" => htmlspecialchars($_POST['note']),
-              "NumClient" => 22,
+              "NumClient" => $customer,
           );
 
            $this->review_model->addReview($review);

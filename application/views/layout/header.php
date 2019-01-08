@@ -61,17 +61,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 					<!-- Search -->
 					<div class="header-search">
-<<<<<<< HEAD
-						<form>
-							<input id='searchBar' class="input search-input" type="text" placeholder="Entrez votre mot-clé">
-							<select class="input search-Catégories">
-								<option value="0">A rechercher dans toutes les catégories</option>
-								<option value="1">High-Tech</option>
-								<option value="2">Vêtements,Bijoux,Sacs</option>
-								<option value="3">Chaussures</option>
-								<option value="4">Décorations</option>
-								<option value="5">Livres</option>
-=======
 						<form action="<?php echo site_url("Search/recherche") ?>" method="post">
 							<input id='searchBar' name= "recherche" class="input search-input" type="text" placeholder="Entrez votre mot-clé">
 							<select name= "cat" class="input search-Catégories">
@@ -85,7 +74,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<option value="Pull">Pull</option>
 								<option value="Pull">Chaussures</option>
 								<option value="Audio">Pantalons</option>
->>>>>>> 03ffd7dcb45d0cdbbc5944353cf16dee53e0df56
 							</select>
 							<button class="search-btn"><i class="fa fa-search"></i></button>
 						</form>
@@ -495,33 +483,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="menu-nav">
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
-						<li><a href="<?php echo site_url('Order'); ?>">Accueil</a></li>
+						<li><a href="<?php echo site_url('Accueil/home'); ?>">Accueil</a></li>
 						<li><a href="<?php echo site_url('Customer/home_page'); ?>">Mon compte</a></li>
-
-						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Boutiques<i class="fa fa-caret-down"></i></a>
-							<ul class="custom-menu">
-								<li><a href="<?php echo site_url('Shop/shop_liste'); ?>">Liste des boutiques</a></li>
-							</ul>
-						</li>
-
-						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Réductions<i class="fa fa-caret-down"></i></a>
-							<ul class="custom-menu">
-								<li><a href="<?php echo site_url('Reduction/list_reduction_client'); ?>">Liste des réductions</a></li>
-							</ul>
-						</li>
-
-						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Produits <i class="fa fa-caret-down"></i></a>
-							<ul class="custom-menu">
-								<li><a href="<?php echo site_url('Product/all_product_page'); ?>">Liste des Produits</a></li>
-								<li><a href="<?php echo site_url('Product/product_list_page'); ?>">Stock</a></li>
-								<li><a href="<?php echo site_url('Product/create_product_page'); ?>">Créer un produit</a></li>
-							</ul>
-						</li>
-
+						<li><a href="<?php echo site_url('Shop/home_page'); ?>">Boutique</a></li>
+						<li><a href="<?php echo site_url('Reduction/list_reduction_client'); ?>">Reduction</a></li>
 						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Commandes<i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
-								<li><a href="<?php echo site_url('Order/tableau_de_bord'); ?>">Stats</a></li>
-								<li><a href="<?php echo site_url('Order/order_reservation_list'); ?>">Liste commandes et reservations</a></li>
+								<li><a href="<?php echo site_url('Customer/all_order_page'); ?>">Mes commandes</a></li>
+								<li><a href="<?php echo site_url('Customer/all_reservation_page'); ?>">Mes Reservation</a></li>
 							</ul>
 						</li>
 					</ul>

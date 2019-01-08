@@ -16,7 +16,7 @@ class Order extends CI_Controller {
      }else{
        if($this->session->privilege == 1){
          // accueil a mettre par la suite
-         header('location: ' . site_url('Index'));
+         header('location: ' . site_url('Trader/home_page'));
        }else{
          $idBoutique = $this->session->idBoutique;
          $data['totalLigneCommande'] =  $this->order_ligne_model->total($idBoutique);
@@ -50,7 +50,7 @@ class Order extends CI_Controller {
      }else{
        if($this->session->privilege == 1){
          // accueil a mettre par la suite
-         header('location: ' . site_url('Index'));
+         header('location: ' . site_url('Accueil/home'));
        }else{
         $idBoutique = $this->session->idBoutique;
         $data['c_nontraite'] = $this->order_ligne_model->getOrderLigne($idBoutique,"non traite");
@@ -74,7 +74,7 @@ class Order extends CI_Controller {
      }else{
        if($this->session->privilege == 1){
          // accueil a mettre par la suite
-         header('location: ' . site_url('Index'));
+         header('location: ' . site_url('Accueil/home'));
        }else{
         $data['commande'] = $this->order_model->getOrderDetailSeller($numLigne,$numCom);
         $this->load->view('layout/header_seller');
@@ -94,15 +94,16 @@ class Order extends CI_Controller {
      }else{
        if($this->session->privilege == 1){
          // accueil a mettre par la suite
-         header('location: ' . site_url('Index'));
+         header('location: ' . site_url('Accueil/home'));
        }else{
+         $idBoutique = $this->session->idBoutique;
 
           $order = array(
             "StatusLigneCom" => htmlspecialchars($_POST['status']),
             "NumLigneCommande" => $numLigne,
             "NumCommande" => $numCom,
             // a modifier
-            "idBoutique" => htmlspecialchars($_POST['idBoutique'])
+            "idBoutique" => $idBoutique
           );
 
           $this->order_ligne_model->updateStatus($order);

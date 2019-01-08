@@ -12,52 +12,119 @@ class Account extends CI_Controller {
 
     public function index()
     {
-        $this->load->view('layout/header');
-        $this->load->view('index');
-        $this->load->view('layout/footer');
+        $this->parameters_page();
     }
 
     public function create_account_page(){
         $this->load->library('session');
         $data['action'] = "create_account";
-        $this->load->view('layout/header');
+
+        $header = "layout/header";
+
+        if ($this->session->has_userdata('login')) {
+          if($this->session->privilege == 2){
+            $header = "layout/header_seller";
+          }
+        }
+        $this->load->view($header);
         $this->load->view('account/create_account',$data);
         $this->load->view('layout/footer');
     }
 
     public function connexion_page(){
         $data['action'] = "connexion";
-        $this->load->view('layout/header');
+
+        $header = "layout/header";
+
+        if ($this->session->has_userdata('login')) {
+          if($this->session->privilege == 2){
+            $header = "layout/header_seller";
+          }
+        }
+        $this->load->view($header);
         $this->load->view('account/connexion',$data);
         $this->load->view('layout/footer');
+
     }
 
     public function myAccount_page(){
+
+      if (!($this->session->has_userdata('login'))) {
+         header('location: ' . site_url('Account/connexion_page'));
+       }else{
+
         $data['info'] = $this->getMyAccountInfo();
-        $this->load->view('layout/header');
+
+        $header = "layout/header";
+
+        if ($this->session->has_userdata('login')) {
+          if($this->session->privilege == 2){
+            $header = "layout/header_seller";
+          }
+        }
+        $this->load->view($header);
         $this->load->view('account/myAccount', $data);
         $this->load->view('layout/footer');
+      }
     }
 
     public function parameters_page(){
-      $data['info'] = $this->getMyAccountInfo();
-  		$this->load->view('layout/header');
-  		$this->load->view('account/parameters',$data);
-  		$this->load->view('layout/footer');
+      if (!($this->session->has_userdata('login'))) {
+         header('location: ' . site_url('Account/connexion_page'));
+       }else{
+        $data['info'] = $this->getMyAccountInfo();
+
+        $header = "layout/header";
+
+        if ($this->session->has_userdata('login')) {
+          if($this->session->privilege == 2){
+            $header = "layout/header_seller";
+          }
+        }
+        $this->load->view($header);
+        $this->load->view('account/parameters', $data);
+        $this->load->view('layout/footer');
+      }
   	}
 
     public function modify_informations_page(){
-      // email a recuperer dans la session et en fonction du type d'utilisateur
-      $data['info'] = $this->getMyAccountInfo();
-  		$this->load->view('layout/header');
-  		$this->load->view('account/modify_informations',$data);
-  		$this->load->view('layout/footer');
+      if (!($this->session->has_userdata('login'))) {
+         header('location: ' . site_url('Account/connexion_page'));
+       }else{
+        // email a recuperer dans la session et en fonction du type d'utilisateur
+        $data['info'] = $this->getMyAccountInfo();
+
+        $header = "layout/header";
+
+        if ($this->session->has_userdata('login')) {
+          if($this->session->privilege == 2){
+            $header = "layout/header_seller";
+          }
+        }
+
+        $this->load->view($header);
+        $this->load->view('account/modify_informations', $data);
+        $this->load->view('layout/footer');
+
+      }
   	}
 
     public function modify_password_page(){
-      $this->load->view('layout/header');
-  		$this->load->view('account/modify_password');
-  		$this->load->view('layout/footer');
+      if (!($this->session->has_userdata('login'))) {
+         header('location: ' . site_url('Account/connexion_page'));
+       }else{
+        $header = "layout/header";
+
+        if ($this->session->has_userdata('login')) {
+          if($this->session->privilege == 2){
+            $header = "layout/header_seller";
+          }
+        }
+
+        $this->load->view($header);
+        $this->load->view('account/modify_password');
+        $this->load->view('layout/footer');
+      }
     }
 
     public function connexion(){
@@ -81,12 +148,11 @@ class Account extends CI_Controller {
                   $id = $this->account_model->getIdboutiqueByLogin($account[0]['login']);
                   $this->session->set_userdata('idBoutique', $id[0]->IdBoutique);
                   $this->session->set_userdata('NumCommercant', $id[0]->NumCommercant);
+                  redirect('Order/tableau_de_bord');
                 }else{
-                  
+                  redirect('Accueil/home');
                 }
 
-                //Redirection
-                redirect('Order');
             }
             else{
                 //TODO : Handle wrong password
@@ -102,7 +168,7 @@ class Account extends CI_Controller {
     public function deconnexion(){
         $this->load->library('session');
         $this->session->sess_destroy();
-        redirect('Order');
+        redirect('Accueil/home');
     }
 
     public function create_account(){

@@ -330,7 +330,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="menu-nav">
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
-						<li><a href="<?php echo site_url('Order'); ?>">Accueil</a></li>
+						<li><a href="<?php echo site_url('Accueil/home'); ?>">Accueil</a></li>
 
 						<li><a href="<?php echo site_url('Trader/home_page'); ?>">Mon compte</a></li>
 
@@ -342,13 +342,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Réductions<i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
-								<li><a href="<?php echo site_url('Reduction/list_reduction_client'); ?>">Mes réductions</a></li>
+								<li><a href="<?php echo site_url('Reduction/list_reduction_seller'); ?>">Mes réductions</a></li>
 								<li><a href="<?php echo site_url('Reduction/create_reduction'); ?>">Ajouter réduction</a></li>
 							</ul>
 						</li>
 
 						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Produits <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
+
 								<li><a href="<?php echo site_url('Product/product_list_page'); ?>"> Mes Stocks</a></li>
 								<li><a href="<?php echo site_url('Product/create_product_page'); ?>">Créer un produit</a></li>
 							</ul>
@@ -356,8 +357,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Commandes<i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
-								<li><a href="<?php echo site_url('Order/tableau_de_bord'); ?>">Stats</a></li>
-								<li><a href="<?php echo site_url('Order/order_reservation_list'); ?>">Liste commandes et reservations</a></li>
+								<li><a href="<?php echo site_url('Order/tableau_de_bord'); ?>">Tableau de bord</a></li>
+								<li><a href="<?php echo site_url('Order/order_reservation_list'); ?>">Commandes / Reservation</a></li>
 							</ul>
 						</li>
 

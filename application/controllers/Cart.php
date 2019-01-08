@@ -8,8 +8,19 @@
 
 class Cart extends CI_Controller {
 
+  public function index(){
+    $this->cart_page;
+  }
+
     function cart_page() {
-        $this->load->view('layout/header');
+
+        $header = "layout/header";
+        if ($this->session->has_userdata('login')) {
+          if($this->session->privilege == 2){
+            $header = "layout/header_seller";
+          }
+        }
+        $this->load->view($header);
         $this->load->view('cart/order-summary');
         $this->load->view('layout/footer');
     }
