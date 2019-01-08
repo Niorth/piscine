@@ -133,7 +133,7 @@
             <div class="column1">
               <div class="card1">
                 <p><i class="fa fa-shopping-cart" style="font-size:50px;"></i></p>
-                <h3 style="color: white;">11+</h3>
+                <h3 style="color: white;">3</h3>
                 <p>Total</p>
               </div>
             </div>
@@ -141,7 +141,7 @@
             <div class="column1">
               <div class="card1">
                 <p><i class="fa fa-smile-o" style="font-size:50px;"></i></p>
-                <h3 style="color: white;">11+</h3>
+                <h3 style="color: white;">1</h3>
                 <p>Retiré</p>
               </div>
             </div>
@@ -149,7 +149,7 @@
             <div class="column1">
               <div class="card1">
                 <p><i class="fa fa-spinner" style="font-size:50px;"></i></p>
-                <h3 style="color: white;">11+</h3>
+                <h3 style="color: white;">1</h3>
                 <p>En cours</p>
               </div>
             </div>
@@ -157,7 +157,7 @@
             <div class="column1">
               <div class="card1">
                 <p><i class="fa fa-times" style="font-size:50px;"></i></p>
-                <h3 style="color: white;">11+</h3>
+                <h3 style="color: white;">1</h3>
                 <p>Expiré</p>
               </div>
             </div>
