@@ -21,6 +21,8 @@
           <ul style="list-style-type:square">
             <a href="<?php echo $lien ?>" ><li><?php echo $item->NomBoutique ?></li>
           </ul>
+
+
               <?php  } ?>
       </div>
 

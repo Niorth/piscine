@@ -34,7 +34,7 @@
                 $lien = site_url("Order/order_detail_seller/$numLigneC/$numC");
               ?>
                 <tr class="info">
-                  <td class="text-center"><?php echo $item->NumLigneCommande; ?></td>
+                  <td class="text-center"><?php echo $item->NumCommande; ?></td>
                   <td class="text-center"><?php echo $item->LibelleProduit; ?></td>
                   <td class="text-center"><?php echo $item->StatusLigneCom; ?></td>
                   <td class="text-center"><?php echo $item->DateCommande; ?></td>
@@ -109,7 +109,7 @@
               ?>
 
               <tr class="info">
-                <td class="text-center"><?php echo $item->NumLigneRes; ?></td>
+                <td class="text-center"><?php echo $item->NumReservation; ?></td>
                 <td class="text-center"><?php echo $item->LibelleProduit; ?></td>
                 <td class="text-center"><?php echo $item->StatusLigneRes; ?></td>
                 <td class="text-center"><?php echo $item->DateReservation; ?></td>

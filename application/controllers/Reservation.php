@@ -23,8 +23,9 @@ class Reservation extends CI_Controller {
         $idBoutique = $this->session->idBoutique;
         $expired = $this->reservation_ligne_model->getResForDelete($idBoutique);
 
+
         foreach ($expired as $ligne) {
-          $this->reservation_ligne_model->deleteForNum($idBoutique,$ligne->NumLigneRes);
+          $this->reservation_ligne_model->deleteForNum($idBoutique,$ligne->NumLigneRes,$ligne->NumReservation);
         }
 
           header('location:  ' . site_url("Order/order_reservation_list"));

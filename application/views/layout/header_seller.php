@@ -339,7 +339,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Réductions<i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
 								<li><a href="<?php echo site_url('Reduction/list_reduction_seller'); ?>">Mes réductions</a></li>
-								<li><a href="<?php echo site_url('Reduction/create_reduction'); ?>">Ajouter réduction</a></li>
+								<li><a href="<?php echo site_url('Reduction/create_reduction_page'); ?>">Ajouter réduction</a></li>
 							</ul>
 						</li>
 

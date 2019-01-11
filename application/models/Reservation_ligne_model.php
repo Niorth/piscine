@@ -90,7 +90,7 @@ class Reservation_ligne_Model extends CI_Model{
   */
   public function getResForDelete($id){
     $this->load->database();
-    return $this->db->select('NumLigneRes, lr.NumReservation, lr.CodeProduit')
+    return $this->db->select('NumLigneRes, lr.NumReservation, lr.CodeProduit,lr.NumReservation')
                     ->from('lignereservation as lr')
                     ->join('reservation as r', 'lr.NumReservation = r.NumReservation')
                     ->join('produit as p', 'lr.CodeProduit = p.CodeProduit')
@@ -104,9 +104,10 @@ class Reservation_ligne_Model extends CI_Model{
   /*
     Supprime la reservation donnee de la liste pour une boutique
   */
-  public function deleteForNum($id,$num){
+  public function deleteForNum($id,$num,$numCom){
     $this->load->database();
     return $this->db->where('NumLigneRes',$num)
+                    ->where('NumReservation',$numCom)
                     ->where('IdBoutique',$id)
                     ->delete($this->table);
   }
